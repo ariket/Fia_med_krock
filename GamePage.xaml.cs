@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Capture;
@@ -24,6 +25,8 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Fia_med_krock
 {
+
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -34,15 +37,21 @@ namespace Fia_med_krock
             this.InitializeComponent();
         }
 
-        private void RollDice_Click(object sender, RoutedEventArgs e)
+        private async Task MoveCar(int romNum, int ColumnNum)
         {
-          
-                Thread.Sleep(1000);
-                PlayBoard.Children.Remove(RedCar1);
-                PlayBoard.Children.Add(RedCar1);
-                Grid.SetRow(RedCar1, 2);
-                Grid.SetColumn(RedCar1,5);
-          
+            PlayBoard.Children.Remove(RedCar1);
+            await System.Threading.Tasks.Task.Delay(500);
+            PlayBoard.Children.Add(RedCar1);
+            Grid.SetRow(RedCar1, romNum);
+            Grid.SetColumn(RedCar1, ColumnNum);
+        }
+
+        private async void RollDice_Click(object sender, RoutedEventArgs e)
+        {
+            await MoveCar(0,5);
+            await MoveCar(1,5);
+            await MoveCar(2,5);
+
         }
     }
 }

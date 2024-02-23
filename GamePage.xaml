@@ -84,7 +84,19 @@
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
-            </Rectangle>    
+            </Rectangle>
+
+            <Rectangle Name="RedCar2" Grid.Column="3" Grid.Row="5" Margin="5" Visibility="Collapsed">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle Name="RedCar3" Grid.Column="3" Grid.Row="5" Margin="5">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
 
         </Grid>
 
