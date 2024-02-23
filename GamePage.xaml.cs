@@ -33,10 +33,13 @@ namespace Fia_med_krock
 
     {
         //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra, bara dom första 7 positionerna finns än så länge.
-        //Sen har man en int (RedCar1Position)för varje bil som anger bilen position mha RedCarsRoad[] 
+        //Sen har man en int (positionRedCar1)för varje bil som anger bilen position mha RedCarsRoad[] 
         //Road för red cars, {column,row}
-        public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300" };
-        public int RedCar1Position = 0;
+        public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404"};
+        public int positionRedCar1 = 1;
+        public int positionRedCar2 = 0;
+        public int positionRedCar3 = 0;
+        public int positionRedCar4 = 0;
 
 
         public MainPage()
@@ -44,7 +47,7 @@ namespace Fia_med_krock
             this.InitializeComponent();
         }
 
-        private void MoveCarRedCar1(int columnNum, int rowNum)
+        private void MoveRedCar1(int columnNum, int rowNum)
         {
             
             PlayBoard.Children.Remove(RedCar1);
@@ -56,15 +59,15 @@ namespace Fia_med_krock
 
         private void RollDice_Click(object sender, RoutedEventArgs e)
         {
-            //await MoveCarRedCar1();
-            //await MoveCarRedCar1(1,5);
-            //await MoveCarRedCar1(2,5);
+            //await MoveRedCar1();
+            //await MoveRedCar1(1,5);
+            //await MoveCRedCar1(2,5);
 
         }
 
         private async void RedCar3_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            //await MoveCarRedCar3();
+            //await MoveRedCar3();
         }
 
         private async void RedCar1_Tapped(object sender, TappedRoutedEventArgs e)
@@ -73,12 +76,12 @@ namespace Fia_med_krock
 
             int dice = 3;
             int movNum = 0;
-            while (movNum <= dice) 
+            while (movNum < dice) 
             {
-                int columnNum = Convert.ToInt32(RedCarsRoad[RedCar1Position].Substring(0, 2));
-                int rowNum = Convert.ToInt32(RedCarsRoad[RedCar1Position].Substring(2, 2));
-                RedCar1Position++;
-                MoveCarRedCar1(columnNum, rowNum);
+                int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(0, 2));
+                int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(2, 2));
+                positionRedCar1++;
+                MoveRedCar1(columnNum, rowNum);
                 movNum++;
                 await System.Threading.Tasks.Task.Delay(200);
             }
