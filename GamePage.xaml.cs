@@ -44,11 +44,11 @@ namespace Fia_med_krock
             this.InitializeComponent();
         }
 
-        private async Task MoveCarRedCar1(int columnNum, int rowNum)
+        private void MoveCarRedCar1(int columnNum, int rowNum)
         {
             
             PlayBoard.Children.Remove(RedCar1);
-            await System.Threading.Tasks.Task.Delay(500);
+            //await System.Threading.Tasks.Task.Delay(10);
             PlayBoard.Children.Add(RedCar1);
             Grid.SetRow(RedCar1, rowNum);
             Grid.SetColumn(RedCar1, columnNum);
@@ -78,8 +78,9 @@ namespace Fia_med_krock
                 int columnNum = Convert.ToInt32(RedCarsRoad[RedCar1Position].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[RedCar1Position].Substring(2, 2));
                 RedCar1Position++;
-                await MoveCarRedCar1(columnNum, rowNum);
+                MoveCarRedCar1(columnNum, rowNum);
                 movNum++;
+                await System.Threading.Tasks.Task.Delay(200);
             }
 
             
