@@ -80,7 +80,7 @@
             <Rectangle Grid.Column="2" Grid.Row="4" Fill= "Red" Stroke="DarkGray" StrokeThickness="2"/>
             <Rectangle Grid.Column="3" Grid.Row="4" Fill= "Red" Stroke="DarkGray" StrokeThickness="2"/>
 
-            <Rectangle Name="RedCar1" Grid.Column="0" Grid.Row="5" Margin="5">
+            <Rectangle Name="RedCar1" Grid.Column="0" Grid.Row="3" Margin="5" Tapped="RedCar1_Tapped">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
@@ -92,7 +92,7 @@
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="RedCar3" Grid.Column="3" Grid.Row="5" Margin="5">
+            <Rectangle Name="RedCar3" Grid.Column="3" Grid.Row="5" Margin="5" Tapped="RedCar3_Tapped">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>

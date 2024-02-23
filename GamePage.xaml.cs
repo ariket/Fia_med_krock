@@ -35,8 +35,8 @@ namespace Fia_med_krock
         //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra, bara dom första 7 positionerna finns än så länge.
         //Sen har man en int (RedCar1Position)för varje bil som anger bilen position mha RedCarsRoad[] 
         //Road för red cars, {column,row}
-        public static string[] RedCarsRoad = {"0003","0103","0203","0303","0302","0301","0300" };
-        public int RedCar1Position = 6;
+        public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300" };
+        public int RedCar1Position = 0;
 
 
         public MainPage()
@@ -44,23 +44,45 @@ namespace Fia_med_krock
             this.InitializeComponent();
         }
 
-        private async Task MoveCarRedCar1()
+        private async Task MoveCarRedCar1(int columnNum, int rowNum)
         {
-            int ColumnNum = Convert.ToInt32(RedCarsRoad[RedCar1Position].Substring(0, 2));
-            int rowNum = Convert.ToInt32(RedCarsRoad[RedCar1Position].Substring(2, 2));
+            
             PlayBoard.Children.Remove(RedCar1);
             await System.Threading.Tasks.Task.Delay(500);
             PlayBoard.Children.Add(RedCar1);
             Grid.SetRow(RedCar1, rowNum);
-            Grid.SetColumn(RedCar1, ColumnNum);
+            Grid.SetColumn(RedCar1, columnNum);
         }
 
-        private async void RollDice_Click(object sender, RoutedEventArgs e)
+        private void RollDice_Click(object sender, RoutedEventArgs e)
         {
-            await MoveCarRedCar1();
+            //await MoveCarRedCar1();
             //await MoveCarRedCar1(1,5);
             //await MoveCarRedCar1(2,5);
 
+        }
+
+        private async void RedCar3_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            //await MoveCarRedCar3();
+        }
+
+        private async void RedCar1_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+
+            int dice = 3;
+            int movNum = 0;
+            while (movNum <= dice) 
+            {
+                int columnNum = Convert.ToInt32(RedCarsRoad[RedCar1Position].Substring(0, 2));
+                int rowNum = Convert.ToInt32(RedCarsRoad[RedCar1Position].Substring(2, 2));
+                RedCar1Position++;
+                await MoveCarRedCar1(columnNum, rowNum);
+                movNum++;
+            }
+
+            
         }
     }
 }
