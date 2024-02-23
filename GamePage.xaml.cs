@@ -26,31 +26,40 @@ using Windows.UI.Xaml.Navigation;
 namespace Fia_med_krock
 {
 
-
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
+
     {
+        //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra, bara dom första 7 positionerna finns än så länge.
+        //Sen har man en int (RedCar1Position)för varje bil som anger bilen position mha RedCarsRoad[] 
+        //Road för red cars, {column,row}
+        public static string[] RedCarsRoad = {"0003","0103","0203","0303","0302","0301","0300" };
+        public int RedCar1Position = 6;
+
+
         public MainPage()
         {
             this.InitializeComponent();
         }
 
-        private async Task MoveCar(int romNum, int ColumnNum)
+        private async Task MoveCarRedCar1()
         {
+            int ColumnNum = Convert.ToInt32(RedCarsRoad[RedCar1Position].Substring(0, 2));
+            int rowNum = Convert.ToInt32(RedCarsRoad[RedCar1Position].Substring(2, 2));
             PlayBoard.Children.Remove(RedCar1);
             await System.Threading.Tasks.Task.Delay(500);
             PlayBoard.Children.Add(RedCar1);
-            Grid.SetRow(RedCar1, romNum);
+            Grid.SetRow(RedCar1, rowNum);
             Grid.SetColumn(RedCar1, ColumnNum);
         }
 
         private async void RollDice_Click(object sender, RoutedEventArgs e)
         {
-            await MoveCar(0,5);
-            await MoveCar(1,5);
-            await MoveCar(2,5);
+            await MoveCarRedCar1();
+            //await MoveCarRedCar1(1,5);
+            //await MoveCarRedCar1(2,5);
 
         }
     }
