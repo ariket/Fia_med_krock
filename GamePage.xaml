@@ -86,13 +86,19 @@
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="RedCar2" Grid.Column="3" Grid.Row="5" Margin="5" Visibility="Collapsed">
+            <Rectangle Name="RedCar2" Grid.Column="3" Grid.Row="5" Margin="5" Tapped="RedCar2_Tapped" Visibility="Collapsed">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
             <Rectangle Name="RedCar3" Grid.Column="3" Grid.Row="5" Margin="5" Tapped="RedCar3_Tapped">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle Name="RedCar4" Grid.Column="3" Grid.Row="6" Margin="5" Tapped="RedCar4_Tapped">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>

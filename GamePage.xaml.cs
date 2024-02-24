@@ -27,7 +27,7 @@ namespace Fia_med_krock
 {
 
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// GamePage.
     /// </summary>
     public sealed partial class MainPage : Page
 
@@ -37,9 +37,9 @@ namespace Fia_med_krock
         //Road för red cars, {column,row}
         public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404"};
         public int positionRedCar1 = 1;
-        public int positionRedCar2 = 0;
-        public int positionRedCar3 = 0;
-        public int positionRedCar4 = 0;
+        public int positionRedCar2 = 1;
+        public int positionRedCar3 = 1;
+        public int positionRedCar4 = 1;
 
 
         public MainPage()
@@ -57,6 +57,36 @@ namespace Fia_med_krock
             Grid.SetColumn(RedCar1, columnNum);
         }
 
+        private void MoveRedCar2(int columnNum, int rowNum)
+        {
+
+            PlayBoard.Children.Remove(RedCar2);
+            //await System.Threading.Tasks.Task.Delay(10);
+            PlayBoard.Children.Add(RedCar2);
+            Grid.SetRow(RedCar2, rowNum);
+            Grid.SetColumn(RedCar2, columnNum);
+        }
+
+        private void MoveRedCar3(int columnNum, int rowNum)
+        {
+
+            PlayBoard.Children.Remove(RedCar3);
+            //await System.Threading.Tasks.Task.Delay(10);
+            PlayBoard.Children.Add(RedCar3);
+            Grid.SetRow(RedCar3, rowNum);
+            Grid.SetColumn(RedCar3, columnNum);
+        }
+
+        private void MoveRedCar4(int columnNum, int rowNum)
+        {
+
+            PlayBoard.Children.Remove(RedCar4);
+            //await System.Threading.Tasks.Task.Delay(10);
+            PlayBoard.Children.Add(RedCar4);
+            Grid.SetRow(RedCar4, rowNum);
+            Grid.SetColumn(RedCar4, columnNum);
+        }
+
         private void RollDice_Click(object sender, RoutedEventArgs e)
         {
             //await MoveRedCar1();
@@ -65,18 +95,12 @@ namespace Fia_med_krock
 
         }
 
-        private async void RedCar3_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            //await MoveRedCar3();
-        }
 
         private async void RedCar1_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
-
             int dice = 3;
             int movNum = 0;
-            while (movNum < dice) 
+            while (movNum < dice)
             {
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(2, 2));
@@ -85,8 +109,52 @@ namespace Fia_med_krock
                 movNum++;
                 await System.Threading.Tasks.Task.Delay(200);
             }
-
-            
         }
+
+        private async void RedCar2_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            int dice = 3;
+            int movNum = 0;
+            while (movNum < dice)
+            {
+                int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar2].Substring(0, 2));
+                int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar2].Substring(2, 2));
+                positionRedCar2++;
+                MoveRedCar2(columnNum, rowNum);
+                movNum++;
+                await System.Threading.Tasks.Task.Delay(200);
+            }
+        }
+
+        private async void RedCar3_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            int dice = 3;
+            int movNum = 0;
+            while (movNum < dice)
+            {
+                int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar3].Substring(0, 2));
+                int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar3].Substring(2, 2));
+                positionRedCar3++;
+                MoveRedCar3(columnNum, rowNum);
+                movNum++;
+                await System.Threading.Tasks.Task.Delay(200);
+            }
+        }
+
+        private async void RedCar4_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            int dice = 3;
+            int movNum = 0;
+            while (movNum < dice)
+            {
+                int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar4].Substring(0, 2));
+                int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar4].Substring(2, 2));
+                positionRedCar4++;
+                MoveRedCar4(columnNum, rowNum);
+                movNum++;
+                await System.Threading.Tasks.Task.Delay(200);
+            }
+        }
+
     }
 }
