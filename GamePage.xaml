@@ -98,7 +98,7 @@
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="RedCar4" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="RedCar4_Tapped" Visibility="Collapsed">
+            <Rectangle Name="RedCar4" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="RedCar4_Tapped"  Visibility="Collapsed">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
@@ -106,7 +106,7 @@
 
         </Grid>
 
-        <Grid Name="Red" Height="100" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" >
+        <Grid Name="Red" Height="100" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />

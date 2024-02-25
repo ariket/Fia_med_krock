@@ -187,6 +187,12 @@ namespace Fia_med_krock
                 await System.Threading.Tasks.Task.Delay(200);
             }
 
+            //Använd detta när det är annan färg som står i tur
+            Red2.IsTapEnabled = false;
+            Red3.IsTapEnabled = false;
+            Red4.IsTapEnabled = false;
+            //Använd detta när det är annan färg som står i tur
+            Red.Opacity = 0.3;
         }
 
         private void Red2_Tapped(object sender, TappedRoutedEventArgs e)
