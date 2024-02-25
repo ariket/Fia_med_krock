@@ -57,15 +57,24 @@ namespace Fia_med_krock
             Grid.SetColumn(RedCar1, columnNum);
         }
 
-        private void MoveRedCar2(int columnNum, int rowNum)
+        private void MoveCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int rowNum)
         {
-
-            PlayBoard.Children.Remove(RedCar2);
+            PlayBoard.Children.Remove(carToMove);
             //await System.Threading.Tasks.Task.Delay(10);
-            PlayBoard.Children.Add(RedCar2);
-            Grid.SetRow(RedCar2, rowNum);
-            Grid.SetColumn(RedCar2, columnNum);
+            PlayBoard.Children.Add(carToMove);
+            Grid.SetRow(carToMove, rowNum);
+            Grid.SetColumn(carToMove, columnNum);
         }
+
+        private void MoveCarStart(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int rowNum)
+        {
+            PlayBoard.Children.Remove(carToMove);
+            //await System.Threading.Tasks.Task.Delay(10);
+            PlayBoard.Children.Add(carToMove);
+            Grid.SetRow(carToMove, rowNum);
+            Grid.SetColumn(carToMove, columnNum);
+        }
+
 
         private void MoveRedCar3(int columnNum, int rowNum)
         {
@@ -105,7 +114,7 @@ namespace Fia_med_krock
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(2, 2));
                 positionRedCar1++;
-                MoveRedCar1(columnNum, rowNum);
+                MoveCar(RedCar1, columnNum, rowNum);
                 movNum++;
                 await System.Threading.Tasks.Task.Delay(200);
             }
@@ -120,7 +129,7 @@ namespace Fia_med_krock
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar2].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar2].Substring(2, 2));
                 positionRedCar2++;
-                MoveRedCar2(columnNum, rowNum);
+                MoveCar(RedCar2, columnNum, rowNum);
                 movNum++;
                 await System.Threading.Tasks.Task.Delay(200);
             }
@@ -135,7 +144,7 @@ namespace Fia_med_krock
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar3].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar3].Substring(2, 2));
                 positionRedCar3++;
-                MoveRedCar3(columnNum, rowNum);
+                MoveCar(RedCar3, columnNum, rowNum);
                 movNum++;
                 await System.Threading.Tasks.Task.Delay(200);
             }
@@ -150,11 +159,55 @@ namespace Fia_med_krock
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar4].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar4].Substring(2, 2));
                 positionRedCar4++;
-                MoveRedCar4(columnNum, rowNum);
+                MoveCar(RedCar4, columnNum, rowNum);
                 movNum++;
                 await System.Threading.Tasks.Task.Delay(200);
             }
         }
+
+        private async void Red1_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Red1.Visibility = Visibility.Collapsed;
+            int dice = 3;
+            int movNum = 0;
+
+            positionRedCar1++;
+            MoveCar(RedCar1, 0, 3);
+            movNum++;
+            RedCar1.Visibility = Visibility.Visible;
+            await System.Threading.Tasks.Task.Delay(200);
+
+            while (movNum < dice)
+            {
+                int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(0, 2));
+                int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(2, 2));
+                positionRedCar1++;
+                MoveCar(RedCar1, columnNum, rowNum);
+                movNum++;
+                await System.Threading.Tasks.Task.Delay(200);
+            }
+
+        }
+
+        private void Red2_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Red2.Visibility = Visibility.Collapsed;
+       
+        }
+
+        private void Red3_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Red3.Visibility = Visibility.Collapsed;
+   
+        }
+
+        private void Red4_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Red4.Visibility = Visibility.Collapsed;
+ 
+        }
+
+
 
     }
 }
