@@ -95,12 +95,17 @@ namespace Fia_med_krock
         }
 
         //Lagt till så att det slumpas ett värde.
-        private void RollDice_Click(object sender, RoutedEventArgs e)
+        private int roll_dice()
         {
             Random dice_roll = new Random();
             //Slumpar ett värde mellan 1 och 6. Maxvärdet 7 kan inte slumpas.
             int roll_result = Convert.ToInt32(dice_roll.Next(1, 7));
-            RollDice.Content = roll_result;
+            return roll_result;
+        }
+
+        private void RollDice_Click(object sender, RoutedEventArgs e)
+        {
+            RollDice.Content = roll_dice();
         }
 
 
