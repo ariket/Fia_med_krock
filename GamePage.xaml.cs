@@ -183,8 +183,8 @@ namespace Fia_med_krock
             int dice = Globals.dice_result;
             int movNum = 0;
 
-            positionRedCar1++;
-            MoveCar(RedCar1, 0, dice);
+            //positionRedCar1++;
+            MoveCar(RedCar1, 0, 3);
             movNum++;
             RedCar1.Visibility = Visibility.Visible;
             await System.Threading.Tasks.Task.Delay(200);
