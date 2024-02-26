@@ -56,44 +56,6 @@ namespace Fia_med_krock
             Grid.SetColumn(carToMove, columnNum);
         }
         
-        private void MoveCarStart(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int rowNum)
-        {
-            PlayBoard.Children.Remove(carToMove);
-            //await System.Threading.Tasks.Task.Delay(10);
-            PlayBoard.Children.Add(carToMove);
-            Grid.SetRow(carToMove, rowNum);
-            Grid.SetColumn(carToMove, columnNum);
-        }
-
-        private void MoveRedCar1(int columnNum, int rowNum)
-        {
-            
-            PlayBoard.Children.Remove(RedCar1);
-            //await System.Threading.Tasks.Task.Delay(10);
-            PlayBoard.Children.Add(RedCar1);
-            Grid.SetRow(RedCar1, rowNum);
-            Grid.SetColumn(RedCar1, columnNum);
-        }
-
-        private void MoveRedCar3(int columnNum, int rowNum)
-        {
-
-            PlayBoard.Children.Remove(RedCar3);
-            //await System.Threading.Tasks.Task.Delay(10);
-            PlayBoard.Children.Add(RedCar3);
-            Grid.SetRow(RedCar3, rowNum);
-            Grid.SetColumn(RedCar3, columnNum);
-        }
-
-        private void MoveRedCar4(int columnNum, int rowNum)
-        {
-
-            PlayBoard.Children.Remove(RedCar4);
-            //await System.Threading.Tasks.Task.Delay(10);
-            PlayBoard.Children.Add(RedCar4);
-            Grid.SetRow(RedCar4, rowNum);
-            Grid.SetColumn(RedCar4, columnNum);
-        }
 
         //Finns inte globala variabler i c#, så gjorde en ful lösning från https://stackoverflow.com/questions/14368129/how-to-use-global-variables-in-c
         public static class Globals
