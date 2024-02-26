@@ -32,6 +32,11 @@ namespace Fia_med_krock
     public sealed partial class MainPage : Page
 
     {
+        public MainPage()
+        {
+            this.InitializeComponent();
+        }
+
         //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra, bara dom första 7 positionerna finns än så länge.
         //Sen har man en int (positionRedCar1)för varje bil som anger bilen position mha RedCarsRoad[] 
         //Road för red cars, {column,row}
@@ -40,22 +45,6 @@ namespace Fia_med_krock
         public int positionRedCar2 = 1;
         public int positionRedCar3 = 1;
         public int positionRedCar4 = 1;
-
-
-        public MainPage()
-        {
-            this.InitializeComponent();
-        }
-
-        private void MoveRedCar1(int columnNum, int rowNum)
-        {
-            
-            PlayBoard.Children.Remove(RedCar1);
-            //await System.Threading.Tasks.Task.Delay(10);
-            PlayBoard.Children.Add(RedCar1);
-            Grid.SetRow(RedCar1, rowNum);
-            Grid.SetColumn(RedCar1, columnNum);
-        }
 
         private void MoveCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int rowNum)
         {
@@ -75,6 +64,15 @@ namespace Fia_med_krock
             Grid.SetColumn(carToMove, columnNum);
         }
 
+        private void MoveRedCar1(int columnNum, int rowNum)
+        {
+            
+            PlayBoard.Children.Remove(RedCar1);
+            //await System.Threading.Tasks.Task.Delay(10);
+            PlayBoard.Children.Add(RedCar1);
+            Grid.SetRow(RedCar1, rowNum);
+            Grid.SetColumn(RedCar1, columnNum);
+        }
 
         private void MoveRedCar3(int columnNum, int rowNum)
         {
@@ -96,12 +94,13 @@ namespace Fia_med_krock
             Grid.SetColumn(RedCar4, columnNum);
         }
 
+        //Lagt till så att det slumpas ett värde.
         private void RollDice_Click(object sender, RoutedEventArgs e)
         {
-            //await MoveRedCar1();
-            //await MoveRedCar1(1,5);
-            //await MoveCRedCar1(2,5);
-
+            Random dice_roll = new Random();
+            //Slumpar ett värde mellan 1 och 6. Maxvärdet 7 kan inte slumpas.
+            int roll_result = Convert.ToInt32(dice_roll.Next(1, 7));
+            RollDice.Content = roll_result;
         }
 
 
@@ -168,6 +167,7 @@ namespace Fia_med_krock
         private async void Red1_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Red1.Visibility = Visibility.Collapsed;
+            //FIXME: DICE = RETURN RAND FUNCTION
             int dice = 3;
             int movNum = 0;
 
