@@ -94,24 +94,33 @@ namespace Fia_med_krock
             Grid.SetColumn(RedCar4, columnNum);
         }
 
+        //Finns inte globala variabler i c#, så gjorde en ful lösning från https://stackoverflow.com/questions/14368129/how-to-use-global-variables-in-c
+        public static class Globals
+        {
+            public static int dice_result = 0;
+        }
+
         //Lagt till så att det slumpas ett värde.
         private int roll_dice()
         {
             Random dice_roll = new Random();
             //Slumpar ett värde mellan 1 och 6. Maxvärdet 7 kan inte slumpas.
             int roll_result = Convert.ToInt32(dice_roll.Next(1, 7));
+            Globals.dice_result = roll_result;
             return roll_result;
         }
 
         private void RollDice_Click(object sender, RoutedEventArgs e)
         {
-            RollDice.Content = roll_dice();
+
+            int dice = roll_dice();
+            RollDice.Content = dice;
         }
 
 
         private async void RedCar1_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            int dice = 3;
+            int dice = Globals.dice_result;
             int movNum = 0;
             while (movNum < dice)
             {
@@ -126,7 +135,7 @@ namespace Fia_med_krock
 
         private async void RedCar2_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            int dice = 3;
+            int dice = Globals.dice_result;
             int movNum = 0;
             while (movNum < dice)
             {
@@ -141,7 +150,7 @@ namespace Fia_med_krock
 
         private async void RedCar3_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            int dice = 3;
+            int dice = Globals.dice_result;
             int movNum = 0;
             while (movNum < dice)
             {
@@ -156,7 +165,7 @@ namespace Fia_med_krock
 
         private async void RedCar4_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            int dice = 3;
+            int dice = Globals.dice_result;
             int movNum = 0;
             while (movNum < dice)
             {
@@ -172,12 +181,11 @@ namespace Fia_med_krock
         private async void Red1_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Red1.Visibility = Visibility.Collapsed;
-            //FIXME: DICE = RETURN RAND FUNCTION
-            int dice = 3;
+            int dice = Globals.dice_result;
             int movNum = 0;
 
             positionRedCar1++;
-            MoveCar(RedCar1, 0, 3);
+            MoveCar(RedCar1, 0, dice);
             movNum++;
             RedCar1.Visibility = Visibility.Visible;
             await System.Threading.Tasks.Task.Delay(200);
