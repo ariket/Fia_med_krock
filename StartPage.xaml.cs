@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Fia_med_krock
@@ -25,6 +26,18 @@ namespace Fia_med_krock
         public StartPage()
         {
             this.InitializeComponent();
+        }
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
+        private void RulesButton_Click(Object sender, RoutedEventArgs e)
+        {
+            RulesPopup.IsOpen= true;
+        }
+        private void CloseRulesButton_Click(object sender, RoutedEventArgs e)
+        {
+            RulesPopup.IsOpen = false;
         }
     }
 }
