@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Height="800" Width="800">
     
         <Grid Name="PlayBoard" Height="500" Width="500">
             <Grid.RowDefinitions>
@@ -106,7 +106,7 @@
 
         </Grid>
 
-        <Grid Name="Red" Height="100" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Grid Name="Red" Height="100" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50,50,0,0">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
@@ -129,13 +129,13 @@
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Red2" Grid.Column="0" Grid.Row="1" Margin="5" Tapped="Red2_Tapped" >
+            <Rectangle Name="Red2" Grid.Column="1" Grid.Row="0" Margin="5" Tapped="Red2_Tapped" >
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Red3" Grid.Column="1" Grid.Row="0" Margin="5" Tapped="Red3_Tapped">
+            <Rectangle Name="Red3" Grid.Column="0" Grid.Row="1" Margin="5" Tapped="Red3_Tapped">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
