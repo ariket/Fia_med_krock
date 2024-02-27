@@ -123,25 +123,25 @@
             <Rectangle Grid.Column="1" Grid.Row="1" Fill= "Red" Stroke="DarkGray" StrokeThickness="2"/>
 
             <!-- Visibility="Collapsed" -->
-            <Rectangle Name="Red1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="Red1_Tapped">
+            <Rectangle Name="Red1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="Red1_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Red2" Grid.Column="1" Grid.Row="0" Margin="5" Tapped="Red2_Tapped" >
+            <Rectangle Name="Red2" Grid.Column="1" Grid.Row="0" Margin="5" Tapped="Red2_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Red3" Grid.Column="0" Grid.Row="1" Margin="5" Tapped="Red3_Tapped">
+            <Rectangle Name="Red3" Grid.Column="0" Grid.Row="1" Margin="5" Tapped="Red3_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Red4" Grid.Column="1" Grid.Row="1" Margin="5" Tapped="Red4_Tapped">
+            <Rectangle Name="Red4" Grid.Column="1" Grid.Row="1" Margin="5" Tapped="Red4_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>

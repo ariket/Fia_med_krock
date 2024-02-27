@@ -98,6 +98,9 @@ namespace Fia_med_krock
         Cars yellowCar4 = new Cars("Yellow", 0, 0, 0);
         //Egen klass för spelplanen?
 
+      
+
+
         private void MoveCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int rowNum)
         {
             PlayBoard.Children.Remove(carToMove);
@@ -132,6 +135,18 @@ namespace Fia_med_krock
 
             int dice = roll_dice();
             RollDice.Content = dice;
+
+            if(dice == 1 || dice == 6)
+            {
+                Red1.IsTapEnabled = true;
+                Red2.IsTapEnabled = true;
+                Red3.IsTapEnabled = true;
+                Red4.IsTapEnabled = true;
+                Red1.Opacity = 1;
+                Red2.Opacity = 1;
+                Red3.Opacity = 1;
+                Red4.Opacity = 1;
+            }
         }
 
 
@@ -149,7 +164,7 @@ namespace Fia_med_krock
 
         async void tappedCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, string[] CarsRoad, Cars car)
         {
-
+            
             int dice = Globals.dice_result;
             int movNum = 0;
             goForward = true;
@@ -186,13 +201,21 @@ namespace Fia_med_krock
                 RedCar1.Visibility = Visibility.Collapsed;
             }
 
-
+            Red1.IsTapEnabled = false;
+            Red2.IsTapEnabled = false;
+            Red3.IsTapEnabled = false;
+            Red4.IsTapEnabled = false;
+            Red1.Opacity = 0.3;
+            Red2.Opacity = 0.3;
+            Red3.Opacity = 0.3;
+            Red4.Opacity = 0.3;
         }
 
 
         private void RedCar1_Tapped(object sender, TappedRoutedEventArgs e)
         {
             tappedCar(RedCar1, RedCarsRoad, redCar1);
+            
         }
 
         private void RedCar2_Tapped(object sender, TappedRoutedEventArgs e)
@@ -271,7 +294,7 @@ namespace Fia_med_krock
             RedCar4.Visibility = Visibility.Visible;
 
             tappedCar(RedCar4, RedCarsRoad, redCar4);
-
+            
         }
     }
 }
