@@ -40,11 +40,12 @@ namespace Fia_med_krock
         //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra, bara dom första 7 positionerna finns än så länge.
         //Sen har man en int (positionRedCar1)för varje bil som anger bilen position mha RedCarsRoad[] 
         //Road för red cars, {column,row}
-        public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404"};
-        public int positionRedCar1 = 1;
+        public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404" };
+        public int positionRedCar1 = 0;
         public int positionRedCar2 = 1;
         public int positionRedCar3 = 1;
         public int positionRedCar4 = 1;
+        public bool goForward = true;
 
         private void MoveCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int rowNum)
         {
@@ -54,7 +55,7 @@ namespace Fia_med_krock
             Grid.SetRow(carToMove, rowNum);
             Grid.SetColumn(carToMove, columnNum);
         }
-        
+
 
         //Finns inte globala variabler i c#, så gjorde en ful lösning från https://stackoverflow.com/questions/14368129/how-to-use-global-variables-in-c
         public static class Globals
@@ -83,14 +84,33 @@ namespace Fia_med_krock
         {
             int dice = Globals.dice_result;
             int movNum = 0;
+            goForward = true;
+
             while (movNum < dice)
             {
+                if (positionRedCar1 == 35)
+                {
+                    goForward = false;
+                }
+
+                if (goForward == true)
+                {
+                    positionRedCar1++;
+                }
+                else
+                {
+                    positionRedCar1--;
+                }
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(2, 2));
-                positionRedCar1++;
                 MoveCar(RedCar1, columnNum, rowNum);
                 movNum++;
                 await System.Threading.Tasks.Task.Delay(200);
+            }
+
+            if (movNum == dice && positionRedCar1 == 35)
+            {
+                RedCar1.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -144,8 +164,6 @@ namespace Fia_med_krock
             Red1.Visibility = Visibility.Collapsed;
             int dice = Globals.dice_result;
             int movNum = 0;
-
-            //positionRedCar1++;
             MoveCar(RedCar1, 0, 3);
             movNum++;
             RedCar1.Visibility = Visibility.Visible;
@@ -153,9 +171,9 @@ namespace Fia_med_krock
 
             while (movNum < dice)
             {
+                positionRedCar1++;
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(2, 2));
-                positionRedCar1++;
                 MoveCar(RedCar1, columnNum, rowNum);
                 movNum++;
                 await System.Threading.Tasks.Task.Delay(200);
