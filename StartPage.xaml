@@ -44,15 +44,13 @@
             <Button HorizontalAlignment="Center" VerticalAlignment="Top" Width="250" Height="100" Background="#004225" Margin="0,50,0,0" FontSize="64" CornerRadius="15" Click="StartButton_Click"> Start</Button>
             <Button HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="20" Width="150" Height="80" Background="#004225" FontSize="32" CornerRadius="15" Click="RulesButton_Click">Rules</Button>
         </Grid>
-        <Popup x:Name="RulesPopup" IsOpen="False" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Border Background="#99000000" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0">
-                    <TextBlock Text="Rules:" Foreground="White" FontSize="24" />
-                    <TextBlock Text="Test rule1" Foreground="White" />
-                    <TextBlock Text="Test rule2" Foreground="White" />
-                    <Button Content="Close" Click="CloseRulesButton_Click" />
-                </StackPanel>
-            </Border>
-        </Popup>
+        <ContentDialog x:Name="RulesDialog" >
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0">
+                <TextBlock Text="Rules:" Foreground="White" FontSize="24" />
+                <TextBlock Text="Test rule1" Foreground="White" />
+                <TextBlock Text="Test rule2" Foreground="White" />
+                <Button Click="CloseRulesButton_Click"> Close</Button>
+            </StackPanel>
+        </ContentDialog>
     </Grid>
 </Page>

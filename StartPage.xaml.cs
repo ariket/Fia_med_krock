@@ -51,11 +51,11 @@ namespace Fia_med_krock
         }
         private void RulesButton_Click(Object sender, RoutedEventArgs e)
         {
-            RulesPopup.IsOpen = true;
+            RulesDialog.ShowAsync();
         }
         private void CloseRulesButton_Click(object sender, RoutedEventArgs e)
         {
-            RulesPopup.IsOpen = false;
+            RulesDialog.Hide();
         }
 
         private void PlayerText_Tapped(object sender, TappedRoutedEventArgs e)
