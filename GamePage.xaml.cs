@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using static Fia_med_krock.MainPage;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -41,10 +42,10 @@ namespace Fia_med_krock
         //Sen har man en int (positionRedCar1)för varje bil som anger bilen position mha RedCarsRoad[] 
         //Road för red cars, {column,row}
         public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404"};
-        public int positionRedCar1 = 0;
-        public int positionRedCar2 = 1;
-        public int positionRedCar3 = 1;
-        public int positionRedCar4 = 1;
+        public int positionRedCar1 = -1;
+        public int positionRedCar2 = -1;
+        public int positionRedCar3 = -1;
+        public int positionRedCar4 = -1;
         public bool goForward = true;
 
         private void MoveCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int rowNum)
@@ -80,6 +81,18 @@ namespace Fia_med_krock
             RollDice.Content = dice;
         }
 
+
+        bool checkCarPosition(int movingCarPosition) 
+        {
+            bool check = true;
+            if (movingCarPosition > 0)
+            {
+                movingCarPosition++;
+                if (movingCarPosition == positionRedCar1 || movingCarPosition == positionRedCar2 || movingCarPosition == positionRedCar3 || movingCarPosition == positionRedCar4) check = false;
+            }
+            return check;
+        }
+
         private async void RedCar1_Tapped(object sender, TappedRoutedEventArgs e)
         {
             int dice = Globals.dice_result;
@@ -88,10 +101,18 @@ namespace Fia_med_krock
 
             while (movNum < dice)
             {
+                if (!checkCarPosition(positionRedCar1)) break;
+
                 if (positionRedCar1 == 35)
                 {
                     goForward = false;
                 }
+
+                int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(0, 2));
+                int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(2, 2));
+                MoveCar(RedCar1, columnNum, rowNum);
+                movNum++;
+                await System.Threading.Tasks.Task.Delay(200);
 
                 if (goForward == true)
                 {
@@ -101,12 +122,8 @@ namespace Fia_med_krock
                 {
                     positionRedCar1--;
                 }
-                int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(0, 2));
-                int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(2, 2));
-                MoveCar(RedCar1, columnNum, rowNum);
-                movNum++;
-                await System.Threading.Tasks.Task.Delay(200);
-            }
+
+            }   
 
             if (movNum == dice && positionRedCar1 ==35)
             {
@@ -118,45 +135,116 @@ namespace Fia_med_krock
         {
             int dice = Globals.dice_result;
             int movNum = 0;
+            goForward = true;
+
             while (movNum < dice)
             {
+                if (!checkCarPosition(positionRedCar2)) break;
+
+                if (positionRedCar2 == 35)
+                {
+                    goForward = false;
+                }
+
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar2].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar2].Substring(2, 2));
-                positionRedCar2++;
                 MoveCar(RedCar2, columnNum, rowNum);
                 movNum++;
                 await System.Threading.Tasks.Task.Delay(200);
+
+                if (goForward == true)
+                {
+                    positionRedCar2++;
+                }
+                else
+                {
+                    positionRedCar2--;
+                }
             }
+
+
+            if (movNum == dice && positionRedCar2 == 35)
+            {
+                RedCar2.Visibility = Visibility.Collapsed;
+            }
+
         }
 
         private async void RedCar3_Tapped(object sender, TappedRoutedEventArgs e)
         {
             int dice = Globals.dice_result;
             int movNum = 0;
+            goForward = true;
+
             while (movNum < dice)
             {
+                if (!checkCarPosition(positionRedCar3)) break;
+
+                if (positionRedCar3 == 35)
+                {
+                    goForward = false;
+                }
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar3].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar3].Substring(2, 2));
-                positionRedCar3++;
                 MoveCar(RedCar3, columnNum, rowNum);
                 movNum++;
                 await System.Threading.Tasks.Task.Delay(200);
+
+                if (goForward == true)
+                {
+                    positionRedCar3++;
+                }
+                else
+                {
+                    positionRedCar3--;
+                }
+
             }
+
+
+            if (movNum == dice && positionRedCar3 == 35)
+            {
+                RedCar3.Visibility = Visibility.Collapsed;
+            }
+
         }
 
         private async void RedCar4_Tapped(object sender, TappedRoutedEventArgs e)
         {
             int dice = Globals.dice_result;
             int movNum = 0;
+            goForward = true;
+
             while (movNum < dice)
             {
+                if (!checkCarPosition(positionRedCar4)) break;
+
+                if (positionRedCar4 == 35)
+                {
+                    goForward = false;
+                }
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar4].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar4].Substring(2, 2));
-                positionRedCar4++;
                 MoveCar(RedCar4, columnNum, rowNum);
                 movNum++;
                 await System.Threading.Tasks.Task.Delay(200);
+
+                if (goForward == true)
+                {
+                    positionRedCar4++;
+                }
+                else
+                {
+                    positionRedCar4--;
+                }
+
             }
+
+            if (movNum == dice && positionRedCar4 == 35)
+            {
+                RedCar4.Visibility = Visibility.Collapsed;
+            }
+
         }
 
         private async void Red1_Tapped(object sender, TappedRoutedEventArgs e)
@@ -164,21 +252,22 @@ namespace Fia_med_krock
             Red1.Visibility = Visibility.Collapsed;
             int dice = Globals.dice_result;
             int movNum = 0;
-            MoveCar(RedCar1, 0, 3);
-            movNum++;
             RedCar1.Visibility = Visibility.Visible;
-            await System.Threading.Tasks.Task.Delay(200);
+            positionRedCar1 = 0;
 
             while (movNum < dice)
             {
-                positionRedCar1++;
+                if (!checkCarPosition(positionRedCar1)) break;
+
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(2, 2));
-                MoveCar(RedCar1, columnNum, rowNum);
+                positionRedCar1++;
+                MoveCar(RedCar1, columnNum, rowNum);   
                 movNum++;
                 await System.Threading.Tasks.Task.Delay(200);
-            }
 
+            }
+           
             //Använd detta när det är annan färg som står i tur
             //Red2.IsTapEnabled = false;
             //Red3.IsTapEnabled = false;
@@ -187,20 +276,19 @@ namespace Fia_med_krock
             //Red.Opacity = 0.3;
         }
 
+
         private async void Red2_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Red2.Visibility = Visibility.Collapsed;
-            int dice = 3;
+            int dice = Globals.dice_result;
             int movNum = 0;
-
-            positionRedCar2++;
-            MoveCar(RedCar2, 0, 3);
-            movNum++;
             RedCar2.Visibility = Visibility.Visible;
-            await System.Threading.Tasks.Task.Delay(200);
+            positionRedCar2 = 0;
 
             while (movNum < dice)
             {
+                if (!checkCarPosition(positionRedCar2)) break;
+
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar2].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar2].Substring(2, 2));
                 positionRedCar2++;
@@ -214,17 +302,15 @@ namespace Fia_med_krock
         private async void Red3_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Red3.Visibility = Visibility.Collapsed;
-            int dice = 3;
+            int dice = Globals.dice_result;
             int movNum = 0;
-
-            positionRedCar3++;
-            MoveCar(RedCar3, 0, 3);
-            movNum++;
             RedCar3.Visibility = Visibility.Visible;
-            await System.Threading.Tasks.Task.Delay(200);
+            positionRedCar3 = 0;
 
             while (movNum < dice)
             {
+                if (!checkCarPosition(positionRedCar3)) break;
+
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar3].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar3].Substring(2, 2));
                 positionRedCar3++;
@@ -235,20 +321,20 @@ namespace Fia_med_krock
 
         }
 
+
         private async void Red4_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Red4.Visibility = Visibility.Collapsed;
-            int dice = 3;
-            int movNum = 0;
 
-            positionRedCar4++;
-            MoveCar(RedCar4, 0, 3);
-            movNum++;
+            Red4.Visibility = Visibility.Collapsed;
+            int dice = Globals.dice_result;
+            int movNum = 0;
             RedCar4.Visibility = Visibility.Visible;
-            await System.Threading.Tasks.Task.Delay(200);
+            positionRedCar4 = 0;
 
             while (movNum < dice)
             {
+                if (!checkCarPosition(positionRedCar4)) break;
+
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar4].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar4].Substring(2, 2));
                 positionRedCar4++;
@@ -258,8 +344,6 @@ namespace Fia_med_krock
             }
 
         }
-
-
 
     }
 }
