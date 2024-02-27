@@ -272,5 +272,66 @@ namespace Fia_med_krock
 
             tappedCar(RedCar4, RedCarsRoad, redCar4);         
         }
+
+        private void Blue1_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void Blue2_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void Blue3_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void Blue4_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void Green1_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+       
+        private void Green2_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void Green3_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void Green4_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void Yellow1_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void Yellow2_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void Yellow3_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void Yellow4_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
     }
 }

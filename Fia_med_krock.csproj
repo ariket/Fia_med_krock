@@ -133,7 +133,10 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BlueCar.png" />
+    <Content Include="Assets\GreenCar.png" />
     <Content Include="Assets\RedCar.png" />
+    <Content Include="Assets\YellowCar.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
