@@ -66,8 +66,19 @@ namespace Fia_med_krock
                 steps = total_steps;
             }
 
+            public void stepCar()
+            {
+                steps++;
+            }
+
+            public void stepCarBack()
+            {
+                steps--;
+            }
+
 
         }
+
         //Skapar pjäserna som behövs
         Cars redCar1 = new Cars("Red", 0, 0, 0);
         Cars redCar2 = new Cars("Red", 0, 0, 0);
@@ -138,8 +149,55 @@ namespace Fia_med_krock
             return check;
         }
 
+
+        async void tappedAllCars(Windows.UI.Xaml.Shapes.Rectangle carToMove, string[] CarsRoad, Cars car)
+        {
+
+            int dice = Globals.dice_result;
+            int movNum = 0;
+            goForward = true;
+
+            while (movNum < dice)
+            {
+                if (!checkCarPosition(car.steps)) break;
+
+                if (car.steps == 36)
+                {
+                    goForward = false;
+                }
+
+                int columnNum = Convert.ToInt32(CarsRoad[car.steps].Substring(0, 2));
+                int rowNum = Convert.ToInt32(CarsRoad[car.steps].Substring(2, 2));
+                MoveCar(carToMove, columnNum, rowNum);
+                movNum++;
+                await System.Threading.Tasks.Task.Delay(200);
+
+                if (goForward == true)
+                {
+                    car.stepCar();
+                }
+                else
+                {
+                    car.stepCarBack();
+                }
+
+            }
+
+            if (movNum == dice && car.steps == 36)
+            {
+                car.stepCar();
+                RedCar1.Visibility = Visibility.Collapsed;
+            }
+
+
+        }
+
+
         private async void RedCar1_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            tappedAllCars(RedCar1, RedCarsRoad, redCar1);
+
+            /*
             int dice = Globals.dice_result;
             int movNum = 0;
             goForward = true;
@@ -179,6 +237,9 @@ namespace Fia_med_krock
             {
                 RedCar1.Visibility = Visibility.Collapsed;
             }
+
+            */
+
         }
 
         private async void RedCar2_Tapped(object sender, TappedRoutedEventArgs e)
