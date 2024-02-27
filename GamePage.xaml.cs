@@ -30,14 +30,13 @@ namespace Fia_med_krock
     /// <summary>
     /// GamePage.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public partial class MainPage : Page
 
     {
         public MainPage()
         {
             this.InitializeComponent();
         }
-
         //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra, bara dom första 7 positionerna finns än så länge.
         //Sen har man en int (positionRedCar1)för varje bil som anger bilen position mha RedCarsRoad[] 
         //Road för red cars, {column,row}
@@ -47,7 +46,50 @@ namespace Fia_med_krock
         public int positionRedCar3 = -1;
         public int positionRedCar4 = -1;
         public bool goForward = true;
+        
+        public class Cars
+        {
+            //color används för att veta vilken spelare pjäsen tillhör.
+            //Just nu används inte col eller row pos, kan nog ta bort de?
+            //steps har samma funktion som gamla positionRedCarX variablerna.
+            public string color;
+            public int col_pos;
+            public int row_pos;
+            public int steps;
 
+            //Konstruktor för objekten
+            public Cars(string car_color, int car_col_pos, int car_row_pos, int total_steps)
+            {
+                color = car_color;
+                col_pos = car_col_pos;
+                row_pos = car_row_pos;
+                steps = total_steps;
+            }
+
+
+        }
+        //Skapar pjäserna som behövs
+        Cars redCar1 = new Cars("Red", 0, 0, 0);
+        Cars redCar2 = new Cars("Red", 0, 0, 0);
+        Cars redCar3 = new Cars("Red", 0, 0, 0);
+        Cars redCar4 = new Cars("Red", 0, 0, 0);
+
+        Cars blueCar1 = new Cars("Blue", 0, 0, 0);
+        Cars blueCar2 = new Cars("Blue", 0, 0, 0);
+        Cars blueCar3 = new Cars("Blue", 0, 0, 0);
+        Cars blueCar4 = new Cars("Blue", 0, 0, 0);
+
+        Cars greenCar1 = new Cars("Green", 0, 0, 0);
+        Cars greenCar2 = new Cars("Green", 0, 0, 0);
+        Cars greenCar3 = new Cars("Green", 0, 0, 0);
+        Cars greenCar4 = new Cars("Green", 0, 0, 0);
+
+        Cars yellowCar1 = new Cars("Yellow", 0, 0, 0);
+        Cars yellowCar2 = new Cars("Yellow", 0, 0, 0);
+        Cars yellowCar3 = new Cars("Yellow", 0, 0, 0);
+        Cars yellowCar4 = new Cars("Yellow", 0, 0, 0);
+        //Egen klass för spelplanen?
+        
         private void MoveCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int rowNum)
         {
             PlayBoard.Children.Remove(carToMove);
@@ -56,12 +98,15 @@ namespace Fia_med_krock
             Grid.SetRow(carToMove, rowNum);
             Grid.SetColumn(carToMove, columnNum);
         }
-        
 
         //Finns inte globala variabler i c#, så gjorde en ful lösning från https://stackoverflow.com/questions/14368129/how-to-use-global-variables-in-c
         public static class Globals
         {
             public static int dice_result = 0;
+            //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra, bara dom första 7 positionerna finns än så länge.
+            //Road för red cars, {column,row}
+            public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404" };
+
         }
 
         //Lagt till så att det slumpas ett värde.
@@ -129,6 +174,11 @@ namespace Fia_med_krock
             {
                 RedCar1.Visibility = Visibility.Collapsed;
             }
+
+            if (movNum == dice && redCar1.steps == 35)
+            {
+                RedCar1.Visibility = Visibility.Collapsed;
+            }
         }
 
         private async void RedCar2_Tapped(object sender, TappedRoutedEventArgs e)
@@ -161,13 +211,10 @@ namespace Fia_med_krock
                     positionRedCar2--;
                 }
             }
-
-
             if (movNum == dice && positionRedCar2 == 35)
             {
                 RedCar2.Visibility = Visibility.Collapsed;
             }
-
         }
 
         private async void RedCar3_Tapped(object sender, TappedRoutedEventArgs e)
@@ -201,12 +248,10 @@ namespace Fia_med_krock
 
             }
 
-
             if (movNum == dice && positionRedCar3 == 35)
             {
                 RedCar3.Visibility = Visibility.Collapsed;
             }
-
         }
 
         private async void RedCar4_Tapped(object sender, TappedRoutedEventArgs e)
@@ -245,6 +290,10 @@ namespace Fia_med_krock
                 RedCar4.Visibility = Visibility.Collapsed;
             }
 
+            if (movNum == dice && redCar4.steps == 35)
+            {
+                RedCar4.Visibility = Visibility.Collapsed;
+            }
         }
 
         private async void Red1_Tapped(object sender, TappedRoutedEventArgs e)
@@ -252,6 +301,9 @@ namespace Fia_med_krock
             Red1.Visibility = Visibility.Collapsed;
             int dice = Globals.dice_result;
             int movNum = 0;
+            string[] red_path = Globals.RedCarsRoad;
+            MoveCar(RedCar1, 0, 3);
+            movNum++;
             RedCar1.Visibility = Visibility.Visible;
             positionRedCar1 = 0;
 
@@ -262,7 +314,7 @@ namespace Fia_med_krock
                 int columnNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(0, 2));
                 int rowNum = Convert.ToInt32(RedCarsRoad[positionRedCar1].Substring(2, 2));
                 positionRedCar1++;
-                MoveCar(RedCar1, columnNum, rowNum);   
+                MoveCar(RedCar1, columnNum, rowNum); 
                 movNum++;
                 await System.Threading.Tasks.Task.Delay(200);
 
@@ -282,6 +334,9 @@ namespace Fia_med_krock
             Red2.Visibility = Visibility.Collapsed;
             int dice = Globals.dice_result;
             int movNum = 0;
+            string[] red_path = Globals.RedCarsRoad;
+            MoveCar(RedCar2, 0, 3);
+            movNum++;
             RedCar2.Visibility = Visibility.Visible;
             positionRedCar2 = 0;
 
@@ -304,6 +359,9 @@ namespace Fia_med_krock
             Red3.Visibility = Visibility.Collapsed;
             int dice = Globals.dice_result;
             int movNum = 0;
+            string[] red_path = Globals.RedCarsRoad;
+            MoveCar(RedCar3, 0, 3);
+            movNum++;
             RedCar3.Visibility = Visibility.Visible;
             positionRedCar3 = 0;
 
@@ -328,6 +386,9 @@ namespace Fia_med_krock
             Red4.Visibility = Visibility.Collapsed;
             int dice = Globals.dice_result;
             int movNum = 0;
+            string[] red_path = Globals.RedCarsRoad;
+            MoveCar(RedCar4, 0, 3);
+            movNum++;
             RedCar4.Visibility = Visibility.Visible;
             positionRedCar4 = 0;
 
@@ -344,6 +405,5 @@ namespace Fia_med_krock
             }
 
         }
-
     }
 }
