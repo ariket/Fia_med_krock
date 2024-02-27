@@ -39,5 +39,30 @@ namespace Fia_med_krock
         {
             RulesPopup.IsOpen = false;
         }
+        private void PlayerText_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (sender is TextBlock textBlock)
+            {
+                TextBox textBox = new TextBox
+                {
+                    Text = textBlock.Text,
+                    FontSize = textBlock.FontSize,
+                    Foreground = textBlock.Foreground,
+                    HorizontalAlignment = textBlock.HorizontalAlignment,
+                    VerticalAlignment = textBlock.VerticalAlignment,
+                    Margin = textBlock.Margin,
+                    Width = textBlock.ActualWidth,
+                    Height = textBlock.ActualHeight,
+                    BorderThickness = new Thickness(0)
+                    
+                };
+                textBox.Tapped += PlayerText_Tapped;
+                StackPanel parentStackPanel = textBlock.Parent as StackPanel;
+                int index = parentStackPanel.Children.IndexOf(textBlock);
+                parentStackPanel.Children.RemoveAt(index);
+                parentStackPanel.Children.Insert(index, textBox);
+                textBox.Focus(FocusState.Programmatic);
+            }
+        }
     }
 }

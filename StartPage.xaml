@@ -15,23 +15,23 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal" Margin="0,200,0,0" >
             <StackPanel Margin="20">
-                <TextBlock Foreground="Black" Text="Player 1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+                <TextBlock x:Name="Player1Text" Foreground="Black" Text="Player 1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Tapped="PlayerText_Tapped"/>
                 <Rectangle Stroke="Red" StrokeThickness="2" Width="100" Height="100"/>
             </StackPanel>
 
 
             <StackPanel Margin="20">
-                <TextBlock Foreground="Black" Text="Player 2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+                <TextBlock x:Name="Player2Text" Foreground="Black" Text="Player 2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Tapped="PlayerText_Tapped"/>
                 <Rectangle Stroke="Green" StrokeThickness="2" Width="100" Height="100"/>
             </StackPanel>
 
             <StackPanel Margin="20">
-                <TextBlock Foreground="Black" Text="Player 3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+                <TextBlock x:Name="Player3Text" Foreground="Black" Text="Player 3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Tapped="PlayerText_Tapped"/>
                 <Rectangle Stroke="Blue" StrokeThickness="2" Width="100" Height="100"/>
             </StackPanel>
 
             <StackPanel Margin="20">
-                <TextBlock Foreground="Black" Text="Player 4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+                <TextBlock x:Name="Player4Text" Foreground="Black" Text="Player 4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Tapped="PlayerText_Tapped"/>
                 <Rectangle Stroke="Yellow" StrokeThickness="2" Width="100" Height="100"/>
             </StackPanel>
         </StackPanel>
