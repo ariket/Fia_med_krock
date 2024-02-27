@@ -37,14 +37,11 @@ namespace Fia_med_krock
         {
             this.InitializeComponent();
         }
-        //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra, bara dom första 7 positionerna finns än så länge.
-        //Sen har man en int (positionRedCar1)för varje bil som anger bilen position mha RedCarsRoad[] 
+        //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra.
+        //Sen har man en int (Cars.steps) för varje bil som anger bilen position mha RedCarsRoad[] 
         //Road för red cars, {column,row}
         public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404" };
-        public int positionRedCar1 = -1;
-        public int positionRedCar2 = -1;
-        public int positionRedCar3 = -1;
-        public int positionRedCar4 = -1;
+        
         public bool goForward = true;
 
         public class Cars
@@ -144,7 +141,7 @@ namespace Fia_med_krock
             if (movingCarPosition > 0)
             {
                 movingCarPosition++;
-                if (movingCarPosition == positionRedCar1 || movingCarPosition == positionRedCar2 || movingCarPosition == positionRedCar3 || movingCarPosition == positionRedCar4) check = false;
+                if (movingCarPosition == redCar1.steps || movingCarPosition == redCar2.steps || movingCarPosition == redCar3.steps || movingCarPosition == redCar4.steps) check = false;
             }
             return check;
         }
@@ -226,7 +223,7 @@ namespace Fia_med_krock
             MoveCar(RedCar1, 0, 3);
             movNum++;
             RedCar1.Visibility = Visibility.Visible;
-            positionRedCar1 = 0;
+
 
             tappedCar(RedCar1, RedCarsRoad, redCar1);
             
@@ -242,7 +239,6 @@ namespace Fia_med_krock
             MoveCar(RedCar2, 0, 3);
             movNum++;
             RedCar2.Visibility = Visibility.Visible;
-            positionRedCar2 = 0;
 
             tappedCar(RedCar2, RedCarsRoad, redCar2);
  
@@ -257,7 +253,6 @@ namespace Fia_med_krock
             MoveCar(RedCar3, 0, 3);
             movNum++;
             RedCar3.Visibility = Visibility.Visible;
-            positionRedCar3 = 0;
 
             tappedCar(RedCar3, RedCarsRoad, redCar3);
 
@@ -274,7 +269,6 @@ namespace Fia_med_krock
             MoveCar(RedCar4, 0, 3);
             movNum++;
             RedCar4.Visibility = Visibility.Visible;
-            positionRedCar4 = 0;
 
             tappedCar(RedCar4, RedCarsRoad, redCar4);
 
