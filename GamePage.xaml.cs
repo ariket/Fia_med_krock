@@ -50,7 +50,8 @@ namespace Fia_med_krock
         {
             this.InitializeComponent();
             currentPlayer = GameState.PlayerRed;
-            
+            RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -161,10 +162,10 @@ namespace Fia_med_krock
 
         private void RollDice_Click(object sender, RoutedEventArgs e)
         {
-
+            
             int dice = roll_dice();
             RollDice.Content = dice;
-         //   RollDice.IsEnabled = false;
+          //  RollDice.IsEnabled = false;
             setCurrentPlayerCarsState(dice);
             
             //bool anyCarsEnabled = CheckAnyCarsEnabled();
@@ -226,6 +227,7 @@ namespace Fia_med_krock
                     Red2.IsTapEnabled = false;
                     Red3.IsTapEnabled = false;
                     Red4.IsTapEnabled = false;
+                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
                     break;
                 case GameState.PlayerBlue:
                     currentPlayer = GameState.PlayerGreen;
@@ -237,6 +239,7 @@ namespace Fia_med_krock
                     Blue2.IsTapEnabled = false;
                     Blue3.IsTapEnabled = false;
                     Blue4.IsTapEnabled = false;
+                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Green);
                     break;
                 case GameState.PlayerGreen:
                     currentPlayer = GameState.PlayerYellow;
@@ -248,6 +251,7 @@ namespace Fia_med_krock
                     Green2.IsTapEnabled = false;
                     Green3.IsTapEnabled = false;
                     Green4.IsTapEnabled = false;
+                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Yellow);
                     break;
                 case GameState.PlayerYellow:
                     currentPlayer = GameState.PlayerRed;
@@ -259,6 +263,7 @@ namespace Fia_med_krock
                     Yellow2.IsTapEnabled = false;
                     Yellow3.IsTapEnabled = false;
                     Yellow4.IsTapEnabled = false;
+                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                     break;
 
             }
@@ -299,11 +304,11 @@ namespace Fia_med_krock
         }
         private void SetTapEnabledForPlayer(Windows.UI.Xaml.Shapes.Rectangle car, Windows.UI.Xaml.Shapes.Rectangle carToMove, int dice)
         {
-          //  if(dice == 1 || dice == 6)
-          //  { 
+         //   if(dice == 1 || dice == 6)
+         //   { 
                 carToMove.IsTapEnabled = true; /*(dice == 1 || dice == 6 || car.steps != -1);*/
                 carToMove.Opacity = 1;
-            //  }
+         //   }
             car.IsTapEnabled = true; 
 
         }
