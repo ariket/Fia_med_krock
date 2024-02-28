@@ -50,19 +50,14 @@ namespace Fia_med_krock
         public class Cars
         {
             //color används för att veta vilken spelare pjäsen tillhör.
-            //Just nu används inte col eller row pos, kan nog ta bort de?
             //steps har samma funktion som gamla positionRedCarX variablerna.
             public string color;
-            public int col_pos;
-            public int row_pos;
             public int steps;
 
             //Konstruktor för objekten
-            public Cars(string car_color, int car_col_pos, int car_row_pos, int total_steps)
+            public Cars(string car_color, int total_steps)
             {
                 color = car_color;
-                col_pos = car_col_pos;
-                row_pos = car_row_pos;
                 steps = total_steps;
             }
 
@@ -80,28 +75,28 @@ namespace Fia_med_krock
         }
 
         //Skapar pjäserna som behövs
-        Cars redCar1 = new Cars("Red", 0, 0, -1);
-        Cars redCar2 = new Cars("Red", 0, 0, -1);
-        Cars redCar3 = new Cars("Red", 0, 0, -1);
-        Cars redCar4 = new Cars("Red", 0, 0, -1);
+        Cars redCar1 = new Cars("Red", -1);
+        Cars redCar2 = new Cars("Red", -1);
+        Cars redCar3 = new Cars("Red", -1);
+        Cars redCar4 = new Cars("Red", -1);
 
-        Cars blueCar1 = new Cars("Blue", 0, 0, -1);
-        Cars blueCar2 = new Cars("Blue", 0, 0, -1);
-        Cars blueCar3 = new Cars("Blue", 0, 0, -1);
-        Cars blueCar4 = new Cars("Blue", 0, 0, -1);
+        Cars blueCar1 = new Cars("Blue", -1);
+        Cars blueCar2 = new Cars("Blue", -1);
+        Cars blueCar3 = new Cars("Blue", -1);
+        Cars blueCar4 = new Cars("Blue", -1);
 
-        Cars greenCar1 = new Cars("Green", 0, 0, -1);
-        Cars greenCar2 = new Cars("Green", 0, 0, -1);
-        Cars greenCar3 = new Cars("Green", 0, 0, -1);
-        Cars greenCar4 = new Cars("Green", 0, 0, -1);
+        Cars greenCar1 = new Cars("Green", -1);
+        Cars greenCar2 = new Cars("Green", -1);
+        Cars greenCar3 = new Cars("Green", -1);
+        Cars greenCar4 = new Cars("Green", -1);
 
-        Cars yellowCar1 = new Cars("Yellow", 0, 0, -1);
-        Cars yellowCar2 = new Cars("Yellow", 0, 0, -1);
-        Cars yellowCar3 = new Cars("Yellow", 0, 0, -1);
-        Cars yellowCar4 = new Cars("Yellow", 0, 0, -1);
+        Cars yellowCar1 = new Cars("Yellow", -1);
+        Cars yellowCar2 = new Cars("Yellow", -1);
+        Cars yellowCar3 = new Cars("Yellow", -1);
+        Cars yellowCar4 = new Cars("Yellow", -1);
         //Egen klass för spelplanen?
 
-      
+
 
 
         private void MoveCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int rowNum)
@@ -138,7 +133,7 @@ namespace Fia_med_krock
 
             int dice = roll_dice();
             RollDice.Content = dice;
-
+            //TODO: Gör så att man bara kan välja den aktiva spelarens bilar.
             if(dice == 1 || dice == 6)
             {
                 Red1.IsTapEnabled = true;
@@ -149,6 +144,33 @@ namespace Fia_med_krock
                 Red2.Opacity = 1;
                 Red3.Opacity = 1;
                 Red4.Opacity = 1;
+
+                Blue1.IsTapEnabled = true;
+                Blue2.IsTapEnabled = true;
+                Blue3.IsTapEnabled = true;
+                Blue4.IsTapEnabled = true;
+                Blue1.Opacity = 1;
+                Blue2.Opacity = 1;
+                Blue3.Opacity = 1;
+                Blue4.Opacity = 1;
+
+                Green1.IsTapEnabled = true;
+                Green2.IsTapEnabled = true;
+                Green3.IsTapEnabled = true;
+                Green4.IsTapEnabled = true;
+                Green1.Opacity = 1;
+                Green2.Opacity = 1;
+                Green3.Opacity = 1;
+                Green4.Opacity = 1;
+
+                Yellow1.IsTapEnabled = true;
+                Yellow2.IsTapEnabled = true;
+                Yellow3.IsTapEnabled = true;
+                Yellow4.IsTapEnabled = true;
+                Yellow1.Opacity = 1;
+                Yellow2.Opacity = 1;
+                Yellow3.Opacity = 1;
+                Yellow4.Opacity = 1;
             }
         }
 
@@ -330,47 +352,110 @@ namespace Fia_med_krock
         }
 
 
+        private void GreenCar1_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            tappedCar(GreenCar1, GreenCarsRoad, greenCar1);
+        }
 
+        private void GreenCar2_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            tappedCar(GreenCar2, GreenCarsRoad, greenCar2);
+        }
+
+        private void GreenCar3_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            tappedCar(GreenCar3, GreenCarsRoad, greenCar3);
+        }
+
+        private void GreenCar4_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            tappedCar(GreenCar4, GreenCarsRoad, greenCar4);
+        }
 
 
         private void Green1_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            Green1.Visibility = Visibility.Collapsed;
+            GreenCar1.Visibility = Visibility.Visible;
 
+            tappedCar(GreenCar1, GreenCarsRoad, greenCar1);
         }
        
         private void Green2_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            Green2.Visibility = Visibility.Collapsed;
+            GreenCar2.Visibility = Visibility.Visible;
 
+            tappedCar(GreenCar2, GreenCarsRoad, greenCar2);
         }
 
         private void Green3_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            Green3.Visibility = Visibility.Collapsed;
+            GreenCar3.Visibility = Visibility.Visible;
 
+            tappedCar(GreenCar3, GreenCarsRoad, greenCar3);
         }
 
         private void Green4_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            Green4.Visibility = Visibility.Collapsed;
+            GreenCar4.Visibility = Visibility.Visible;
 
+            tappedCar(GreenCar4, GreenCarsRoad, greenCar4);
+        }
+
+
+        private void YellowCar1_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            tappedCar(YellowCar1, YellowCarsRoad, yellowCar1);
+        }
+
+        private void YellowCar2_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            tappedCar(YellowCar2, YellowCarsRoad, yellowCar2);
+        }
+
+        private void YellowCar3_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            tappedCar(YellowCar3, YellowCarsRoad, yellowCar3);
+        }
+
+        private void YellowCar4_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            tappedCar(YellowCar4, YellowCarsRoad, yellowCar4);
         }
 
         private void Yellow1_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            Yellow1.Visibility = Visibility.Collapsed;
+            YellowCar1.Visibility = Visibility.Visible;
 
+            tappedCar(YellowCar1, YellowCarsRoad, yellowCar1);
         }
 
         private void Yellow2_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            Yellow2.Visibility = Visibility.Collapsed;
+            YellowCar2.Visibility = Visibility.Visible;
 
+            tappedCar(YellowCar2, YellowCarsRoad, yellowCar2);
         }
 
         private void Yellow3_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            Yellow3.Visibility = Visibility.Collapsed;
+            YellowCar3.Visibility = Visibility.Visible;
 
+            tappedCar(YellowCar3, YellowCarsRoad, yellowCar3);
         }
 
         private void Yellow4_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            Yellow4.Visibility = Visibility.Collapsed;
+            YellowCar4.Visibility = Visibility.Visible;
 
+            tappedCar(YellowCar4, YellowCarsRoad, yellowCar4);
         }
 
 

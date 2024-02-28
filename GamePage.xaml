@@ -128,7 +128,53 @@
                 </Rectangle.Fill>
             </Rectangle>
 
+            <Rectangle Name="GreenCar1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="GreenCar1_Tapped" Visibility="Collapsed">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
 
+            <Rectangle Name="GreenCar2" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="GreenCar2_Tapped" Visibility="Collapsed">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle Name="GreenCar3" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="GreenCar3_Tapped" Visibility="Collapsed">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle Name="GreenCar4" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="GreenCar4_Tapped"  Visibility="Collapsed">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle Name="YellowCar1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="YellowCar1_Tapped" Visibility="Collapsed">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/YellowCar.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle Name="YellowCar2" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="YellowCar2_Tapped" Visibility="Collapsed">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/YellowCar.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle Name="YellowCar3" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="YellowCar3_Tapped" Visibility="Collapsed">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/YellowCar.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle Name="YellowCar4" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="YellowCar4_Tapped"  Visibility="Collapsed">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="/Assets/YellowCar.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
 
         </Grid>
 
