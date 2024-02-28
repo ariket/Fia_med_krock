@@ -164,9 +164,9 @@ namespace Fia_med_krock
 
             int dice = roll_dice();
             RollDice.Content = dice;
-
+         //   RollDice.IsEnabled = false;
             setCurrentPlayerCarsState(dice);
-
+            
             //bool anyCarsEnabled = CheckAnyCarsEnabled();
 
             //if (!anyCarsEnabled)
@@ -270,38 +270,42 @@ namespace Fia_med_krock
             switch (currentPlayer)
             {
                 case GameState.PlayerRed:
-                    SetTapEnabledForPlayer(redCar1, Red1, dice);
-                    SetTapEnabledForPlayer(redCar2, Red2, dice);
-                    SetTapEnabledForPlayer(redCar3, Red3, dice);
-                    SetTapEnabledForPlayer(redCar4, Red4, dice);
+                    SetTapEnabledForPlayer(RedCar1, Red1, dice);
+                    SetTapEnabledForPlayer(RedCar2, Red2, dice);
+                    SetTapEnabledForPlayer(RedCar3, Red3, dice);
+                    SetTapEnabledForPlayer(RedCar4, Red4, dice);
                     break;
 
                 case GameState.PlayerBlue:
-                    SetTapEnabledForPlayer(blueCar1, Blue1, dice);
-                    SetTapEnabledForPlayer(blueCar2, Blue2, dice);
-                    SetTapEnabledForPlayer(blueCar3, Blue3, dice);
-                    SetTapEnabledForPlayer(blueCar4, Blue4, dice);
+                    SetTapEnabledForPlayer(BlueCar1, Blue1, dice);
+                    SetTapEnabledForPlayer(BlueCar2, Blue2, dice);
+                    SetTapEnabledForPlayer(BlueCar3, Blue3, dice);
+                    SetTapEnabledForPlayer(BlueCar4, Blue4, dice);
                     break;
                 case GameState.PlayerGreen:
-                    SetTapEnabledForPlayer(greenCar1, Green1, dice);
-                    SetTapEnabledForPlayer(greenCar2, Green2, dice);
-                    SetTapEnabledForPlayer(greenCar3, Green3, dice);
-                    SetTapEnabledForPlayer(greenCar4, Green4, dice);
+                    SetTapEnabledForPlayer(GreenCar1, Green1, dice);
+                    SetTapEnabledForPlayer(GreenCar2, Green2, dice);
+                    SetTapEnabledForPlayer(GreenCar3, Green3, dice);
+                    SetTapEnabledForPlayer(GreenCar4, Green4, dice);
                     break;
                 case GameState.PlayerYellow:
-                    SetTapEnabledForPlayer(yellowCar1, Yellow1, dice);
-                    SetTapEnabledForPlayer(yellowCar2, Yellow2, dice);
-                    SetTapEnabledForPlayer(yellowCar3, Yellow3, dice);
-                    SetTapEnabledForPlayer(yellowCar4, Yellow4, dice);
+                    SetTapEnabledForPlayer(YellowCar1, Yellow1, dice);
+                    SetTapEnabledForPlayer(YellowCar2, Yellow2, dice);
+                    SetTapEnabledForPlayer(YellowCar3, Yellow3, dice);
+                    SetTapEnabledForPlayer(YellowCar4, Yellow4, dice);
                     break;
             }
 
         }
-        private void SetTapEnabledForPlayer(Cars car, Windows.UI.Xaml.Shapes.Rectangle carToMove, int dice)
+        private void SetTapEnabledForPlayer(Windows.UI.Xaml.Shapes.Rectangle car, Windows.UI.Xaml.Shapes.Rectangle carToMove, int dice)
         {
+          //  if(dice == 1 || dice == 6)
+          //  { 
+                carToMove.IsTapEnabled = true; /*(dice == 1 || dice == 6 || car.steps != -1);*/
+                carToMove.Opacity = 1;
+            //  }
+            car.IsTapEnabled = true; 
 
-            carToMove.IsTapEnabled = true; /*(dice == 1 || dice == 6 || car.steps != -1);*/
-            carToMove.Opacity = 1;
         }
 
 
@@ -363,7 +367,7 @@ namespace Fia_med_krock
             {
                 SwitchToNextPlayer();
             }
-
+            else RollDice.IsEnabled = true;
 
         }
         private void DisableAllCarsForCurrentPlayer()
