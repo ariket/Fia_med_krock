@@ -41,7 +41,10 @@ namespace Fia_med_krock
         //Sen har man en int (Cars.steps) för varje bil som anger bilen position mha RedCarsRoad[] 
         //Road för red cars, {column,row}
         public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404" };
-        
+        public static string[] BlueCarsRoad = { "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0401", "0402", "0403", "0404" };
+        public static string[] GreenCarsRoad = { "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0704", "0604", "0504", "0404" };
+        public static string[] YellowCarsRoad = {  "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0407", "0406", "0405", "0404" };
+
         public bool goForward = true;
 
         public class Cars
@@ -82,20 +85,20 @@ namespace Fia_med_krock
         Cars redCar3 = new Cars("Red", 0, 0, -1);
         Cars redCar4 = new Cars("Red", 0, 0, -1);
 
-        Cars blueCar1 = new Cars("Blue", 0, 0, 0);
-        Cars blueCar2 = new Cars("Blue", 0, 0, 0);
-        Cars blueCar3 = new Cars("Blue", 0, 0, 0);
-        Cars blueCar4 = new Cars("Blue", 0, 0, 0);
+        Cars blueCar1 = new Cars("Blue", 0, 0, -1);
+        Cars blueCar2 = new Cars("Blue", 0, 0, -1);
+        Cars blueCar3 = new Cars("Blue", 0, 0, -1);
+        Cars blueCar4 = new Cars("Blue", 0, 0, -1);
 
-        Cars greenCar1 = new Cars("Green", 0, 0, 0);
-        Cars greenCar2 = new Cars("Green", 0, 0, 0);
-        Cars greenCar3 = new Cars("Green", 0, 0, 0);
-        Cars greenCar4 = new Cars("Green", 0, 0, 0);
+        Cars greenCar1 = new Cars("Green", 0, 0, -1);
+        Cars greenCar2 = new Cars("Green", 0, 0, -1);
+        Cars greenCar3 = new Cars("Green", 0, 0, -1);
+        Cars greenCar4 = new Cars("Green", 0, 0, -1);
 
-        Cars yellowCar1 = new Cars("Yellow", 0, 0, 0);
-        Cars yellowCar2 = new Cars("Yellow", 0, 0, 0);
-        Cars yellowCar3 = new Cars("Yellow", 0, 0, 0);
-        Cars yellowCar4 = new Cars("Yellow", 0, 0, 0);
+        Cars yellowCar1 = new Cars("Yellow", 0, 0, -1);
+        Cars yellowCar2 = new Cars("Yellow", 0, 0, -1);
+        Cars yellowCar3 = new Cars("Yellow", 0, 0, -1);
+        Cars yellowCar4 = new Cars("Yellow", 0, 0, -1);
         //Egen klass för spelplanen?
 
       
@@ -116,8 +119,8 @@ namespace Fia_med_krock
             public static int dice_result = 0;
             //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra, bara dom första 7 positionerna finns än så länge.
             //Road för red cars, {column,row}
-            public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404" };
-
+            // public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404" };
+           
         }
 
         //Lagt till så att det slumpas ett värde.
@@ -273,25 +276,62 @@ namespace Fia_med_krock
             tappedCar(RedCar4, RedCarsRoad, redCar4);         
         }
 
+        private void BlueCar1_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            tappedCar(BlueCar1, BlueCarsRoad, blueCar1);
+        }
+
+        private void BlueCar2_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            tappedCar(BlueCar2, BlueCarsRoad, blueCar2);
+        }
+
+        private void BlueCar3_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            tappedCar(BlueCar3, BlueCarsRoad, blueCar3);
+        }
+
+        private void BlueCar4_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            tappedCar(BlueCar4, BlueCarsRoad, blueCar4);
+        }
+
+
         private void Blue1_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            Blue1.Visibility = Visibility.Collapsed;
+            BlueCar1.Visibility = Visibility.Visible;
 
+            tappedCar(BlueCar1, BlueCarsRoad, blueCar1);
         }
 
         private void Blue2_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            Blue2.Visibility = Visibility.Collapsed;
+            BlueCar2.Visibility = Visibility.Visible;
 
+            tappedCar(BlueCar2, BlueCarsRoad, blueCar2);
         }
 
         private void Blue3_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            Blue3.Visibility = Visibility.Collapsed;
+            BlueCar3.Visibility = Visibility.Visible;
 
+            tappedCar(BlueCar3, BlueCarsRoad, blueCar3);
         }
 
         private void Blue4_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            Blue4.Visibility = Visibility.Collapsed;
+            BlueCar4.Visibility = Visibility.Visible;
 
+            tappedCar(BlueCar4, BlueCarsRoad, blueCar4);
         }
+
+
+
+
 
         private void Green1_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -333,5 +373,8 @@ namespace Fia_med_krock
 
         }
 
+
+
+    
     }
 }
