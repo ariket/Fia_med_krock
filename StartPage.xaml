@@ -42,13 +42,19 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Button HorizontalAlignment="Center" VerticalAlignment="Top" Width="250" Height="100" Background="#004225" Margin="0,50,0,0" FontSize="64" CornerRadius="15" Click="StartButton_Click"> Start</Button>
-            <Button HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="20" Width="150" Height="80" Background="#004225" FontSize="32" CornerRadius="15" Click="RulesButton_Click">Rules</Button>
+            <Button HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="20" Width="150" Height="80" Background="#004225" Foreground="#FFFFFF" FontSize="32" CornerRadius="15" Click="RulesButton_Click">Regler</Button>
         </Grid>
+        
         <ContentDialog x:Name="RulesDialog" >
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0">
-                <TextBlock Text="Rules:" Foreground="White" FontSize="24" />
-                <TextBlock Text="Test rule1" Foreground="White" />
-                <TextBlock Text="Test rule2" Foreground="White" />
+                <TextBlock Text="Regler för FIA med krock:" Foreground="#000000" FontSize="24" TextDecorations="Underline" />
+                <TextBlock Text="För att flytta ut en bil på spelplanen måste man rulla 1 eller 6." Foreground="#000000" />
+                <TextBlock Text="Om man slår en 6a kan man flytta 2 pjäser till start, eller 1 pjäs 6 steg framåt.." Foreground="#000000" />
+                <TextBlock Text="Rullar man en 6a för man slå tärningen igen." Foreground="#000000" />
+                <TextBlock Text="Pjäser av samma färg kan inte gå förbi varandra på spelplanen." Foreground="#000000" />
+                <TextBlock Text="Landar man på en motståndares pjäs knuffas de tillbaks till boet." Foreground="#000000" />
+                <TextBlock Text="För att gå i mål måste man slå det exakta antalet steg som behövs." Foreground="#000000" />
+                <TextBlock Text="Spelaren som först går i mål med alla sina bilar har vunnit!." Foreground="#000000" />
                 <Button Click="CloseRulesButton_Click"> Close</Button>
             </StackPanel>
         </ContentDialog>

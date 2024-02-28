@@ -63,7 +63,6 @@ namespace Fia_med_krock
         public class Cars
         {
             //color används för att veta vilken spelare pjäsen tillhör.
-            //Just nu används inte col eller row pos, kan nog ta bort de?
             //steps har samma funktion som gamla positionRedCarX variablerna.
             public string color;
             public int steps;
@@ -129,8 +128,8 @@ namespace Fia_med_krock
             public static int dice_result = 0;
             //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra, bara dom första 7 positionerna finns än så länge.
             //Road för red cars, {column,row}
-            public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404" };
-
+            // public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404" };
+           
         }
 
         //Lagt till så att det slumpas ett värde.
@@ -618,5 +617,8 @@ namespace Fia_med_krock
             tappedCar(YellowCar4, YellowCarsRoad, yellowCar4);
         }
 
+
+
+    
     }
 }
