@@ -301,6 +301,7 @@ namespace Fia_med_krock
         {
 
             carToMove.IsTapEnabled = true; /*(dice == 1 || dice == 6 || car.steps != -1);*/
+            carToMove.Opacity = 1;
         }
 
 
@@ -374,40 +375,56 @@ namespace Fia_med_krock
                     RedCar2.IsTapEnabled = false;
                     RedCar3.IsTapEnabled = false;
                     RedCar4.IsTapEnabled = false;
-                    RedCar1.Opacity = 0.3;
-                    RedCar2.Opacity = 0.3;
-                    RedCar3.Opacity = 0.3;
-                    RedCar4.Opacity = 0.3;
+                    Red1.IsTapEnabled = false;
+                    Red2.IsTapEnabled = false;
+                    Red3.IsTapEnabled = false;
+                    Red4.IsTapEnabled = false;
+                    Red1.Opacity = 0.3;
+                    Red2.Opacity = 0.3;
+                    Red3.Opacity = 0.3;
+                    Red4.Opacity = 0.3;
                     break;
                 case GameState.PlayerBlue:
                     BlueCar1.IsTapEnabled = false;
                     BlueCar2.IsTapEnabled = false;
                     BlueCar3.IsTapEnabled = false;
                     BlueCar4.IsTapEnabled = false;
-                    BlueCar1.Opacity = 0.3;
-                    BlueCar2.Opacity = 0.3;
-                    BlueCar3.Opacity = 0.3;
-                    BlueCar4.Opacity = 0.3;
+                    Blue1.IsTapEnabled = false;
+                    Blue2.IsTapEnabled = false;
+                    Blue3.IsTapEnabled = false;
+                    Blue4.IsTapEnabled = false;
+                    Blue1.Opacity = 0.3;
+                    Blue2.Opacity = 0.3;
+                    Blue3.Opacity = 0.3;
+                    Blue4.Opacity = 0.3;
                     break;
                 case GameState.PlayerGreen:
                     GreenCar1.IsTapEnabled = false;
                     GreenCar2.IsTapEnabled = false;
                     GreenCar3.IsTapEnabled = false;
                     GreenCar4.IsTapEnabled = false;
-                    GreenCar1.Opacity = 0.3;
-                    GreenCar2.Opacity = 0.3;
-                    GreenCar3.Opacity = 0.3;
-                    GreenCar4.Opacity = 0.3;
+                    Green1.IsTapEnabled = false;
+                    Green2.IsTapEnabled = false;
+                    Green3.IsTapEnabled = false;
+                    Green4.IsTapEnabled = false;
+                    Green1.Opacity = 0.3;
+                    Green2.Opacity = 0.3;
+                    Green3.Opacity = 0.3;
+                    Green4.Opacity = 0.3;
                     break;
                 case GameState.PlayerYellow:
                     YellowCar1.IsTapEnabled = false;
                     YellowCar2.IsTapEnabled = false;
                     YellowCar3.IsTapEnabled = false;
                     YellowCar4.IsTapEnabled = false;
-                    YellowCar1.Opacity = 0.3;
-                    YellowCar2.Opacity = 0.3;
-                    YellowCar3.Opacity = 0.3;
-                    YellowCar4.Opacity = 0.3;
+                    Yellow1.IsTapEnabled = false;
+                    Yellow2.IsTapEnabled = false;
+                    Yellow3.IsTapEnabled = false;
+                    Yellow4.IsTapEnabled = false;
+                    Yellow1.Opacity = 0.3;
+                    Yellow2.Opacity = 0.3;
+                    Yellow3.Opacity = 0.3;
+                    Yellow4.Opacity = 0.3;
                     break;
 
                 default:
