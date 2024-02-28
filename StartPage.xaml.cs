@@ -24,6 +24,15 @@ namespace Fia_med_krock
     /// </summary>
     public sealed partial class StartPage : Page
     {
+       
+
+        private PlayerAiStates playerAiStates = new PlayerAiStates();
+
+        public class MainPageParameters
+        {
+            public List<string> PlayerNames { get; set; }
+            public PlayerAiStates PlayerAiStates { get; set; }
+        }
         public StartPage()
         {
             this.InitializeComponent();
@@ -31,7 +40,11 @@ namespace Fia_med_krock
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             List<string> playerNames = GetPlayerNames();
-            Frame.Navigate(typeof(MainPage), playerNames);
+            Frame.Navigate(typeof(MainPage), new MainPageParameters
+            {
+                PlayerNames = playerNames,
+                PlayerAiStates = playerAiStates
+            });
         }
         private List<string> GetPlayerNames()
         {
@@ -56,6 +69,14 @@ namespace Fia_med_krock
         private void CloseRulesButton_Click(object sender, RoutedEventArgs e)
         {
             RulesDialog.Hide();
+        }
+        public class PlayerAiStates
+        {
+            public bool IsPlayer1Ai { get; set; }
+            public bool IsPlayer2Ai { get; set; }
+            public bool IsPlayer3Ai { get; set; }
+            public bool IsPlayer4Ai { get; set; }
+            
         }
 
         private void PlayerText_Tapped(object sender, TappedRoutedEventArgs e)
@@ -96,6 +117,35 @@ namespace Fia_med_krock
 
             }
 
+        }
+
+        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            if (sender is Slider slider)
+            {
+                string playerName = slider.Name.Replace("Slider", "");
+                switch (playerName)
+                {
+                    case "Player1":
+                        playerAiStates.IsPlayer1Ai = slider.Value == 1;
+                        break;
+
+                    case "Player2":
+                        playerAiStates.IsPlayer2Ai = slider.Value == 1;
+                        break;
+
+                    case "Player3":
+                        playerAiStates.IsPlayer3Ai = slider.Value == 1;
+                        break;
+
+                    case "Player4":
+                        playerAiStates.IsPlayer4Ai = slider.Value == 1;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

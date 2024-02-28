@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using static Fia_med_krock.MainPage;
+using static Fia_med_krock.StartPage;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -43,11 +44,27 @@ namespace Fia_med_krock
         }
 
         private GameState currentPlayer;
+        private PlayerAiStates playerAiStates;
 
         public MainPage()
         {
             this.InitializeComponent();
             currentPlayer = GameState.PlayerRed;
+            
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter is MainPageParameters parameters)
+            {
+                List<string> playerNames = parameters.PlayerNames;
+                PlayerAiStates playerAiStates = parameters.PlayerAiStates;
+                Debug.WriteLine("Player AI States:");
+                Debug.WriteLine($"Player 1 AI: {playerAiStates.IsPlayer1Ai}");
+                Debug.WriteLine($"Player 2 AI: {playerAiStates.IsPlayer2Ai}");
+                Debug.WriteLine($"Player 3 AI: {playerAiStates.IsPlayer3Ai}");
+                Debug.WriteLine($"Player 4 AI: {playerAiStates.IsPlayer4Ai}");
+
+            }
         }
 
         //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra.

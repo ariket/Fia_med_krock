@@ -17,22 +17,26 @@
             <StackPanel Margin="20">
                 <TextBlock x:Name="Player1Text" Foreground="Black" Text="Player 1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Tapped="PlayerText_Tapped"/>
                 <Rectangle Stroke="Red" StrokeThickness="2" Width="100" Height="100"/>
+                <Slider x:Name="Player1Slider" Width="100" Height="30" Maximum="1" Minimum="0" ValueChanged="Slider_ValueChanged"/>
             </StackPanel>
 
 
             <StackPanel Margin="20">
                 <TextBlock x:Name="Player2Text" Foreground="Black" Text="Player 2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Tapped="PlayerText_Tapped"/>
                 <Rectangle Stroke="Green" StrokeThickness="2" Width="100" Height="100"/>
+                <Slider x:Name="Player2Slider" Width="100" Height="30" Maximum="1" Minimum="0" ValueChanged="Slider_ValueChanged"/>
             </StackPanel>
 
             <StackPanel Margin="20">
                 <TextBlock x:Name="Player3Text" Foreground="Black" Text="Player 3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Tapped="PlayerText_Tapped"/>
                 <Rectangle Stroke="Blue" StrokeThickness="2" Width="100" Height="100"/>
+                <Slider x:Name="Player3Slider" Width="100" Height="30" Maximum="1" Minimum="0" ValueChanged="Slider_ValueChanged"/>
             </StackPanel>
 
             <StackPanel Margin="20">
                 <TextBlock x:Name="Player4Text" Foreground="Black" Text="Player 4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Tapped="PlayerText_Tapped"/>
                 <Rectangle Stroke="Yellow" StrokeThickness="2" Width="100" Height="100"/>
+                <Slider x:Name="Player4Slider" Width="100" Height="30" Maximum="1" Minimum="0" ValueChanged="Slider_ValueChanged"/>
             </StackPanel>
         </StackPanel>
 
