@@ -171,7 +171,7 @@ namespace Fia_med_krock
             
             int dice = roll_dice();
             RollDice.Content = dice;
-          //  RollDice.IsEnabled = false;
+            RollDice.IsEnabled = false;
             setCurrentPlayerCarsState(dice);
             
             //bool anyCarsEnabled = CheckAnyCarsEnabled();
@@ -408,9 +408,13 @@ namespace Fia_med_krock
             if (dice != 6)
             {
                 SwitchToNextPlayer();
+                RollDice.IsEnabled = true;
             }
-            else RollDice.IsEnabled = true;
-
+            else
+            {
+                RollDice.IsEnabled = true;
+                RollDice.Content = "Rulla Tärning";
+            }
         }
         private void DisableAllCarsForCurrentPlayer()
         {
