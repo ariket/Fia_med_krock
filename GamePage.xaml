@@ -9,7 +9,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Height="800" Width="800">
-    
+
+        <MediaElement x:Name="myPlayer" AutoPlay="True" >
+        </MediaElement>
+
         <Grid Name="PlayBoard" Height="500" Width="500">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />

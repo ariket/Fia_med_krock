@@ -12,6 +12,7 @@ using Windows.Foundation.Collections;
 using Windows.Graphics.Capture;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
@@ -51,6 +52,11 @@ namespace Fia_med_krock
             this.InitializeComponent();
             currentPlayer = GameState.PlayerRed;
             RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+
+            Uri newuri = new Uri("ms-appx:///Assets/music.mp3");
+            myPlayer.Source = newuri;
+            myPlayer.Play();
+
 
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -328,6 +334,33 @@ namespace Fia_med_krock
             }
             return check;
         }
+        bool CheckCarPosition(Cars car)
+        {
+            bool check = true;
+         
+            int movingCarPosition = car.steps + 1;
+
+            if (movingCarPosition > 0)
+            {
+                if (car.color == "Red")
+                {
+                    if (movingCarPosition == redCar1.steps || movingCarPosition == redCar2.steps || movingCarPosition == redCar3.steps || movingCarPosition == redCar4.steps) check = false;
+                }
+                else if (car.color == "Blue")
+                {
+                    if (movingCarPosition == blueCar1.steps || movingCarPosition == blueCar2.steps || movingCarPosition == blueCar3.steps || movingCarPosition == blueCar4.steps) check = false;
+                }
+                else if (car.color == "Green")
+                {
+                    if (movingCarPosition == greenCar1.steps || movingCarPosition == greenCar2.steps || movingCarPosition == greenCar3.steps || movingCarPosition == greenCar4.steps) check = false;
+                }
+                else
+                {
+                    if (movingCarPosition == yellowCar1.steps || movingCarPosition == yellowCar2.steps || movingCarPosition == yellowCar3.steps || movingCarPosition == yellowCar4.steps) check = false;
+                }
+            } 
+            return check;
+        }
 
 
         async void tappedCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, string[] CarsRoad, Cars car)
@@ -339,8 +372,8 @@ namespace Fia_med_krock
 
             while (movNum < dice)
             {
-               // if (!checkCarPosition(car.steps)) break;
-          
+                if (!CheckCarPosition(car)) break;
+
                 if (car.steps == 35)
                 {
                     goForward = false;
