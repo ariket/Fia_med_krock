@@ -330,7 +330,7 @@ namespace Fia_med_krock
 
             while (movNum < dice)
             {
-                if (!checkCarPosition(car.steps)) break;
+               // if (!checkCarPosition(car.steps)) break;
           
                 if (car.steps == 35)
                 {
