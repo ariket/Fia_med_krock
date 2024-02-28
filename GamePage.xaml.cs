@@ -228,6 +228,7 @@ namespace Fia_med_krock
                     Red3.IsTapEnabled = false;
                     Red4.IsTapEnabled = false;
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
+                    RollDice.Content = "Rulla Tärning";
                     break;
                 case GameState.PlayerBlue:
                     currentPlayer = GameState.PlayerGreen;
@@ -240,6 +241,7 @@ namespace Fia_med_krock
                     Blue3.IsTapEnabled = false;
                     Blue4.IsTapEnabled = false;
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Green);
+                    RollDice.Content = "Rulla Tärning";
                     break;
                 case GameState.PlayerGreen:
                     currentPlayer = GameState.PlayerYellow;
@@ -252,6 +254,7 @@ namespace Fia_med_krock
                     Green3.IsTapEnabled = false;
                     Green4.IsTapEnabled = false;
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Yellow);
+                    RollDice.Content = "Rulla Tärning";
                     break;
                 case GameState.PlayerYellow:
                     currentPlayer = GameState.PlayerRed;
@@ -264,6 +267,7 @@ namespace Fia_med_krock
                     Yellow3.IsTapEnabled = false;
                     Yellow4.IsTapEnabled = false;
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                    RollDice.Content = "Rulla Tärning";
                     break;
 
             }
@@ -330,7 +334,6 @@ namespace Fia_med_krock
         {
             Debug.WriteLine("tappedcar körs ");
             int dice = Globals.dice_result;
-            RollDice.Content = "Rulla Tärning";
             int movNum = 0;
             goForward = true;
 
