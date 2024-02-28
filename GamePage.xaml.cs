@@ -174,13 +174,14 @@ namespace Fia_med_krock
             RollDice.IsEnabled = false;
             setCurrentPlayerCarsState(dice);
             
-            //bool anyCarsEnabled = CheckAnyCarsEnabled();
-
-            //if (!anyCarsEnabled)
-            //{
-            //    // Ingen bil kan röras och därav byts det tur
-            //    SwitchToNextPlayer();  
-            //}
+            bool anyCarsEnabled = CheckAnyCarsEnabled();
+            
+            if (!anyCarsEnabled)
+            {
+                // Ingen bil kan röras och därav byts det tur
+                SwitchToNextPlayer();
+                RollDice.IsEnabled = true;
+            }
 
             //if(dice == 1 || dice == 6)
             //{
@@ -214,7 +215,7 @@ namespace Fia_med_krock
                     return Yellow1.IsTapEnabled || Yellow2.IsTapEnabled || Yellow3.IsTapEnabled || Yellow4.IsTapEnabled;
 
                 default:
-                    return false;
+                    return true;
             }
         }
 
@@ -314,11 +315,11 @@ namespace Fia_med_krock
         }
         private void SetTapEnabledForPlayer(Windows.UI.Xaml.Shapes.Rectangle car, Windows.UI.Xaml.Shapes.Rectangle carToMove, int dice)
         {
-         //   if(dice == 1 || dice == 6)
-         //   { 
+          //  if(dice == 1 || dice == 6)
+          //  { 
                 carToMove.IsTapEnabled = true; /*(dice == 1 || dice == 6 || car.steps != -1);*/
                 carToMove.Opacity = 1;
-         //   }
+          //  }
             car.IsTapEnabled = true; 
 
         }
