@@ -330,6 +330,7 @@ namespace Fia_med_krock
         {
             Debug.WriteLine("tappedcar körs ");
             int dice = Globals.dice_result;
+            RollDice.Content = "Rulla Tärning";
             int movNum = 0;
             goForward = true;
 
