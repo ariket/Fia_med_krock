@@ -108,7 +108,10 @@ namespace Fia_med_krock
                 steps--;
             }
 
-
+            public void CarCrasced()
+            {
+                steps = -1;
+            }
         }
 
         //Skapar pjäserna som behövs
@@ -385,6 +388,74 @@ namespace Fia_med_krock
             return check;
         }
 
+        void CheckCarPositionToCrash(Cars car)
+        {
+            string movingCarPosition = "";
+            if (car.color == "Red")
+            {
+                movingCarPosition = RedCarsRoad[car.steps];
+            }
+            else if (car.color == "Blue")
+            {
+                movingCarPosition = BlueCarsRoad[car.steps];
+            }
+            else if (car.color == "Green")
+            {
+                movingCarPosition = GreenCarsRoad[car.steps];
+            }
+            else
+            {
+                movingCarPosition = YellowCarsRoad[car.steps];
+            }
+
+            if (redCar1.steps >-1)
+            {
+                if (movingCarPosition == RedCarsRoad[redCar1.steps] && car.color != "Red")
+                {
+                    redCar1.CarCrasced();
+                    RedCar1.Visibility = Visibility.Collapsed;
+                    Red1.Opacity = 0.3;
+                    Red1.IsTapEnabled = false;
+                    Red1.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (redCar2.steps > -1)
+            {
+                if (movingCarPosition == RedCarsRoad[redCar2.steps] && car.color != "Red")
+                {
+                    redCar2.CarCrasced();
+                    RedCar2.Visibility = Visibility.Collapsed;
+                    Red2.Opacity = 0.3;
+                    Red2.IsTapEnabled = false;
+                    Red2.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (redCar3.steps > -1)
+            {
+                if (movingCarPosition == RedCarsRoad[redCar3.steps] && car.color != "Red")
+                {
+                    redCar3.CarCrasced();
+                    RedCar3.Visibility = Visibility.Collapsed;
+                    Red3.Opacity = 0.3;
+                    Red3.IsTapEnabled = false;
+                    Red3.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (redCar4.steps > -1)
+            {
+                if (movingCarPosition == RedCarsRoad[redCar4.steps] && car.color != "Red")
+                {
+                    redCar4.CarCrasced();
+                    RedCar4.Visibility = Visibility.Collapsed;
+                    Red4.Opacity = 0.3;
+                    Red4.IsTapEnabled = false;
+                    Red4.Visibility = Visibility.Visible;
+                }
+            }
+        }
 
         async void tappedCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, string[] CarsRoad, Cars car)
         {
@@ -425,7 +496,7 @@ namespace Fia_med_krock
                 }
             }
 
-
+            CheckCarPositionToCrash(car);
 
             DisableAllCarsForCurrentPlayer();
             if (dice != 6)
