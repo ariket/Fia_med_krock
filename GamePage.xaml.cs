@@ -53,9 +53,9 @@ namespace Fia_med_krock
             currentPlayer = GameState.PlayerRed;
             RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
 
-            Uri newuri = new Uri("ms-appx:///Assets/music.mp3");
-            myPlayer.Source = newuri;
-            myPlayer.Play();
+            //Uri newuri = new Uri("ms-appx:///Assets/music.mp3");
+            //myPlayer.Source = newuri;
+            //myPlayer.Play();
 
 
         }

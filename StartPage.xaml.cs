@@ -119,6 +119,93 @@ namespace Fia_med_krock
 
         }
 
+        private void player_click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                string playerName = button.Name.Replace("Button", "");
+                switch (playerName)
+                {
+                    case "Player1":
+                        //Byter från mänsklig spelare till AI
+                        if (playerAiStates.IsPlayer1Ai == false)
+                        {
+                            playerAiStates.IsPlayer1Ai = true;
+                            Player1Button.Content = "AI";
+                            break;
+                        }
+                        //Byter från spelare till AI
+                        else if (playerAiStates.IsPlayer1Ai == true)
+                        {
+                            playerAiStates.IsPlayer1Ai = false;
+                            Player1Button.Content = "Player1";
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    case "Player2":
+                        //Byter från mänsklig spelare till AI
+                        if (playerAiStates.IsPlayer2Ai == false)
+                        {
+                            playerAiStates.IsPlayer2Ai = true;
+                            Player2Button.Content = "AI";
+                            break;
+                        }
+                        //Byter från spelare till AI
+                        else if (playerAiStates.IsPlayer2Ai == true)
+                        {
+                            playerAiStates.IsPlayer2Ai = false;
+                            Player2Button.Content = "Player2";
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    case "Player3":
+                        //Byter från mänsklig spelare till AI
+                        if (playerAiStates.IsPlayer3Ai == false)
+                        {
+                            playerAiStates.IsPlayer3Ai = true;
+                            Player3Button.Content = "AI";
+                            break;
+                        }
+                        //Byter från spelare till AI
+                        else if (playerAiStates.IsPlayer3Ai == true)
+                        {
+                            playerAiStates.IsPlayer3Ai = false;
+                            Player3Button.Content = "Player3";
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    case "Player4":
+                        //Byter från mänsklig spelare till AI
+                        if (playerAiStates.IsPlayer4Ai == false)
+                        {
+                            playerAiStates.IsPlayer4Ai = true;
+                            Player4Button.Content = "AI";
+                            break;
+                        }
+                        //Byter från spelare till AI
+                        else if (playerAiStates.IsPlayer4Ai == true)
+                        {
+                            playerAiStates.IsPlayer4Ai = false;
+                            Player4Button.Content = "Player4";
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                }
+            }
+        }
+
         private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             if (sender is Slider slider)
