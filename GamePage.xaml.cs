@@ -108,7 +108,10 @@ namespace Fia_med_krock
                 steps--;
             }
 
-
+            public void CarCrasced()
+            {
+                steps = -1;
+            }
         }
 
         //Skapar pjäserna som behövs
@@ -183,17 +186,6 @@ namespace Fia_med_krock
                 RollDice.IsEnabled = true;
             }
 
-            //if(dice == 1 || dice == 6)
-            //{
-            //    Red1.IsTapEnabled = true;
-            //    Red2.IsTapEnabled = true;
-            //    Red3.IsTapEnabled = true;
-            //    Red4.IsTapEnabled = true;
-            //    Red1.Opacity = 1;
-            //    Red2.Opacity = 1;
-            //    Red3.Opacity = 1;
-            //    Red4.Opacity = 1;
-            //}
         }
 
 
@@ -276,7 +268,6 @@ namespace Fia_med_krock
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                     RollDice.Content = "Rulla Tärning";
                     break;
-
             }
         }
 
@@ -286,41 +277,75 @@ namespace Fia_med_krock
             switch (currentPlayer)
             {
                 case GameState.PlayerRed:
-                    SetTapEnabledForPlayer(RedCar1, Red1, dice);
-                    SetTapEnabledForPlayer(RedCar2, Red2, dice);
-                    SetTapEnabledForPlayer(RedCar3, Red3, dice);
-                    SetTapEnabledForPlayer(RedCar4, Red4, dice);
+                    SetTapEnabledForPlayer(redCar1, RedCar1, Red1, dice);
+                    SetTapEnabledForPlayer(redCar2, RedCar2, Red2, dice);
+                    SetTapEnabledForPlayer(redCar3, RedCar3, Red3, dice);
+                    SetTapEnabledForPlayer(redCar4, RedCar4, Red4, dice);
                     break;
 
                 case GameState.PlayerBlue:
-                    SetTapEnabledForPlayer(BlueCar1, Blue1, dice);
-                    SetTapEnabledForPlayer(BlueCar2, Blue2, dice);
-                    SetTapEnabledForPlayer(BlueCar3, Blue3, dice);
-                    SetTapEnabledForPlayer(BlueCar4, Blue4, dice);
+                    SetTapEnabledForPlayer(blueCar1, BlueCar1, Blue1, dice);
+                    SetTapEnabledForPlayer(blueCar2, BlueCar2, Blue2, dice);
+                    SetTapEnabledForPlayer(blueCar3, BlueCar3, Blue3, dice);
+                    SetTapEnabledForPlayer(blueCar4, BlueCar4, Blue4, dice);
                     break;
                 case GameState.PlayerGreen:
-                    SetTapEnabledForPlayer(GreenCar1, Green1, dice);
-                    SetTapEnabledForPlayer(GreenCar2, Green2, dice);
-                    SetTapEnabledForPlayer(GreenCar3, Green3, dice);
-                    SetTapEnabledForPlayer(GreenCar4, Green4, dice);
+                    SetTapEnabledForPlayer(greenCar1, GreenCar1, Green1, dice);
+                    SetTapEnabledForPlayer(greenCar2, GreenCar2, Green2, dice);
+                    SetTapEnabledForPlayer(greenCar3, GreenCar3, Green3, dice);
+                    SetTapEnabledForPlayer(greenCar4, GreenCar4, Green4, dice);
                     break;
                 case GameState.PlayerYellow:
-                    SetTapEnabledForPlayer(YellowCar1, Yellow1, dice);
-                    SetTapEnabledForPlayer(YellowCar2, Yellow2, dice);
-                    SetTapEnabledForPlayer(YellowCar3, Yellow3, dice);
-                    SetTapEnabledForPlayer(YellowCar4, Yellow4, dice);
+                    SetTapEnabledForPlayer(yellowCar1, YellowCar1, Yellow1, dice);
+                    SetTapEnabledForPlayer(yellowCar2, YellowCar2, Yellow2, dice);
+                    SetTapEnabledForPlayer(yellowCar3, YellowCar3, Yellow3, dice);
+                    SetTapEnabledForPlayer(yellowCar4, YellowCar4, Yellow4, dice);
                     break;
             }
 
         }
-        private void SetTapEnabledForPlayer(Windows.UI.Xaml.Shapes.Rectangle car, Windows.UI.Xaml.Shapes.Rectangle carToMove, int dice)
+        private void SetTapEnabledForPlayer(Cars car, Windows.UI.Xaml.Shapes.Rectangle car2, Windows.UI.Xaml.Shapes.Rectangle carToMove, int dice)
         {
-          //  if(dice == 1 || dice == 6)
-          //  { 
-                carToMove.IsTapEnabled = true; /*(dice == 1 || dice == 6 || car.steps != -1);*/
+            
+            if(car.steps != -1)
+            {
+                car2.IsTapEnabled = true;
+                car2.Opacity = 1;
+                carToMove.IsTapEnabled =true;
                 carToMove.Opacity = 1;
-          //  }
-            car.IsTapEnabled = true; 
+            }
+            else
+            {
+                if (dice ==1 || dice == 6)
+                {
+                    car2.IsTapEnabled = true;
+                    car2.Opacity = 1;
+                    carToMove.IsTapEnabled = true;
+                    carToMove.Opacity = 1;
+                }
+                else
+                {
+                    car2.IsTapEnabled = false;
+                    car2.Opacity = 0.3;
+                    carToMove.IsTapEnabled = false;
+                    carToMove.Opacity = 0.3;
+                }
+            }
+            
+            
+            
+            
+            
+            //if (car.steps == -1 && (dice == 1 || dice == 6))
+            //{
+            //    carToMove.IsTapEnabled = true;
+            //    carToMove.Opacity = 1;
+            //}
+            //else
+            //{
+            //    carToMove.IsTapEnabled = false;
+            //    carToMove.Opacity = 0.3;
+            //}
 
         }
 
@@ -363,6 +388,74 @@ namespace Fia_med_krock
             return check;
         }
 
+        void CheckCarPositionToCrash(Cars car)
+        {
+            string movingCarPosition = "";
+            if (car.color == "Red")
+            {
+                movingCarPosition = RedCarsRoad[car.steps];
+            }
+            else if (car.color == "Blue")
+            {
+                movingCarPosition = BlueCarsRoad[car.steps];
+            }
+            else if (car.color == "Green")
+            {
+                movingCarPosition = GreenCarsRoad[car.steps];
+            }
+            else
+            {
+                movingCarPosition = YellowCarsRoad[car.steps];
+            }
+
+            if (redCar1.steps >-1)
+            {
+                if (movingCarPosition == RedCarsRoad[redCar1.steps] && car.color != "Red")
+                {
+                    redCar1.CarCrasced();
+                    RedCar1.Visibility = Visibility.Collapsed;
+                    Red1.Opacity = 0.3;
+                    Red1.IsTapEnabled = false;
+                    Red1.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (redCar2.steps > -1)
+            {
+                if (movingCarPosition == RedCarsRoad[redCar2.steps] && car.color != "Red")
+                {
+                    redCar2.CarCrasced();
+                    RedCar2.Visibility = Visibility.Collapsed;
+                    Red2.Opacity = 0.3;
+                    Red2.IsTapEnabled = false;
+                    Red2.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (redCar3.steps > -1)
+            {
+                if (movingCarPosition == RedCarsRoad[redCar3.steps] && car.color != "Red")
+                {
+                    redCar3.CarCrasced();
+                    RedCar3.Visibility = Visibility.Collapsed;
+                    Red3.Opacity = 0.3;
+                    Red3.IsTapEnabled = false;
+                    Red3.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (redCar4.steps > -1)
+            {
+                if (movingCarPosition == RedCarsRoad[redCar4.steps] && car.color != "Red")
+                {
+                    redCar4.CarCrasced();
+                    RedCar4.Visibility = Visibility.Collapsed;
+                    Red4.Opacity = 0.3;
+                    Red4.IsTapEnabled = false;
+                    Red4.Visibility = Visibility.Visible;
+                }
+            }
+        }
 
         async void tappedCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, string[] CarsRoad, Cars car)
         {
@@ -403,7 +496,7 @@ namespace Fia_med_krock
                 }
             }
 
-
+            CheckCarPositionToCrash(car);
 
             DisableAllCarsForCurrentPlayer();
             if (dice != 6)
