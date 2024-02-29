@@ -27,22 +27,22 @@
 
             <StackPanel Margin="20">
                 <TextBlock x:Name="Player2Text" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Tapped="PlayerText_Tapped"/>
-                <Rectangle Stroke="Green" StrokeThickness="2" Width="100" Height="100">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-                <Button x:Name="Player2Button" Content="Spelare 2" Width="100" Height="30" Click="player_click" Background="DarkGreen"></Button>
-            </StackPanel>
-
-            <StackPanel Margin="20">
-                <TextBlock x:Name="Player3Text" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Tapped="PlayerText_Tapped"/>
                 <Rectangle Stroke="Blue" StrokeThickness="2" Width="100" Height="100">
                     <Rectangle.Fill>
                         <ImageBrush ImageSource="/Assets/BlueCar.png" Stretch="UniformToFill"/>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Button x:Name="Player3Button" Content="Spelare 3" Width="100" Height="30" Click="player_click" Background="DarkBlue"></Button>
+                <Button x:Name="Player2Button" Content="Spelare 2" Width="100" Height="30" Click="player_click" Background="DarkBlue"></Button>
+            </StackPanel>
+
+            <StackPanel Margin="20">
+                <TextBlock x:Name="Player3Text" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Tapped="PlayerText_Tapped"/>
+                <Rectangle Stroke="Green" StrokeThickness="2" Width="100" Height="100">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Button x:Name="Player3Button" Content="Spelare 3" Width="100" Height="30" Click="player_click" Background="DarkGreen"></Button>
             </StackPanel>
 
             <StackPanel Margin="20">
