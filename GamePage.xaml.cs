@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Capture;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
@@ -51,12 +52,13 @@ namespace Fia_med_krock
         {
             this.InitializeComponent();
             currentPlayer = GameState.PlayerRed;
+            CenterOfGrid.Fill = new SolidColorBrush(Colors.Red);
             RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
 
             //music.mp3 downloaded from https://pixabay.com/
-            //Uri newuri = new Uri("ms-appx:///Assets/music.mp3");
-            //myPlayer.Source = newuri;
-            //myPlayer.Play();
+            Uri newuri = new Uri("ms-appx:///Assets/music.mp3");
+            myPlayer.Source = newuri;
+            myPlayer.Volume = 0.1;
 
 
         }
@@ -229,6 +231,7 @@ namespace Fia_med_krock
                     Red2.IsTapEnabled = false;
                     Red3.IsTapEnabled = false;
                     Red4.IsTapEnabled = false;
+                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Blue);
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
                     RollDice.Content = "Rulla Tärning";
                     break;
@@ -242,6 +245,7 @@ namespace Fia_med_krock
                     Blue2.IsTapEnabled = false;
                     Blue3.IsTapEnabled = false;
                     Blue4.IsTapEnabled = false;
+                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Green);
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Green);
                     RollDice.Content = "Rulla Tärning";
                     break;
@@ -255,6 +259,7 @@ namespace Fia_med_krock
                     Green2.IsTapEnabled = false;
                     Green3.IsTapEnabled = false;
                     Green4.IsTapEnabled = false;
+                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Yellow);
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Yellow);
                     RollDice.Content = "Rulla Tärning";
                     break;
@@ -268,6 +273,7 @@ namespace Fia_med_krock
                     Yellow2.IsTapEnabled = false;
                     Yellow3.IsTapEnabled = false;
                     Yellow4.IsTapEnabled = false;
+                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Red);
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                     RollDice.Content = "Rulla Tärning";
                     break;
@@ -458,6 +464,152 @@ namespace Fia_med_krock
                     Red4.Visibility = Visibility.Visible;
                 }
             }
+
+            if (blueCar1.steps > -1)
+            {
+                if (movingCarPosition == BlueCarsRoad[blueCar1.steps] && car.color != "Blue")
+                {
+                    blueCar1.CarCrasced();
+                    BlueCar1.Visibility = Visibility.Collapsed;
+                    Blue1.Opacity = 0.3;
+                    Blue1.IsTapEnabled = false;
+                    Blue1.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (blueCar2.steps > -1)
+            {
+                if (movingCarPosition == BlueCarsRoad[blueCar2.steps] && car.color != "Blue")
+                {
+                    blueCar2.CarCrasced();
+                    BlueCar2.Visibility = Visibility.Collapsed;
+                    Blue2.Opacity = 0.3;
+                    Blue2.IsTapEnabled = false;
+                    Blue2.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (blueCar3.steps > -1)
+            {
+                if (movingCarPosition == BlueCarsRoad[blueCar3.steps] && car.color != "Blue")
+                {
+                    blueCar3.CarCrasced();
+                    BlueCar3.Visibility = Visibility.Collapsed;
+                    Blue3.Opacity = 0.3;
+                    Blue3.IsTapEnabled = false;
+                    Blue3.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (blueCar4.steps > -1)
+            {
+                if (movingCarPosition == BlueCarsRoad[blueCar4.steps] && car.color != "Blue")
+                {
+                    blueCar4.CarCrasced();
+                    BlueCar4.Visibility = Visibility.Collapsed;
+                    Blue4.Opacity = 0.3;
+                    Blue4.IsTapEnabled = false;
+                    Blue4.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (greenCar1.steps > -1)
+            {
+                if (movingCarPosition == GreenCarsRoad[greenCar1.steps] && car.color != "Green")
+                {
+                    greenCar1.CarCrasced();
+                    GreenCar1.Visibility = Visibility.Collapsed;
+                    Green1.Opacity = 0.3;
+                    Green1.IsTapEnabled = false;
+                    Green1.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (greenCar2.steps > -1)
+            {
+                if (movingCarPosition == GreenCarsRoad[greenCar2.steps] && car.color != "Green")
+                {
+                    greenCar2.CarCrasced();
+                    GreenCar2.Visibility = Visibility.Collapsed;
+                    Green2.Opacity = 0.3;
+                    Green2.IsTapEnabled = false;
+                    Green2.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (greenCar3.steps > -1)
+            {
+                if (movingCarPosition == GreenCarsRoad[greenCar3.steps] && car.color != "Green")
+                {
+                    greenCar3.CarCrasced();
+                    GreenCar3.Visibility = Visibility.Collapsed;
+                    Green3.Opacity = 0.3;
+                    Green3.IsTapEnabled = false;
+                    Green3.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (greenCar4.steps > -1)
+            {
+                if (movingCarPosition == GreenCarsRoad[greenCar4.steps] && car.color != "Green")
+                {
+                    greenCar4.CarCrasced();
+                    GreenCar4.Visibility = Visibility.Collapsed;
+                    Green4.Opacity = 0.3;
+                    Green4.IsTapEnabled = false;
+                    Green4.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (yellowCar1.steps > -1)
+            {
+                if (movingCarPosition == YellowCarsRoad[yellowCar1.steps] && car.color != "Yellow")
+                {
+                    yellowCar1.CarCrasced();
+                    YellowCar1.Visibility = Visibility.Collapsed;
+                    Yellow1.Opacity = 0.3;
+                    Yellow1.IsTapEnabled = false;
+                    Yellow1.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (yellowCar2.steps > -1)
+            {
+                if (movingCarPosition == YellowCarsRoad[yellowCar2.steps] && car.color != "Yellow")
+                {
+                    yellowCar2.CarCrasced();
+                    YellowCar2.Visibility = Visibility.Collapsed;
+                    Yellow2.Opacity = 0.3;
+                    Yellow2.IsTapEnabled = false;
+                    Yellow2.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (yellowCar3.steps > -1)
+            {
+                if (movingCarPosition == YellowCarsRoad[yellowCar3.steps] && car.color != "Yellow")
+                {
+                    yellowCar3.CarCrasced();
+                    YellowCar3.Visibility = Visibility.Collapsed;
+                    Yellow3.Opacity = 0.3;
+                    Yellow3.IsTapEnabled = false;
+                    Yellow3.Visibility = Visibility.Visible;
+                }
+            }
+
+            if (yellowCar4.steps > -1)
+            {
+                if (movingCarPosition == YellowCarsRoad[yellowCar4.steps] && car.color != "Yellow")
+                {
+                    yellowCar4.CarCrasced();
+                    YellowCar4.Visibility = Visibility.Collapsed;
+                    Yellow4.Opacity = 0.3;
+                    Yellow4.IsTapEnabled = false;
+                    Yellow4.Visibility = Visibility.Visible;
+                }
+            }
+
+
         }
 
         async void tappedCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, string[] CarsRoad, Cars car)

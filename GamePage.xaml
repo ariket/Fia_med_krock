@@ -85,6 +85,7 @@
             <Rectangle Grid.Column="1" Grid.Row="4" Fill= "Red" Stroke="DarkGray" StrokeThickness="2"/>
             <Rectangle Grid.Column="2" Grid.Row="4" Fill= "Red" Stroke="DarkGray" StrokeThickness="2"/>
             <Rectangle Grid.Column="3" Grid.Row="4" Fill= "Red" Stroke="DarkGray" StrokeThickness="2"/>
+            <Rectangle Name="CenterOfGrid" Grid.Column="4" Grid.Row="4" Fill= "White" Stroke="DarkGray" StrokeThickness="2"/>
 
             <Rectangle Name="RedCar1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="RedCar1_Tapped" Visibility="Collapsed">
                 <Rectangle.Fill>
