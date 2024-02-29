@@ -9,6 +9,10 @@
     Background="#D9D9D9">
 
     <Grid x:Name="menuGrid">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill"  ImageSource="Assets/carCrash.jpg" AlignmentY="Top" AlignmentX="Center"/>
+        </Grid.Background>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
