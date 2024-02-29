@@ -138,7 +138,7 @@ namespace Fia_med_krock
                         else if (playerAiStates.IsPlayer1Ai == true)
                         {
                             playerAiStates.IsPlayer1Ai = false;
-                            Player1Button.Content = "Player1";
+                            Player1Button.Content = "Spelare 1";
                             break;
                         }
                         else
@@ -157,7 +157,7 @@ namespace Fia_med_krock
                         else if (playerAiStates.IsPlayer2Ai == true)
                         {
                             playerAiStates.IsPlayer2Ai = false;
-                            Player2Button.Content = "Player2";
+                            Player2Button.Content = "Spelare 2";
                             break;
                         }
                         else
@@ -176,7 +176,7 @@ namespace Fia_med_krock
                         else if (playerAiStates.IsPlayer3Ai == true)
                         {
                             playerAiStates.IsPlayer3Ai = false;
-                            Player3Button.Content = "Player3";
+                            Player3Button.Content = "Spelare 3";
                             break;
                         }
                         else
@@ -195,7 +195,7 @@ namespace Fia_med_krock
                         else if (playerAiStates.IsPlayer4Ai == true)
                         {
                             playerAiStates.IsPlayer4Ai = false;
-                            Player4Button.Content = "Player4";
+                            Player4Button.Content = "Spelare 4";
                             break;
                         }
                         else
