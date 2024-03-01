@@ -340,22 +340,6 @@ namespace Fia_med_krock
                     carToMove.Opacity = 0.3;
                 }
             }
-            
-            
-            
-            
-            
-            //if (car.steps == -1 && (dice == 1 || dice == 6))
-            //{
-            //    carToMove.IsTapEnabled = true;
-            //    carToMove.Opacity = 1;
-            //}
-            //else
-            //{
-            //    carToMove.IsTapEnabled = false;
-            //    carToMove.Opacity = 0.3;
-            //}
-
         }
 
 
@@ -369,11 +353,16 @@ namespace Fia_med_krock
             }
             return check;
         }
-        bool CheckCarPosition(Cars car)
+
+        bool CheckCarPosition(Cars car, bool goForward)
         {
             bool check = true;
-         
+
             int movingCarPosition = car.steps + 1;
+            if (!goForward)
+            {
+                 movingCarPosition = car.steps - 1;
+            }
 
             if (movingCarPosition > 0)
             {
@@ -621,12 +610,12 @@ namespace Fia_med_krock
 
             while (movNum < dice)
             {
-                if (!CheckCarPosition(car)) break;
-
                 if (car.steps == 35)
                 {
                     goForward = false;
                 }
+
+                if (!CheckCarPosition(car, goForward)) break;
 
                 if (goForward == true)
                 {
@@ -668,6 +657,7 @@ namespace Fia_med_krock
                 RollDice.Content = "Rulla Tärning";
             }
         }
+
         private void DisableAllCarsForCurrentPlayer()
         {
             switch (currentPlayer)
@@ -734,7 +724,6 @@ namespace Fia_med_krock
             }
         }
 
-
         private void RedCar1_Tapped(object sender, TappedRoutedEventArgs e)
         {
             tappedCar(RedCar1, RedCarsRoad, redCar1);
@@ -758,8 +747,6 @@ namespace Fia_med_krock
             tappedCar(RedCar4, RedCarsRoad, redCar4);
         }
 
-
-
         private void Red1_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Red1.Visibility = Visibility.Collapsed;        
@@ -767,7 +754,6 @@ namespace Fia_med_krock
 
             tappedCar(RedCar1, RedCarsRoad, redCar1);         
         }
-
 
         private void Red2_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -784,7 +770,6 @@ namespace Fia_med_krock
 
             tappedCar(RedCar3, RedCarsRoad, redCar3);
         }
-
 
         private void Red4_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -845,8 +830,6 @@ namespace Fia_med_krock
             tappedCar(BlueCar4, BlueCarsRoad, blueCar4);
         }
 
-
-
         private void GreenCar1_Tapped(object sender, TappedRoutedEventArgs e)
         {
             tappedCar(GreenCar1, GreenCarsRoad, greenCar1);
@@ -866,7 +849,6 @@ namespace Fia_med_krock
         {
             tappedCar(GreenCar4, GreenCarsRoad, greenCar4);
         }
-
 
         private void Green1_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -899,7 +881,6 @@ namespace Fia_med_krock
 
             tappedCar(GreenCar4, GreenCarsRoad, greenCar4);
         }
-
 
         private void YellowCar1_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -952,9 +933,5 @@ namespace Fia_med_krock
 
             tappedCar(YellowCar4, YellowCarsRoad, yellowCar4);
         }
-
-
-
-    
     }
 }
