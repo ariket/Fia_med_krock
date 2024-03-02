@@ -162,7 +162,118 @@ namespace Fia_med_krock
            
         }
 
-        //Lagt till så att det slumpas ett värde.
+        private async void roll_dice_animation(int dice)
+        {
+            ellipse1.Visibility = Visibility.Collapsed;
+            ellipse2.Visibility = Visibility.Collapsed;
+            ellipse3.Visibility = Visibility.Collapsed;
+            ellipse4.Visibility = Visibility.Collapsed;
+            ellipse5.Visibility = Visibility.Collapsed;
+            ellipse6.Visibility = Visibility.Collapsed;
+            ellipse7.Visibility = Visibility.Collapsed;
+            ellipse6.Visibility = Visibility.Visible;
+            ellipse1.Visibility = Visibility.Visible;
+            await System.Threading.Tasks.Task.Delay(150);
+            ellipse6.Visibility = Visibility.Collapsed;
+            ellipse1.Visibility = Visibility.Collapsed;
+            ellipse1.Visibility = Visibility.Visible;
+            ellipse2.Visibility = Visibility.Visible;
+            ellipse3.Visibility = Visibility.Visible;
+            ellipse4.Visibility = Visibility.Visible;
+            ellipse5.Visibility = Visibility.Visible;
+            ellipse6.Visibility = Visibility.Visible;
+            await System.Threading.Tasks.Task.Delay(150);
+            ellipse1.Visibility = Visibility.Collapsed;
+            ellipse2.Visibility = Visibility.Collapsed;
+            ellipse3.Visibility = Visibility.Collapsed;
+            ellipse4.Visibility = Visibility.Collapsed;
+            ellipse5.Visibility = Visibility.Collapsed;
+            ellipse6.Visibility = Visibility.Collapsed;
+            ellipse7.Visibility = Visibility.Visible;
+            ellipse1.Visibility = Visibility.Visible;
+            ellipse6.Visibility = Visibility.Visible;
+            await System.Threading.Tasks.Task.Delay(150);
+            ellipse7.Visibility = Visibility.Collapsed;
+            ellipse1.Visibility = Visibility.Collapsed;
+            ellipse6.Visibility = Visibility.Collapsed;
+            ellipse1.Visibility = Visibility.Visible;
+            ellipse3.Visibility = Visibility.Visible;
+            ellipse4.Visibility = Visibility.Visible;
+            ellipse6.Visibility = Visibility.Visible;
+            await System.Threading.Tasks.Task.Delay(150);
+            ellipse1.Visibility = Visibility.Collapsed;
+            ellipse3.Visibility = Visibility.Collapsed;
+            ellipse4.Visibility = Visibility.Collapsed;
+            ellipse6.Visibility = Visibility.Collapsed;
+
+            if (dice == 6)
+            {
+                ellipse7.Visibility = Visibility.Visible;
+                await System.Threading.Tasks.Task.Delay(150);
+                ellipse7.Visibility = Visibility.Collapsed;
+                ellipse1.Visibility = Visibility.Visible;
+                ellipse2.Visibility = Visibility.Visible;
+                ellipse3.Visibility = Visibility.Visible;
+                ellipse4.Visibility = Visibility.Visible;
+                ellipse5.Visibility = Visibility.Visible;
+                ellipse6.Visibility = Visibility.Visible;
+            }
+            else if (dice == 5)
+            {
+                ellipse7.Visibility = Visibility.Visible;
+                await System.Threading.Tasks.Task.Delay(150);
+                ellipse7.Visibility = Visibility.Collapsed;
+                ellipse1.Visibility = Visibility.Visible;
+                ellipse3.Visibility = Visibility.Visible;
+                ellipse4.Visibility = Visibility.Visible;
+                ellipse6.Visibility = Visibility.Visible;
+                ellipse7.Visibility = Visibility.Visible;
+            }
+            else if (dice == 4)
+            {
+                ellipse7.Visibility = Visibility.Visible;
+                await System.Threading.Tasks.Task.Delay(150);
+                ellipse7.Visibility = Visibility.Collapsed;
+                ellipse1.Visibility = Visibility.Visible;
+                ellipse3.Visibility = Visibility.Visible;
+                ellipse4.Visibility = Visibility.Visible;
+                ellipse6.Visibility = Visibility.Visible;
+            }
+            else if (dice == 3)
+            {
+                ellipse7.Visibility = Visibility.Visible;
+                await System.Threading.Tasks.Task.Delay(150);
+                ellipse7.Visibility = Visibility.Collapsed;
+                ellipse3.Visibility = Visibility.Visible;
+                ellipse7.Visibility = Visibility.Visible;
+                ellipse4.Visibility = Visibility.Visible;
+            }
+            else if (dice == 2)
+            {
+                ellipse7.Visibility = Visibility.Visible;
+                await System.Threading.Tasks.Task.Delay(150);
+                ellipse7.Visibility = Visibility.Collapsed;
+                ellipse3.Visibility = Visibility.Visible;
+                ellipse4.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ellipse1.Visibility = Visibility.Visible;
+                ellipse3.Visibility = Visibility.Visible;
+                ellipse4.Visibility = Visibility.Visible;
+                ellipse6.Visibility = Visibility.Visible;
+                ellipse7.Visibility = Visibility.Visible;
+                await System.Threading.Tasks.Task.Delay(150);
+                ellipse1.Visibility = Visibility.Collapsed;
+                ellipse3.Visibility = Visibility.Collapsed;
+                ellipse4.Visibility = Visibility.Collapsed;
+                ellipse6.Visibility = Visibility.Collapsed;
+            }
+
+
+        }
+
+            //Lagt till så att det slumpas ett värde.
         private int roll_dice()
         {
             Random dice_roll = new Random();
@@ -181,7 +292,9 @@ namespace Fia_med_krock
             RollDice.Content = dice;
             RollDice.IsEnabled = false;
             setCurrentPlayerCarsState(dice);
-            
+
+            roll_dice_animation(dice);
+
             bool anyCarsEnabled = CheckAnyCarsEnabled();
             
             if (!anyCarsEnabled)

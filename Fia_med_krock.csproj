@@ -136,6 +136,7 @@
     <Content Include="Assets\BlueCar.png" />
     <Content Include="Assets\carCrash.jpg" />
     <Content Include="Assets\diceroll.mp3" />
+    <Content Include="Assets\diceX.png" />
     <Content Include="Assets\GreenCar.png" />
     <Content Include="Assets\music.mp3" />
     <Content Include="Assets\RedCar.png" />
