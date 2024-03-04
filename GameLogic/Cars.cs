@@ -73,6 +73,7 @@ namespace Fia_med_krock.GameLogic
             if (colorGrid != null)
             {
                 MoveHelper.MoveCar(CarUI, colorGrid, targetColumn, targetRow);
+                CarUI.Opacity = 0.3;
             }
         }
 

@@ -358,7 +358,7 @@ namespace Fia_med_krock
                             if (movingCarPosition == GetCarRoadPosition(playerCar))
                             {
                                 playerCar.CarCrasced();
-                                
+                                                                 
                             }
                         }
                     }
