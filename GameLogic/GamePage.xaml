@@ -87,97 +87,145 @@
             <Rectangle Grid.Column="3" Grid.Row="4" Fill= "Red" Stroke="DarkGray" StrokeThickness="2"/>
             <Rectangle Name="CenterOfGrid" Grid.Column="4" Grid.Row="4" Fill= "White" Stroke="DarkGray" StrokeThickness="2"/>
 
-            <Rectangle Name="RedCar1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="RedCar1_Tapped" Visibility="Collapsed">
+            <Rectangle Name="RedCar1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Red</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="RedCar2" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="RedCar2_Tapped" Visibility="Collapsed">
+            <Rectangle Name="RedCar2" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Red</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="RedCar3" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="RedCar3_Tapped" Visibility="Collapsed">
+            <Rectangle Name="RedCar3" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Red</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="RedCar4" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="RedCar4_Tapped"  Visibility="Collapsed">
+            <Rectangle Name="RedCar4" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped"  Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Red</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="BlueCar1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="BlueCar1_Tapped" Visibility="Collapsed">
+            <Rectangle Name="BlueCar1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Blue</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/BlueCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="BlueCar2" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="BlueCar2_Tapped" Visibility="Collapsed">
+            <Rectangle Name="BlueCar2" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Blue</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/BlueCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="BlueCar3" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="BlueCar3_Tapped" Visibility="Collapsed">
+            <Rectangle Name="BlueCar3" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Blue</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/BlueCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="BlueCar4" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="BlueCar4_Tapped"  Visibility="Collapsed">
+            <Rectangle Name="BlueCar4" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped"  Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Blue</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/BlueCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="GreenCar1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="GreenCar1_Tapped" Visibility="Collapsed">
+            <Rectangle Name="GreenCar1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Green</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="GreenCar2" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="GreenCar2_Tapped" Visibility="Collapsed">
+            <Rectangle Name="GreenCar2" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Green</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="GreenCar3" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="GreenCar3_Tapped" Visibility="Collapsed">
+            <Rectangle Name="GreenCar3" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Green</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="GreenCar4" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="GreenCar4_Tapped"  Visibility="Collapsed">
+            <Rectangle Name="GreenCar4" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped"  Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Green</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="YellowCar1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="YellowCar1_Tapped" Visibility="Collapsed">
+            <Rectangle Name="YellowCar1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Yellow</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/YellowCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="YellowCar2" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="YellowCar2_Tapped" Visibility="Collapsed">
+            <Rectangle Name="YellowCar2" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Yellow</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/YellowCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="YellowCar3" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="YellowCar3_Tapped" Visibility="Collapsed">
+            <Rectangle Name="YellowCar3" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Yellow</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/YellowCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="YellowCar4" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="YellowCar4_Tapped"  Visibility="Collapsed">
+            <Rectangle Name="YellowCar4" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped"  Visibility="Collapsed">
+                <Rectangle.Tag>
+                    <x:String>Yellow</x:String>
+                </Rectangle.Tag>
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/YellowCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
@@ -202,25 +250,25 @@
             <Rectangle Grid.Column="1" Grid.Row="1" Fill= "Red" Stroke="DarkGray" StrokeThickness="2"/>
 
             <!-- Visibility="Collapsed" -->
-            <Rectangle Name="Red1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="Red1_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Red1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Red2" Grid.Column="1" Grid.Row="0" Margin="5" Tapped="Red2_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Red2" Grid.Column="1" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Red3" Grid.Column="0" Grid.Row="1" Margin="5" Tapped="Red3_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Red3" Grid.Column="0" Grid.Row="1" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Red4" Grid.Column="1" Grid.Row="1" Margin="5" Tapped="Red4_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Red4" Grid.Column="1" Grid.Row="1" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/RedCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
@@ -244,26 +292,26 @@
             <Rectangle Grid.Column="1" Grid.Row="0" Fill= "Blue" Stroke="DarkGray" StrokeThickness="2"/>
             <Rectangle Grid.Column="1" Grid.Row="1" Fill= "Blue" Stroke="DarkGray" StrokeThickness="2"/>
 
-           
-            <Rectangle Name="Blue1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="Blue1_Tapped" IsTapEnabled="False" Opacity="0.3">
+
+            <Rectangle Name="Blue1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/BlueCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Blue2" Grid.Column="1" Grid.Row="0" Margin="5" Tapped="Blue2_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Blue2" Grid.Column="1" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/BlueCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Blue3" Grid.Column="0" Grid.Row="1" Margin="5" Tapped="Blue3_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Blue3" Grid.Column="0" Grid.Row="1" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/BlueCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Blue4" Grid.Column="1" Grid.Row="1" Margin="5" Tapped="Blue4_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Blue4" Grid.Column="1" Grid.Row="1" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/BlueCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
@@ -288,25 +336,25 @@
             <Rectangle Grid.Column="1" Grid.Row="1" Fill= "Green" Stroke="DarkGray" StrokeThickness="2"/>
 
 
-            <Rectangle Name="Green1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="Green1_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Green1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Green2" Grid.Column="1" Grid.Row="0" Margin="5" Tapped="Green2_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Green2" Grid.Column="1" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Green3" Grid.Column="0" Grid.Row="1" Margin="5" Tapped="Green3_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Green3" Grid.Column="0" Grid.Row="1" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Green4" Grid.Column="1" Grid.Row="1" Margin="5" Tapped="Green4_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Green4" Grid.Column="1" Grid.Row="1" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/GreenCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
@@ -331,25 +379,25 @@
             <Rectangle Grid.Column="1" Grid.Row="1" Fill= "Yellow" Stroke="DarkGray" StrokeThickness="2"/>
 
 
-            <Rectangle Name="Yellow1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="Yellow1_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Yellow1" Grid.Column="0" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/YellowCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Yellow2" Grid.Column="1" Grid.Row="0" Margin="5" Tapped="Yellow2_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Yellow2" Grid.Column="1" Grid.Row="0" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/YellowCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Yellow3" Grid.Column="0" Grid.Row="1" Margin="5" Tapped="Yellow3_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Yellow3" Grid.Column="0" Grid.Row="1" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/YellowCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
             </Rectangle>
 
-            <Rectangle Name="Yellow4" Grid.Column="1" Grid.Row="1" Margin="5" Tapped="Yellow4_Tapped" IsTapEnabled="False" Opacity="0.3">
+            <Rectangle Name="Yellow4" Grid.Column="1" Grid.Row="1" Margin="5" Tapped="CarRectangle_Tapped" IsTapEnabled="False" Opacity="0.3">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="/Assets/YellowCar.png" Stretch="UniformToFill"/>
                 </Rectangle.Fill>
