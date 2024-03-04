@@ -386,7 +386,7 @@ namespace Fia_med_krock
                 if (!CheckCarPosition(car))
                 {
                     Debug.WriteLine("CheckCarPosition failed");
-                    SwitchToNextPlayer();
+                    RollDice.IsEnabled = true;
                     break;
                 }
 
@@ -402,6 +402,7 @@ namespace Fia_med_krock
 
                 int columnNum = Convert.ToInt32(CarsRoad[car.steps].Substring(0, 2));
                 int rowNum = Convert.ToInt32(CarsRoad[car.steps].Substring(2, 2));
+
                 MoveHelper.MoveCar(carToMove, playBoard, columnNum, rowNum);
                 await Task.Delay(200);
 
@@ -411,8 +412,6 @@ namespace Fia_med_krock
                     RollDice.IsEnabled = true;
                     
                 }
-               
-
             }
             if (dice != 6)
             {
@@ -421,6 +420,8 @@ namespace Fia_med_krock
             }
 
         }
+
+        
 
 
 
