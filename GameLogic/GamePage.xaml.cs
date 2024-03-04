@@ -386,7 +386,7 @@ namespace Fia_med_krock
                 if (!CheckCarPosition(car))
                 {
                     Debug.WriteLine("CheckCarPosition failed");
-                    SwitchToNextPlayer();
+                    RollDice.IsEnabled = true;
                     break;
                 }
 
@@ -412,8 +412,6 @@ namespace Fia_med_krock
                     RollDice.IsEnabled = true;
                     
                 }
-               
-
             }
             if (dice != 6)
             {
