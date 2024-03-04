@@ -45,34 +45,48 @@ namespace Fia_med_krock.GameLogic
         {
             steps = -1;
 
-            Rectangle homeGridRectangle = GetHomeGridRectangle(color, CarNumber);
+            
+            int targetColumn = 0;
+            int targetRow = 0;
 
-            if (homeGridRectangle != null)
+            switch (CarNumber)
             {
-                // Set the visibility of the home grid rectangle
-               // homeGridRectangle.Visibility = Visibility.Visible;
-                
-                int targetColumn = Grid.GetColumn(homeGridRectangle);
-                int targetRow = Grid.GetRow(homeGridRectangle);
-                Debug.WriteLine(homeGridRectangle.Name);   
-                Debug.WriteLine(homeGridRectangle.Visibility);   
-                MoveHelper.MoveCar(CarUI, PlayBoard, targetColumn, targetRow);
+                case 1:
+                    break; 
+                case 2:
+                    targetColumn = 1;
+                    break;
+                case 3:
+                    targetRow = 1;
+                    break; 
+                case 4:
+                    targetColumn = 1;
+                    targetRow = 1;
+                    break; 
+
+                default:
+                    Debug.WriteLine($"Unsupported car number: {CarNumber}");
+                    return;
             }
 
-            //CarUI.Visibility = Visibility.Collapsed;
-            //CarUI.Opacity = 0.3;
-           /// CarUI.IsTapEnabled = false;
-            
-
+            Grid colorGrid = FindColorGrid(color);
+            if (colorGrid != null)
+            {
+                MoveHelper.MoveCar(CarUI, colorGrid, targetColumn, targetRow);
+            }
         }
 
-        private Rectangle GetHomeGridRectangle(string color, int carNumber)
+
+        private Grid FindColorGrid(string color)
         {
-            string rectangleName = $"{color}{carNumber}";
-
-            return PlayBoard.FindName(rectangleName) as Rectangle;
-
+            string gridName = $"{color}";
+            Debug.WriteLine(gridName);
+            Debug.WriteLine("FindcolorGrid: ");
+            Debug.WriteLine(PlayBoard.FindName(gridName));
+            return PlayBoard.FindName(gridName) as Grid;
         }
+
+       
 
 
     }

@@ -402,6 +402,7 @@ namespace Fia_med_krock
 
                 int columnNum = Convert.ToInt32(CarsRoad[car.steps].Substring(0, 2));
                 int rowNum = Convert.ToInt32(CarsRoad[car.steps].Substring(2, 2));
+
                 MoveHelper.MoveCar(carToMove, playBoard, columnNum, rowNum);
                 await Task.Delay(200);
 
@@ -421,6 +422,8 @@ namespace Fia_med_krock
             }
 
         }
+
+        
 
 
 
