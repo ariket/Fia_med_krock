@@ -138,6 +138,12 @@
   <ItemGroup>
     <Content Include="Assets\BlueCar.png" />
     <Content Include="Assets\carCrash.jpg" />
+    <Content Include="Assets\dice1.png" />
+    <Content Include="Assets\dice2.png" />
+    <Content Include="Assets\dice3.png" />
+    <Content Include="Assets\dice4.png" />
+    <Content Include="Assets\dice5.png" />
+    <Content Include="Assets\dice6.png" />
     <Content Include="Assets\diceroll.mp3" />
     <Content Include="Assets\diceX.png" />
     <Content Include="Assets\GreenCar.png" />
