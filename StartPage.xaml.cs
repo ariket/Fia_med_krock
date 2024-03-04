@@ -64,11 +64,14 @@ namespace Fia_med_krock
         }
         private void RulesButton_Click(Object sender, RoutedEventArgs e)
         {
-            RulesDialog.ShowAsync();
+            //RulesDialog.ShowAsync();
+            Rules.Visibility = Visibility.Visible;
+            RollDownMeny.Begin();
         }
         private void CloseRulesButton_Click(object sender, RoutedEventArgs e)
         {
-            RulesDialog.Hide();
+            RollUpMeny.Begin();
+         //   Rules.Visibility = Visibility.Collapsed;
         }
         public class PlayerAiStates
         {
