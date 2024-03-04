@@ -203,10 +203,6 @@ namespace Fia_med_krock
             {
                 case GameState.PlayerRed:
                     currentPlayer = GameState.PlayerBlue;
-                    RedCar1.IsTapEnabled = false;
-                    RedCar2.IsTapEnabled = false;
-                    RedCar3.IsTapEnabled = false;
-                    RedCar4.IsTapEnabled = false;
                     Red1.IsTapEnabled = false;
                     Red2.IsTapEnabled = false;
                     Red3.IsTapEnabled = false;
@@ -217,10 +213,6 @@ namespace Fia_med_krock
                     break;
                 case GameState.PlayerBlue:
                     currentPlayer = GameState.PlayerGreen;
-                    BlueCar1.IsTapEnabled =false;
-                    BlueCar2.IsTapEnabled =false;
-                    BlueCar3.IsTapEnabled =false;
-                    BlueCar4.IsTapEnabled =false;
                     Blue1.IsTapEnabled = false;
                     Blue2.IsTapEnabled = false;
                     Blue3.IsTapEnabled = false;
@@ -231,10 +223,6 @@ namespace Fia_med_krock
                     break;
                 case GameState.PlayerGreen:
                     currentPlayer = GameState.PlayerYellow;
-                    GreenCar1.IsTapEnabled =false;
-                    GreenCar2.IsTapEnabled =false;
-                    GreenCar3.IsTapEnabled =false;
-                    GreenCar4.IsTapEnabled =false;
                     Green1.IsTapEnabled = false;
                     Green2.IsTapEnabled = false;
                     Green3.IsTapEnabled = false;
@@ -245,10 +233,6 @@ namespace Fia_med_krock
                     break;
                 case GameState.PlayerYellow:
                     currentPlayer = GameState.PlayerRed;
-                    YellowCar1.IsTapEnabled=false;
-                    YellowCar2.IsTapEnabled=false;
-                    YellowCar3.IsTapEnabled=false;
-                    YellowCar4.IsTapEnabled=false;
                     Yellow1.IsTapEnabled = false;
                     Yellow2.IsTapEnabled = false;
                     Yellow3.IsTapEnabled = false;
@@ -541,10 +525,6 @@ namespace Fia_med_krock
             switch (currentPlayer)
             {
                 case GameState.PlayerRed:
-                    RedCar1.IsTapEnabled = false;
-                    RedCar2.IsTapEnabled = false;
-                    RedCar3.IsTapEnabled = false;
-                    RedCar4.IsTapEnabled = false;
                     Red1.IsTapEnabled = false;
                     Red2.IsTapEnabled = false;
                     Red3.IsTapEnabled = false;
@@ -555,10 +535,6 @@ namespace Fia_med_krock
                     Red4.Opacity = 0.3;
                     break;
                 case GameState.PlayerBlue:
-                    BlueCar1.IsTapEnabled = false;
-                    BlueCar2.IsTapEnabled = false;
-                    BlueCar3.IsTapEnabled = false;
-                    BlueCar4.IsTapEnabled = false;
                     Blue1.IsTapEnabled = false;
                     Blue2.IsTapEnabled = false;
                     Blue3.IsTapEnabled = false;
@@ -569,10 +545,6 @@ namespace Fia_med_krock
                     Blue4.Opacity = 0.3;
                     break;
                 case GameState.PlayerGreen:
-                    GreenCar1.IsTapEnabled = false;
-                    GreenCar2.IsTapEnabled = false;
-                    GreenCar3.IsTapEnabled = false;
-                    GreenCar4.IsTapEnabled = false;
                     Green1.IsTapEnabled = false;
                     Green2.IsTapEnabled = false;
                     Green3.IsTapEnabled = false;
@@ -583,10 +555,6 @@ namespace Fia_med_krock
                     Green4.Opacity = 0.3;
                     break;
                 case GameState.PlayerYellow:
-                    YellowCar1.IsTapEnabled = false;
-                    YellowCar2.IsTapEnabled = false;
-                    YellowCar3.IsTapEnabled = false;
-                    YellowCar4.IsTapEnabled = false;
                     Yellow1.IsTapEnabled = false;
                     Yellow2.IsTapEnabled = false;
                     Yellow3.IsTapEnabled = false;
