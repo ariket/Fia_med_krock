@@ -203,10 +203,8 @@ namespace Fia_med_krock
         private async Task SimulateAiPlayerTurn (Player aiPlayer)
         {
             RollDice.IsEnabled = false;
-            await Task.Delay(2000);
-
             int aiDiceValue = roll_dice();
-            await Task.Delay(1000);
+            await Task.Delay(2000);
             setCurrentPlayerCarsState(aiDiceValue);
             SimulateMoveCar(aiPlayer, aiDiceValue);
         }
@@ -223,8 +221,9 @@ namespace Fia_med_krock
                 }
                 
             }
-            await Task.Delay(2000);
-            SwitchToNextPlayer();
+            await Task.Delay(1000);
+
+           // SwitchToNextPlayer();
         }
 
 
@@ -245,7 +244,8 @@ namespace Fia_med_krock
                     RollDice.Content = "Rulla Tärning";
                     if (players[CarColor.Blue].IsAi)
                     {
-                       await SimulateAiPlayerTurn(players[CarColor.Blue]);
+                        RollDice.Content = "AI";
+                        await SimulateAiPlayerTurn(players[CarColor.Blue]);
                     }
                     break;
                 case GameState.PlayerBlue:
@@ -259,6 +259,7 @@ namespace Fia_med_krock
                     RollDice.Content = "Rulla Tärning";
                     if (players[CarColor.Green].IsAi)
                     {
+                        RollDice.Content = "AI";
                         await SimulateAiPlayerTurn(players[CarColor.Green]);
                     }
                     break;
