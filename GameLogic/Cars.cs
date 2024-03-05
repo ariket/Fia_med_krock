@@ -41,6 +41,11 @@ namespace Fia_med_krock.GameLogic
             steps--;
         }
 
+        public void StepCarToGoal()
+        {
+            steps = 99;
+        }
+
         public void CarCrasced()
         {
             steps = -1;

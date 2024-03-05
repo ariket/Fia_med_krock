@@ -347,7 +347,7 @@ namespace Fia_med_krock
             return (CarColor)Enum.Parse(typeof(CarColor), color, true);
         }
 
-        bool CheckCarPosition(Cars car)
+        bool CheckMyOtherCarsPosition(Cars car) //You are not allowed to pass your own cars
         {
             bool check = true;
             int movingCarPosition = car.steps + 1;
@@ -531,10 +531,11 @@ namespace Fia_med_krock
         private async Task AnimateCarAsync(Windows.UI.Xaml.Shapes.Rectangle carToMove, string[] CarsRoad, int dice, Cars car, Player player, Grid playBoard)
         {
             int destination = Math.Min(car.steps + dice, 35);
+            goForward = true;
 
             for (int i = car.steps; i < destination; i++)
             {
-                if (!CheckCarPosition(car))
+                if (!CheckMyOtherCarsPosition(car))
                 {
                     Debug.WriteLine("CheckCarPosition failed");
                     RollDice.IsEnabled = true;
@@ -543,13 +544,26 @@ namespace Fia_med_krock
 
                 if (car.steps == 35)
                 {
-                    carToMove.Visibility = Visibility.Collapsed;
-                    Debug.WriteLine("Car reached destination");
-                    break;
+                    if (i == destination - 1)
+                    {
+                        car.StepCarToGoal();
+                        carToMove.Visibility = Visibility.Collapsed;
+                        Debug.WriteLine("Car reached destination");
+                        break;
+                    }
+                    goForward = false;
                 }
 
-                car.StepCar();
-                Debug.WriteLine($"Car steps: {car.steps}");
+                if (goForward == true)
+                {
+                    car.StepCar();
+                }
+                else
+                {
+                    car.StepCarBack();
+                }
+
+                    Debug.WriteLine($"Car steps: {car.steps}");
 
                 int columnNum = Convert.ToInt32(CarsRoad[car.steps].Substring(0, 2));
                 int rowNum = Convert.ToInt32(CarsRoad[car.steps].Substring(2, 2));
@@ -557,12 +571,14 @@ namespace Fia_med_krock
                 MoveHelper.MoveCar(carToMove, playBoard, columnNum, rowNum);
                 await Task.Delay(200);
 
-                if (i == destination - 1)
-                {
-                    CheckCarPositionToCrash(car);
-                    RollDice.IsEnabled = true;                 
-                }
+           //     if (i == destination - 1)
+           //     {
+           //         CheckCarPositionToCrash(car);
+           //         RollDice.IsEnabled = true;                 
+           //     }
             }
+            CheckCarPositionToCrash(car);
+            RollDice.IsEnabled = true;
 
             SetTapToPlayer();
 
