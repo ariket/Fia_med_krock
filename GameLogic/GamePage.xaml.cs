@@ -574,6 +574,7 @@ namespace Fia_med_krock
             else
             {
                 RollDice.Content = "Rulla Tärning";
+                SetTapDisabeldForPlayer(car);
             }
         }
         
