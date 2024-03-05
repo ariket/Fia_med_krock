@@ -155,7 +155,7 @@ namespace Fia_med_krock
             return roll_result;
         }
 
-        public void RollDice_Click(object sender, RoutedEventArgs e)
+        public async void RollDice_Click(object sender, RoutedEventArgs e)
         {
             //diceroll.mp3 downloaded from https://pixabay.com/
             //Uri newuri = new Uri("ms-appx:///Assets/diceroll.mp3");
@@ -171,7 +171,7 @@ namespace Fia_med_krock
             {
                 // Ingen bil kan röras och därav byts det tur
                 
-                SwitchToNextPlayer();
+                await SwitchToNextPlayer();
                 RollDice.IsEnabled = true;
             }
 
@@ -202,34 +202,39 @@ namespace Fia_med_krock
 
         private async Task SimulateAiPlayerTurn (Player aiPlayer)
         {
+            Debug.WriteLine($"Starting simulation for {aiPlayer.Color}: SimulateAiPlayerTurn function");
             RollDice.IsEnabled = false;
             await Task.Delay(2000);
 
             int aiDiceValue = roll_dice();
             await Task.Delay(1000);
             setCurrentPlayerCarsState(aiDiceValue);
-            SimulateMoveCar(aiPlayer, aiDiceValue);
+            await SimulateMoveCar(aiPlayer, aiDiceValue);
+            Debug.WriteLine($"exiting simulation {aiPlayer.Color}");
         }
 
-        private async void SimulateMoveCar(Player aiPlayer, int aiDiceValue)
+        private async Task SimulateMoveCar(Player aiPlayer, int aiDiceValue)
         {
+            Debug.WriteLine($"Simulating move for {aiPlayer.Color}");
             string[] carsRoad = GetCarsRoad(aiPlayer.Color);
             foreach (Cars car in aiPlayer.Cars) 
             { 
                 if (car.CarUI.IsTapEnabled) 
                 {
                     await AnimateCarAsync(car.CarUI, carsRoad, aiDiceValue,  car, aiPlayer, PlayBoard);
+                    await Task.Delay(1000);
                     break;
                 }
                 
             }
             await Task.Delay(2000);
-            SwitchToNextPlayer();
+            Debug.WriteLine($"Move simulation completed for {aiPlayer.Color}");
+            await SwitchToNextPlayer();
         }
 
 
 
-        private async void SwitchToNextPlayer()
+        private async Task SwitchToNextPlayer()
         {
             //DisableAllCarsForCurrentPlayer();
             switch (currentPlayer)
@@ -245,7 +250,8 @@ namespace Fia_med_krock
                     RollDice.Content = "Rulla Tärning";
                     if (players[CarColor.Blue].IsAi)
                     {
-                       await SimulateAiPlayerTurn(players[CarColor.Blue]);
+                        Debug.WriteLine("Simulating  turn for Blue");
+                        await SimulateAiPlayerTurn(players[CarColor.Blue]);
                     }
                     break;
                 case GameState.PlayerBlue:
@@ -259,6 +265,7 @@ namespace Fia_med_krock
                     RollDice.Content = "Rulla Tärning";
                     if (players[CarColor.Green].IsAi)
                     {
+                        Debug.WriteLine("Simulating  turn for Green");
                         await SimulateAiPlayerTurn(players[CarColor.Green]);
                     }
                     break;
@@ -273,6 +280,7 @@ namespace Fia_med_krock
                     RollDice.Content = "Rulla Tärning";
                     if (players[CarColor.Yellow].IsAi)
                     {
+                        Debug.WriteLine("Simulating  turn for Yellow");
                         await SimulateAiPlayerTurn(players[CarColor.Yellow]);
                     }
 
@@ -289,7 +297,7 @@ namespace Fia_med_krock
                     RollDice.Content = "Rulla Tärning";
                     if (players[CarColor.Red].IsAi)
                     {
-                        
+                        Debug.WriteLine("Simulating  turn for Red");
                         await SimulateAiPlayerTurn(players[CarColor.Red]);
                     }                   
                     break;
@@ -569,7 +577,7 @@ namespace Fia_med_krock
             {
                 if (dice == 1) SetTapDisabeldForPlayer(car);  //dummy call to set if dice == 1
                        
-                SwitchToNextPlayer();
+                await SwitchToNextPlayer();
             }
             else
             {
