@@ -331,12 +331,38 @@ namespace Fia_med_krock
                     carUI.Opacity = 0.3;
                 }
             }
-
-
-
         }
 
-        Dictionary<CarColor, List<Cars>> GetCarsByColorDictionary()
+        private void SetTapDisabeldForPlayer(Cars car)
+        {
+            Player currentPlayerObj = players[GetCarColor(currentPlayer)];
+            Windows.UI.Xaml.Shapes.Rectangle carUI = currentPlayerObj.Cars[0].CarUI;
+            if (currentPlayerObj.Cars[0].steps == -1)
+            {
+                carUI.IsTapEnabled = false;
+                carUI.Opacity = 0.3;
+            }
+            carUI = currentPlayerObj.Cars[1].CarUI;
+            if (currentPlayerObj.Cars[1].steps == -1)
+            {
+                carUI.IsTapEnabled = false;
+                carUI.Opacity = 0.3;
+            }
+            carUI = currentPlayerObj.Cars[2].CarUI;
+            if (currentPlayerObj.Cars[2].steps == -1)
+            {
+                carUI.IsTapEnabled = false;
+                carUI.Opacity = 0.3;
+            }
+            carUI = currentPlayerObj.Cars[3].CarUI;
+            if (currentPlayerObj.Cars[3].steps == -1)
+            {
+                carUI.IsTapEnabled = false;
+                carUI.Opacity = 0.3;
+            }
+        }
+
+            Dictionary<CarColor, List<Cars>> GetCarsByColorDictionary()
         {
             return players.ToDictionary(entry => entry.Key, entry => entry.Value.Cars);
         }
@@ -347,10 +373,14 @@ namespace Fia_med_krock
             return (CarColor)Enum.Parse(typeof(CarColor), color, true);
         }
 
-        bool CheckMyOtherCarsPosition(Cars car) //You are not allowed to pass your own cars
+        bool CheckMyOtherCarsPosition(Cars car, bool goForward) //You are not allowed to pass your own cars
         {
             bool check = true;
             int movingCarPosition = car.steps + 1;
+            if (!goForward)
+            {
+                movingCarPosition = car.steps - 1;
+            }
 
             if (movingCarPosition > 0)
             {
@@ -535,7 +565,7 @@ namespace Fia_med_krock
 
             for (int i = car.steps; i < destination; i++)
             {
-                if (!CheckMyOtherCarsPosition(car))
+                if (!CheckMyOtherCarsPosition(car, goForward))
                 {
                     Debug.WriteLine("CheckCarPosition failed");
                     RollDice.IsEnabled = true;
@@ -577,6 +607,7 @@ namespace Fia_med_krock
            //         RollDice.IsEnabled = true;                 
            //     }
             }
+
             CheckCarPositionToCrash(car);
             RollDice.IsEnabled = true;
 
@@ -584,18 +615,16 @@ namespace Fia_med_krock
 
             if (dice != 6)
             {
-                if(dice == 1 && car.steps == 0)
-                {
-                    setCurrentPlayerCarsState(-1);
-                }
-
+                if (dice == 1) SetTapDisabeldForPlayer(car);  //dummy call to set if dice == 1
+                       
                 SwitchToNextPlayer();
             }
+            else
+            {
+                RollDice.Content = "Rulla Tärning";
+            }
         }
-
         
-
-
 
         private void DisableAllCarsForCurrentPlayer()
         {
