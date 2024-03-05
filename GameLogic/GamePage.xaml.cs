@@ -82,7 +82,7 @@ namespace Fia_med_krock
             CenterOfGrid.Fill = new SolidColorBrush(Colors.Red);
             RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
 
-            InitializePlayers();
+            //InitializePlayers();
 
             //music.mp3 downloaded from https://pixabay.com/
             // Uri newuri = new Uri("ms-appx:///Assets/music.mp3");
@@ -91,14 +91,14 @@ namespace Fia_med_krock
 
         }
 
-        private void InitializePlayers()
+        private void InitializePlayers(PlayerAiStates playerAiStates)
         {
             players = new Dictionary<CarColor, Player>
             {
-                { CarColor.Red, new Player("Red", new List<Windows.UI.Xaml.Shapes.Rectangle> { Red1, Red2, Red3, Red4 }, PlayBoard) },
-                { CarColor.Blue, new Player("Blue", new List<Windows.UI.Xaml.Shapes.Rectangle> { Blue1, Blue2, Blue3, Blue4 }, PlayBoard) },
-                { CarColor.Green, new Player("Green", new List<Windows.UI.Xaml.Shapes.Rectangle> { Green1, Green2, Green3, Green4 }, PlayBoard) },
-                { CarColor.Yellow, new Player("Yellow", new List<Windows.UI.Xaml.Shapes.Rectangle> { Yellow1, Yellow2, Yellow3, Yellow4 }, PlayBoard) },
+                { CarColor.Red, new Player("Red", new List<Windows.UI.Xaml.Shapes.Rectangle> { Red1, Red2, Red3, Red4 }, PlayBoard, playerAiStates.IsPlayer1Ai) },
+                { CarColor.Blue, new Player("Blue", new List<Windows.UI.Xaml.Shapes.Rectangle> { Blue1, Blue2, Blue3, Blue4 }, PlayBoard, playerAiStates.IsPlayer2Ai) },
+                { CarColor.Green, new Player("Green", new List<Windows.UI.Xaml.Shapes.Rectangle> { Green1, Green2, Green3, Green4 }, PlayBoard, playerAiStates.IsPlayer3Ai) },
+                { CarColor.Yellow, new Player("Yellow", new List<Windows.UI.Xaml.Shapes.Rectangle> { Yellow1, Yellow2, Yellow3, Yellow4 }, PlayBoard, playerAiStates.IsPlayer4Ai) },
                 
             };
         }
@@ -113,6 +113,7 @@ namespace Fia_med_krock
                 Debug.WriteLine($"Player 2 AI: {playerAiStates.IsPlayer2Ai}");
                 Debug.WriteLine($"Player 3 AI: {playerAiStates.IsPlayer3Ai}");
                 Debug.WriteLine($"Player 4 AI: {playerAiStates.IsPlayer4Ai}");
+                InitializePlayers(playerAiStates);
 
             }
         }
@@ -149,10 +150,11 @@ namespace Fia_med_krock
             int roll_result = Convert.ToInt32(dice_roll.Next(1, 7));
             Globals.dice_result = roll_result;
             roll_dice_animation(roll_result);
+            
             return roll_result;
         }
 
-        private void RollDice_Click(object sender, RoutedEventArgs e)
+        public void RollDice_Click(object sender, RoutedEventArgs e)
         {
             //diceroll.mp3 downloaded from https://pixabay.com/
             //Uri newuri = new Uri("ms-appx:///Assets/diceroll.mp3");
@@ -196,7 +198,34 @@ namespace Fia_med_krock
             }
         }
 
-        private void SwitchToNextPlayer()
+        private async Task SimulateAiPlayerTurn (Player aiPlayer)
+        {
+            await Task.Delay(2000);
+
+            int aiDiceValue = roll_dice();
+            await Task.Delay(2000);
+            setCurrentPlayerCarsState(aiDiceValue);
+            SimulateMoveCar(aiPlayer, aiDiceValue);
+        }
+
+        private async void SimulateMoveCar(Player aiPlayer, int aiDiceValue)
+        {
+            string[] carsRoad = GetCarsRoad(aiPlayer.Color);
+            foreach (Cars car in aiPlayer.Cars) 
+            { 
+                if (car.CarUI.IsTapEnabled) 
+                {
+                   await AnimateCarAsync(car.CarUI, carsRoad, aiDiceValue,  car, aiPlayer, PlayBoard);
+                    break;
+                }
+                
+            }
+            SwitchToNextPlayer();
+        }
+
+
+
+        private async void SwitchToNextPlayer()
         {
             //DisableAllCarsForCurrentPlayer();
             switch (currentPlayer)
@@ -210,6 +239,10 @@ namespace Fia_med_krock
                     CenterOfGrid.Fill = new SolidColorBrush(Colors.Blue);
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
                     RollDice.Content = "Rulla Tärning";
+                    if (players[CarColor.Blue].IsAi)
+                    {
+                        await SimulateAiPlayerTurn(players[CarColor.Blue]);
+                    }
                     break;
                 case GameState.PlayerBlue:
                     currentPlayer = GameState.PlayerGreen;
@@ -220,6 +253,10 @@ namespace Fia_med_krock
                     CenterOfGrid.Fill = new SolidColorBrush(Colors.Green);
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Green);
                     RollDice.Content = "Rulla Tärning";
+                    if (players[CarColor.Green].IsAi)
+                    {
+                        await SimulateAiPlayerTurn(players[CarColor.Green]);
+                    }
                     break;
                 case GameState.PlayerGreen:
                     currentPlayer = GameState.PlayerYellow;
@@ -230,6 +267,10 @@ namespace Fia_med_krock
                     CenterOfGrid.Fill = new SolidColorBrush(Colors.Yellow);
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Yellow);
                     RollDice.Content = "Rulla Tärning";
+                    if (players[CarColor.Yellow].IsAi)
+                    {
+                        await SimulateAiPlayerTurn(players[CarColor.Yellow]);
+                    }
                     break;
                 case GameState.PlayerYellow:
                     currentPlayer = GameState.PlayerRed;
@@ -240,6 +281,10 @@ namespace Fia_med_krock
                     CenterOfGrid.Fill = new SolidColorBrush(Colors.Red);
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                     RollDice.Content = "Rulla Tärning";
+                    if (players[CarColor.Red].IsAi)
+                    {
+                        await SimulateAiPlayerTurn(players[CarColor.Red]);
+                    }
                     break;
             }
         }
@@ -361,132 +406,70 @@ namespace Fia_med_krock
                 default: return "";
             }
         }
-        private async void roll_dice_animation(int dice)
+        public async void roll_dice_animation(int dice)
         {
             DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice2.png"));
-         //   ellipse1.Visibility = Visibility.Collapsed;
-         //   ellipse2.Visibility = Visibility.Collapsed;
-         //   ellipse3.Visibility = Visibility.Collapsed;
-         //   ellipse4.Visibility = Visibility.Collapsed;
-         //   ellipse5.Visibility = Visibility.Collapsed;
-         //   ellipse6.Visibility = Visibility.Collapsed;
-         //   ellipse7.Visibility = Visibility.Collapsed;
-         //   ellipse6.Visibility = Visibility.Visible;
-         //   ellipse1.Visibility = Visibility.Visible;
+         
             await System.Threading.Tasks.Task.Delay(150);
             DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice6.png"));
-         //   ellipse6.Visibility = Visibility.Collapsed;
-         //   ellipse1.Visibility = Visibility.Collapsed;
-         //   ellipse1.Visibility = Visibility.Visible;
-         //   ellipse2.Visibility = Visibility.Visible;
-         //   ellipse3.Visibility = Visibility.Visible;
-         //   ellipse4.Visibility = Visibility.Visible;
-         //   ellipse5.Visibility = Visibility.Visible;
-         //   ellipse6.Visibility = Visibility.Visible;
+        
             await System.Threading.Tasks.Task.Delay(150);
             DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice3.png"));
-         //   ellipse1.Visibility = Visibility.Collapsed;
-         //   ellipse2.Visibility = Visibility.Collapsed;
-         //   ellipse3.Visibility = Visibility.Collapsed;
-         //   ellipse4.Visibility = Visibility.Collapsed;
-         //   ellipse5.Visibility = Visibility.Collapsed;
-         //   ellipse6.Visibility = Visibility.Collapsed;
-         //   ellipse7.Visibility = Visibility.Visible;
-         //   ellipse1.Visibility = Visibility.Visible;
-         //   ellipse6.Visibility = Visibility.Visible;
+         
             await System.Threading.Tasks.Task.Delay(150);
             DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice4.png"));
-         //   ellipse7.Visibility = Visibility.Collapsed;
-         //   ellipse1.Visibility = Visibility.Collapsed;
-         //   ellipse6.Visibility = Visibility.Collapsed;
-         //   ellipse1.Visibility = Visibility.Visible;
-         //   ellipse3.Visibility = Visibility.Visible;
-         //   ellipse4.Visibility = Visibility.Visible;
-         //   ellipse6.Visibility = Visibility.Visible;
+         
             await System.Threading.Tasks.Task.Delay(150);
             DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice6.png"));
-         //   ellipse1.Visibility = Visibility.Collapsed;
-         //   ellipse3.Visibility = Visibility.Collapsed;
-         //   ellipse4.Visibility = Visibility.Collapsed;
-         //   ellipse6.Visibility = Visibility.Collapsed;
+         
 
             if (dice == 6)
             {
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-               // ellipse7.Visibility = Visibility.Visible;
+               
                 await System.Threading.Tasks.Task.Delay(150);
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice6.png"));
-               // ellipse7.Visibility = Visibility.Collapsed;
-               // ellipse1.Visibility = Visibility.Visible;
-               // ellipse2.Visibility = Visibility.Visible;
-               // ellipse3.Visibility = Visibility.Visible;
-               // ellipse4.Visibility = Visibility.Visible;
-               // ellipse5.Visibility = Visibility.Visible;
-               // ellipse6.Visibility = Visibility.Visible;
+               
             }
             else if (dice == 5)
             {
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-                //ellipse7.Visibility = Visibility.Visible;
+                
                 await System.Threading.Tasks.Task.Delay(150);
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice5.png"));
-                //  ellipse7.Visibility = Visibility.Collapsed;
-                //  ellipse1.Visibility = Visibility.Visible;
-                //  ellipse3.Visibility = Visibility.Visible;
-                //  ellipse4.Visibility = Visibility.Visible;
-                //  ellipse6.Visibility = Visibility.Visible;
-                //  ellipse7.Visibility = Visibility.Visible;
+                
             }
             else if (dice == 4)
             {
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-                //ellipse7.Visibility = Visibility.Visible;
+                
                 await System.Threading.Tasks.Task.Delay(150);
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice4.png"));
-               // ellipse7.Visibility = Visibility.Collapsed;
-               // ellipse1.Visibility = Visibility.Visible;
-               // ellipse3.Visibility = Visibility.Visible;
-               // ellipse4.Visibility = Visibility.Visible;
-               // ellipse6.Visibility = Visibility.Visible;
+               
             }
             else if (dice == 3)
             {
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-                //ellipse7.Visibility = Visibility.Visible;
+                
                 await System.Threading.Tasks.Task.Delay(150);
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice3.png"));
-                //   ellipse7.Visibility = Visibility.Collapsed;
-                //   ellipse3.Visibility = Visibility.Visible;
-                //   ellipse7.Visibility = Visibility.Visible;
-                //   ellipse4.Visibility = Visibility.Visible;
+                
             }
             else if (dice == 2)
             {
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-                // ellipse7.Visibility = Visibility.Visible;
+               
                 await System.Threading.Tasks.Task.Delay(150);
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice2.png"));
-              //  ellipse7.Visibility = Visibility.Collapsed;
-              //  ellipse3.Visibility = Visibility.Visible;
-              //  ellipse4.Visibility = Visibility.Visible;
+             
             }
             else
             {
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice5.png"));
-                // ellipse1.Visibility = Visibility.Visible;
-                // ellipse3.Visibility = Visibility.Visible;
-                // ellipse4.Visibility = Visibility.Visible;
-                // ellipse6.Visibility = Visibility.Visible;
-                // ellipse7.Visibility = Visibility.Visible;
+                
                 await System.Threading.Tasks.Task.Delay(150);
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-                //   ellipse1.Visibility = Visibility.Collapsed;
-                //   ellipse3.Visibility = Visibility.Collapsed;
-                //   ellipse4.Visibility = Visibility.Collapsed;
-                //   ellipse6.Visibility = Visibility.Collapsed;
             }
-
-
         }
 
         private async Task AnimateCarAsync(Windows.UI.Xaml.Shapes.Rectangle carToMove, string[] CarsRoad, int dice, Cars car, Player player, Grid playBoard)
