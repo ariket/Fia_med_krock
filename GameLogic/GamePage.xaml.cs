@@ -218,12 +218,12 @@ namespace Fia_med_krock
             { 
                 if (car.CarUI.IsTapEnabled) 
                 {
-                    AnimateCarAsync(car.CarUI, carsRoad, aiDiceValue,  car, aiPlayer, PlayBoard);
+                    await AnimateCarAsync(car.CarUI, carsRoad, aiDiceValue,  car, aiPlayer, PlayBoard);
                     break;
                 }
                 
             }
-            //await Task.Delay(2000);
+            await Task.Delay(2000);
             SwitchToNextPlayer();
         }
 
