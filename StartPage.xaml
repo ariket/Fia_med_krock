@@ -131,6 +131,8 @@
                 <TextBlock Text="För att köra i mål måste man slå det exakta antalet steg som behövs." Foreground="#000000" d:IsLocked="True" />
                 <TextBlock Text="Spelaren som först går i mål med alla sina bilar har vunnit!." Foreground="#000000" d:IsLocked="True" />
                 <TextBlock Text="  " Foreground="#000000" d:IsLocked="True" />
+                <TextBlock Text="Via startsidan kan man aktivera en AI spelare genom att klicka på Spelare 1 - Spelare 4." Foreground="#000000" d:IsLocked="True" />
+                <TextBlock Text="  " Foreground="#000000" d:IsLocked="True" />
             </StackPanel>
 
             <Button  x:Name="CloseButton" Height="35" Width="75" CornerRadius="5" Background="CornflowerBlue" Click="CloseRulesButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,5,5,25">Stäng</Button>
