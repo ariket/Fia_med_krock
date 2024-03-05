@@ -169,6 +169,7 @@ namespace Fia_med_krock
             if (!anyCarsEnabled)
             {
                 // Ingen bil kan röras och därav byts det tur
+                SetTapToPlayer();
                 SwitchToNextPlayer();
                 RollDice.IsEnabled = true;
             }
@@ -232,12 +233,58 @@ namespace Fia_med_krock
             {
                 case GameState.PlayerRed:
                     currentPlayer = GameState.PlayerBlue;
+                 //   Red1.IsTapEnabled = false;
+                 //   Red2.IsTapEnabled = false;
+                 //   Red3.IsTapEnabled = false;
+                 //   Red4.IsTapEnabled = false;
+                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Blue);
+                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
+                 //   RollDice.Content = "Rulla Tärning";
+                    break;
+                case GameState.PlayerBlue:
+                    currentPlayer = GameState.PlayerGreen;
+                 //   Blue1.IsTapEnabled = false;
+                 //   Blue2.IsTapEnabled = false;
+                 //   Blue3.IsTapEnabled = false;
+                 //   Blue4.IsTapEnabled = false;
+                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Green);
+                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Green);
+                 //   RollDice.Content = "Rulla Tärning";
+                    break;
+                case GameState.PlayerGreen:
+                    currentPlayer = GameState.PlayerYellow;
+                  //  Green1.IsTapEnabled = false;
+                  //  Green2.IsTapEnabled = false;
+                  //  Green3.IsTapEnabled = false;
+                  //  Green4.IsTapEnabled = false;
+                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Yellow);
+                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Yellow);
+                  //  RollDice.Content = "Rulla Tärning";
+                    break;
+                case GameState.PlayerYellow:
+                    currentPlayer = GameState.PlayerRed;
+                 //   Yellow1.IsTapEnabled = false;
+                 //   Yellow2.IsTapEnabled = false;
+                 //   Yellow3.IsTapEnabled = false;
+                 //   Yellow4.IsTapEnabled = false;
+                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Red);
+                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+                 //   RollDice.Content = "Rulla Tärning";
+                    break;
+            }
+        }
+
+        private void SetTapToPlayer()
+        {
+           // RollDice.Content = "Rulla Tärning";
+            //DisableAllCarsForCurrentPlayer();
+            switch (currentPlayer)
+            {
+                case GameState.PlayerRed:
                     Red1.IsTapEnabled = false;
                     Red2.IsTapEnabled = false;
                     Red3.IsTapEnabled = false;
                     Red4.IsTapEnabled = false;
-                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Blue);
-                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
                     RollDice.Content = "Rulla Tärning";
                     if (players[CarColor.Blue].IsAi)
                     {
@@ -245,13 +292,10 @@ namespace Fia_med_krock
                     }
                     break;
                 case GameState.PlayerBlue:
-                    currentPlayer = GameState.PlayerGreen;
                     Blue1.IsTapEnabled = false;
                     Blue2.IsTapEnabled = false;
                     Blue3.IsTapEnabled = false;
                     Blue4.IsTapEnabled = false;
-                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Green);
-                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Green);
                     RollDice.Content = "Rulla Tärning";
                     if (players[CarColor.Green].IsAi)
                     {
@@ -259,13 +303,10 @@ namespace Fia_med_krock
                     }
                     break;
                 case GameState.PlayerGreen:
-                    currentPlayer = GameState.PlayerYellow;
                     Green1.IsTapEnabled = false;
                     Green2.IsTapEnabled = false;
                     Green3.IsTapEnabled = false;
                     Green4.IsTapEnabled = false;
-                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Yellow);
-                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Yellow);
                     RollDice.Content = "Rulla Tärning";
                     if (players[CarColor.Yellow].IsAi)
                     {
@@ -273,13 +314,10 @@ namespace Fia_med_krock
                     }
                     break;
                 case GameState.PlayerYellow:
-                    currentPlayer = GameState.PlayerRed;
                     Yellow1.IsTapEnabled = false;
                     Yellow2.IsTapEnabled = false;
                     Yellow3.IsTapEnabled = false;
                     Yellow4.IsTapEnabled = false;
-                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Red);
-                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                     RollDice.Content = "Rulla Tärning";
                     if (players[CarColor.Red].IsAi)
                     {
@@ -288,7 +326,6 @@ namespace Fia_med_krock
                     break;
             }
         }
-
 
         private void setCurrentPlayerCarsState(int dice)
         {
@@ -337,12 +374,38 @@ namespace Fia_med_krock
                     carUI.Opacity = 0.3;
                 }
             }
-
-
-
         }
 
-        Dictionary<CarColor, List<Cars>> GetCarsByColorDictionary()
+        private void SetTapDisabeldForPlayer(Cars car)
+        {
+            Player currentPlayerObj = players[GetCarColor(currentPlayer)];
+            Windows.UI.Xaml.Shapes.Rectangle carUI = currentPlayerObj.Cars[0].CarUI;
+            if (currentPlayerObj.Cars[0].steps == -1)
+            {
+                carUI.IsTapEnabled = false;
+                carUI.Opacity = 0.3;
+            }
+            carUI = currentPlayerObj.Cars[1].CarUI;
+            if (currentPlayerObj.Cars[1].steps == -1)
+            {
+                carUI.IsTapEnabled = false;
+                carUI.Opacity = 0.3;
+            }
+            carUI = currentPlayerObj.Cars[2].CarUI;
+            if (currentPlayerObj.Cars[2].steps == -1)
+            {
+                carUI.IsTapEnabled = false;
+                carUI.Opacity = 0.3;
+            }
+            carUI = currentPlayerObj.Cars[3].CarUI;
+            if (currentPlayerObj.Cars[3].steps == -1)
+            {
+                carUI.IsTapEnabled = false;
+                carUI.Opacity = 0.3;
+            }
+        }
+
+            Dictionary<CarColor, List<Cars>> GetCarsByColorDictionary()
         {
             return players.ToDictionary(entry => entry.Key, entry => entry.Value.Cars);
         }
@@ -353,10 +416,14 @@ namespace Fia_med_krock
             return (CarColor)Enum.Parse(typeof(CarColor), color, true);
         }
 
-        bool CheckCarPosition(Cars car)
+        bool CheckMyOtherCarsPosition(Cars car, bool goForward) //You are not allowed to pass your own cars
         {
             bool check = true;
             int movingCarPosition = car.steps + 1;
+            if (!goForward)
+            {
+                movingCarPosition = car.steps - 1;
+            }
 
             if (movingCarPosition > 0)
             {
@@ -475,10 +542,11 @@ namespace Fia_med_krock
         private async Task AnimateCarAsync(Windows.UI.Xaml.Shapes.Rectangle carToMove, string[] CarsRoad, int dice, Cars car, Player player, Grid playBoard)
         {
             int destination = Math.Min(car.steps + dice, 35);
+            goForward = true;
 
             for (int i = car.steps; i < destination; i++)
             {
-                if (!CheckCarPosition(car))
+                if (!CheckMyOtherCarsPosition(car, goForward))
                 {
                     Debug.WriteLine("CheckCarPosition failed");
                     RollDice.IsEnabled = true;
@@ -487,13 +555,26 @@ namespace Fia_med_krock
 
                 if (car.steps == 35)
                 {
-                    carToMove.Visibility = Visibility.Collapsed;
-                    Debug.WriteLine("Car reached destination");
-                    break;
+                    if (i == destination - 1)
+                    {
+                        car.StepCarToGoal();
+                        carToMove.Visibility = Visibility.Collapsed;
+                        Debug.WriteLine("Car reached destination");
+                        break;
+                    }
+                    goForward = false;
                 }
 
-                car.StepCar();
-                Debug.WriteLine($"Car steps: {car.steps}");
+                if (goForward == true)
+                {
+                    car.StepCar();
+                }
+                else
+                {
+                    car.StepCarBack();
+                }
+
+                    Debug.WriteLine($"Car steps: {car.steps}");
 
                 int columnNum = Convert.ToInt32(CarsRoad[car.steps].Substring(0, 2));
                 int rowNum = Convert.ToInt32(CarsRoad[car.steps].Substring(2, 2));
@@ -501,21 +582,30 @@ namespace Fia_med_krock
                 MoveHelper.MoveCar(carToMove, playBoard, columnNum, rowNum);
                 await Task.Delay(200);
 
-                if (i == destination - 1)
-                {
-                    CheckCarPositionToCrash(car);
-                    RollDice.IsEnabled = true;                 
-                }
+           //     if (i == destination - 1)
+           //     {
+           //         CheckCarPositionToCrash(car);
+           //         RollDice.IsEnabled = true;                 
+           //     }
             }
+
+            CheckCarPositionToCrash(car);
+            RollDice.IsEnabled = true;
+
+            SetTapToPlayer();
+
             if (dice != 6)
             {
+                if (dice == 1) SetTapDisabeldForPlayer(car);  //dummy call to set if dice == 1
+                       
                 SwitchToNextPlayer();
             }
+            else
+            {
+                RollDice.Content = "Rulla Tärning";
+            }
         }
-
         
-
-
 
         private void DisableAllCarsForCurrentPlayer()
         {

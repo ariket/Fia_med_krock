@@ -41,7 +41,11 @@ namespace Fia_med_krock.GameLogic
             steps--;
         }
 
-        
+        public void StepCarToGoal()
+        {
+            steps = 99;
+        }
+
         public void CarCrasced()
         {
             steps = -1;
@@ -87,8 +91,6 @@ namespace Fia_med_krock.GameLogic
             Debug.WriteLine(PlayBoard.FindName(gridName));
             return PlayBoard.FindName(gridName) as Grid;
         }
-
-
 
        
 
