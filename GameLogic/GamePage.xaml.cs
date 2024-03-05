@@ -204,10 +204,8 @@ namespace Fia_med_krock
         {
             Debug.WriteLine($"Starting simulation for {aiPlayer.Color}: SimulateAiPlayerTurn function");
             RollDice.IsEnabled = false;
-            await Task.Delay(2000);
-
             int aiDiceValue = roll_dice();
-            await Task.Delay(1000);
+            await Task.Delay(2000);
             setCurrentPlayerCarsState(aiDiceValue);
             await SimulateMoveCar(aiPlayer, aiDiceValue);
             Debug.WriteLine($"exiting simulation {aiPlayer.Color}");
