@@ -193,11 +193,12 @@ namespace Fia_med_krock
                 Debug.WriteLine($"Player 4 AI: {playerAiStates.IsPlayer4Ai}");
                 InitializePlayers(playerAiStates);
             }
+            
             MainGameLoop();
         }
 
         //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra.
-        //Sen har man en int (Cars.steps) för varje bil som anger bilen position mha RedCarsRoad[] 
+        //Sen har man en int (Cars.steps) för varje bil som anger bilen position m.h.a. RedCarsRoad[] 
         //Road för red cars, {column,row}
         public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404", "0000", "0000" };
         public static string[] BlueCarsRoad = { "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0401", "0402", "0403", "0404", "0000", "0000" };
@@ -205,10 +206,9 @@ namespace Fia_med_krock
         public static string[] YellowCarsRoad = { "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0407", "0406", "0405", "0404", "0000", "0000" };
 
         public bool goForward = true;
+        public bool turnActive = true;
 
-   
 
-        
 
         //Finns inte globala variabler i c#, så gjorde en ful lösning från https://stackoverflow.com/questions/14368129/how-to-use-global-variables-in-c
         public static class Globals
@@ -336,7 +336,7 @@ namespace Fia_med_krock
         {
             Debug.WriteLine($"Test human player: {humanPlayer.Cars}");
             RollDice.IsEnabled = true;
-            while(turnActive)
+            while (turnActive)
             {
                 await Task.Delay(1000);
             }
@@ -384,7 +384,7 @@ namespace Fia_med_krock
         }
 
 
-        public bool turnActive = true; 
+        
 
         private async Task SwitchToNextPlayer()
         {
@@ -456,8 +456,6 @@ namespace Fia_med_krock
             }
         }
 
-        
-
         private void setCurrentPlayerCarsState(int dice)
         {
             Player currentPlayerObj = players[GetCarColor(currentPlayer)];
@@ -504,6 +502,10 @@ namespace Fia_med_krock
                     carUI.IsTapEnabled = false;
                     carUI.Opacity = 0.3;
                 }
+            }
+            if(car.steps == 37)
+            {
+                carUI.IsTapEnabled = false;
             }
         }
         private void SetTapDisabeldForPlayer(Cars car)
