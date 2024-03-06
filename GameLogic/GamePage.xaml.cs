@@ -284,7 +284,7 @@ namespace Fia_med_krock
             if (!anyCarsEnabled)
             {
                 // Ingen bil kan röras och därav byts det tur
-                await Task.Delay(1000);
+                await Task.Delay(100);
                 turnActive = false;
                 //await SwitchToNextPlayer();
                 //RollDice.IsEnabled = true;
@@ -336,7 +336,11 @@ namespace Fia_med_krock
         {
             Debug.WriteLine($"Test human player: {humanPlayer.Cars}");
             RollDice.IsEnabled = true;
-            await Task.Delay(6000);
+            while(turnActive)
+            {
+                await Task.Delay(1000);
+            }
+
         }
 
         private async Task TestTurn(Player humanPlayer)
