@@ -717,6 +717,7 @@ namespace Fia_med_krock
                 {
                     car.StepCarToGoal();
                     carToMove.Visibility = Visibility.Collapsed;
+                    carToMove.IsTapEnabled = false;
                     Debug.WriteLine("Car reached destination");
                     if (player.CheckIfWinner()) Debug.WriteLine("We have a winner");
                 }
