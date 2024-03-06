@@ -152,20 +152,23 @@ namespace Fia_med_krock
             {
                 foreach (var playerKVP in players)
                 {
+                    currentPlayer = GameState.PlayerRed;
                     turnActive = true;
                     Player player = playerKVP.Value;
                     CenterOfGrid.Fill = GetColorForPlayer(player);
                     RollDice.Background = GetColorForPlayer(player);
-                    RollDice.Content = "Rulla Tärning";
+                    
 
                     if (player.IsAi)
                     {
+                        RollDice.Content = "AI";
                         Debug.WriteLine($"Simulating turn for {player.Color}");
                         await SimulateAiPlayerTurn(player);
                         //await TestTurn(player);
                     }
                     else
                     {
+                        RollDice.Content = "Rulla Tärning";
                         await HandleHumanPlayerTurn(player);
                     }
                 }
@@ -248,9 +251,9 @@ namespace Fia_med_krock
 
         private async Task HandleHumanPlayerTurn(Player humanPlayer)
         {
-            Debug.WriteLine("Test human player");
+            Debug.WriteLine($"Test human player: {humanPlayer.Cars}");
             RollDice.IsEnabled = true;
-            await Task.Delay(9000);
+            await Task.Delay(6000);
         }
 
         private async Task TestTurn(Player humanPlayer)
@@ -258,7 +261,7 @@ namespace Fia_med_krock
 
             RollDice.IsEnabled = true;
             Debug.WriteLine("Test Ai player");
-            await Task.Delay(9000);
+            await Task.Delay(1000);
         }
 
         private async Task SimulateAiPlayerTurn (Player aiPlayer)
