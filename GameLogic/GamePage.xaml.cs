@@ -26,6 +26,7 @@ using Fia_med_krock.GameLogic;
 using System.Runtime.ConstrainedExecution;
 using Windows.Media.PlayTo;
 using System.Collections;
+using Windows.UI.Xaml.Media.Animation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -36,6 +37,82 @@ namespace Fia_med_krock
 {
     public static class MoveHelper
     {
+        //Tar samma argument som 'movecar' funktionen
+        public static void AnimateCarRight(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum)
+        {
+            //Animering för bilar
+            //Skapar objekten som behövs för att göra animeringen
+            carToMove.RenderTransform = new CompositeTransform();
+            Storyboard oStoryboard = new Storyboard();
+            DoubleAnimation oDoubleAnimation = new DoubleAnimation();
+
+            //Värden som bestämmer vart elementet ska flyttas och hur snabbt.
+            int startPosition = columnNum - 50;
+            oDoubleAnimation.From = startPosition;
+            oDoubleAnimation.To = startPosition + 50;
+            oDoubleAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(100));
+            //oDoubleAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(durationTime*200));
+
+            //Applicerar animationen
+            Storyboard.SetTarget(oDoubleAnimation, carToMove);
+            //(CompositeTransform.TranslateY) flyttar vertikalt istället!
+            Storyboard.SetTargetProperty(oDoubleAnimation, "(UIElement.RenderTransform).(CompositeTransform.TranslateX)");
+
+            //Lägger till animationen i storyboard objektet
+            oStoryboard.Children.Add(oDoubleAnimation);
+            //Kör animering
+            oStoryboard.Begin();
+        }
+
+        //Samma som de andra
+        public static void AnimateCarLeft(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum)
+        {
+            carToMove.RenderTransform = new CompositeTransform();
+            Storyboard oStoryboard = new Storyboard();
+            DoubleAnimation oDoubleAnimation = new DoubleAnimation();
+            int startPosition = columnNum + 50;
+            oDoubleAnimation.From = startPosition;
+            oDoubleAnimation.To = startPosition - 50;
+            oDoubleAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(100));
+            Storyboard.SetTarget(oDoubleAnimation, carToMove);
+            Storyboard.SetTargetProperty(oDoubleAnimation, "(UIElement.RenderTransform).(CompositeTransform.TranslateX)");
+            oStoryboard.Children.Add(oDoubleAnimation);
+            oStoryboard.Begin();
+        }
+
+        //Samma som de andra
+        public static void AnimateCarDown(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum)
+        {
+            carToMove.RenderTransform = new CompositeTransform();
+            Storyboard oStoryboard = new Storyboard();
+            DoubleAnimation oDoubleAnimation = new DoubleAnimation();
+            int startPosition = columnNum - 50;
+            oDoubleAnimation.From = startPosition;
+            oDoubleAnimation.To = startPosition + 50;
+            oDoubleAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(100));
+            Storyboard.SetTarget(oDoubleAnimation, carToMove);
+            Storyboard.SetTargetProperty(oDoubleAnimation, "(UIElement.RenderTransform).(CompositeTransform.TranslateY)");
+            oStoryboard.Children.Add(oDoubleAnimation);
+            oStoryboard.Begin();
+        }
+
+        //Samma som de andra
+        public static void AnimateCarUp(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum)
+        {
+            carToMove.RenderTransform = new CompositeTransform();
+            Storyboard oStoryboard = new Storyboard();
+            DoubleAnimation oDoubleAnimation = new DoubleAnimation();
+            int startPosition = columnNum + 50;
+            oDoubleAnimation.From = startPosition;
+            oDoubleAnimation.To = startPosition - 50;
+            oDoubleAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(100));
+            Storyboard.SetTarget(oDoubleAnimation, carToMove);
+            Storyboard.SetTargetProperty(oDoubleAnimation, "(UIElement.RenderTransform).(CompositeTransform.TranslateY)");
+            oStoryboard.Children.Add(oDoubleAnimation);
+            oStoryboard.Begin();
+        }
+
+
         public static void MoveCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, Grid playBoard, int columnNum, int rowNum)
         {
             var parent = (Panel)carToMove.Parent;
@@ -626,8 +703,9 @@ namespace Fia_med_krock
 
                 int columnNum = Convert.ToInt32(CarsRoad[car.steps].Substring(0, 2));
                 int rowNum = Convert.ToInt32(CarsRoad[car.steps].Substring(2, 2));
-
                 MoveHelper.MoveCar(carToMove, playBoard, columnNum, rowNum);
+                //Kör animationen
+                PickAnimation(carToMove, columnNum, car.steps, currentPlayer);
                 await Task.Delay(200);
                 MovesToMake++;
 
@@ -659,7 +737,234 @@ namespace Fia_med_krock
                 SetTapDisabeldForPlayer(car);
             }
         }
-        
+
+        //TODO: Gör så att animationen funkar 'baklänges' när man tar för många steg för att gå i mål.
+        //FIXME: Gör så att funktionen inte är världens största if-else träd.
+        private void PickAnimation(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int car_steps, GameState active_player)
+        {
+            //Väljer olika animationer beroende på vilken spelare som kör.
+            if (active_player == GameState.PlayerRed)
+            {
+                if (car_steps <= 3)
+                {
+                    MoveHelper.AnimateCarRight(carToMove, columnNum);
+                }
+                else if (car_steps <= 6)
+                {
+                    MoveHelper.AnimateCarUp(carToMove, columnNum);
+                }
+                else if (car_steps <= 8)
+                {
+                    MoveHelper.AnimateCarRight(carToMove, columnNum);
+                }
+                else if (car_steps <= 11)
+                {
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                }
+                else if (car_steps <= 14)
+                {
+                    MoveHelper.AnimateCarRight(carToMove, columnNum);
+                }
+                else if (car_steps <= 16)
+                {
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                }
+                else if (car_steps <= 19)
+                {
+                    MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                }
+                else if (car_steps <= 22)
+                {
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                }
+                else if (car_steps <= 24)
+                {
+                    MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                }
+                else if (car_steps <= 27)
+                {
+                    MoveHelper.AnimateCarUp(carToMove, columnNum);
+                }
+                else if (car_steps <= 30)
+                {
+                    MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                }
+                else if (car_steps <= 31)
+                {
+                    MoveHelper.AnimateCarUp(carToMove, columnNum);
+                }
+                else if (car_steps >= 32)
+                {
+                    MoveHelper.AnimateCarRight(carToMove, columnNum);
+                }
+            }
+            if (active_player == GameState.PlayerBlue)
+            {
+                if (car_steps <= 3)
+                {
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                }
+                else if (car_steps <= 6)
+                {
+                    MoveHelper.AnimateCarRight(carToMove, columnNum);
+                }
+                else if (car_steps <= 8)
+                {
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                }
+                else if (car_steps <= 11)
+                {
+                    MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                }
+                else if (car_steps <= 14)
+                {
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                }
+                else if (car_steps <= 16)
+                {
+                    MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                }
+                else if (car_steps <= 19)
+                {
+                    MoveHelper.AnimateCarUp(carToMove, columnNum);
+                }
+                else if (car_steps <= 22)
+                {
+                    MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                }
+                else if (car_steps <= 24)
+                {
+                    MoveHelper.AnimateCarUp(carToMove, columnNum);
+                }
+                else if (car_steps <= 27)
+                {
+                    MoveHelper.AnimateCarRight(carToMove, columnNum);
+                }
+                else if (car_steps <= 30)
+                {
+                    MoveHelper.AnimateCarUp(carToMove, columnNum);
+                }
+                else if (car_steps <= 31)
+                {
+                    MoveHelper.AnimateCarRight(carToMove, columnNum);
+                }
+                else if (car_steps >= 32)
+                {
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                }
+            }
+            if (active_player == GameState.PlayerGreen)
+            {
+                if (car_steps <= 3)
+                {
+                    MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                }
+                else if (car_steps <= 6)
+                {
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                }
+                else if (car_steps <= 8)
+                {
+                    MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                }
+                else if (car_steps <= 11)
+                {
+                    MoveHelper.AnimateCarUp(carToMove, columnNum);
+                }
+                else if (car_steps <= 14)
+                {
+                    MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                }
+                else if (car_steps <= 16)
+                {
+                    MoveHelper.AnimateCarUp(carToMove, columnNum);
+                }
+                else if (car_steps <= 19)
+                {
+                    MoveHelper.AnimateCarRight(carToMove, columnNum);
+                }
+                else if (car_steps <= 22)
+                {
+                    MoveHelper.AnimateCarUp(carToMove, columnNum);
+                }
+                else if (car_steps <= 24)
+                {
+                    MoveHelper.AnimateCarRight(carToMove, columnNum);
+                }
+                else if (car_steps <= 27)
+                {
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                }
+                else if (car_steps <= 30)
+                {
+                    MoveHelper.AnimateCarRight(carToMove, columnNum);
+                }
+                else if (car_steps <= 31)
+                {
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                }
+                else if (car_steps >= 32)
+                {
+                    MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                }
+            }
+            if (active_player == GameState.PlayerYellow)
+            {
+                if (car_steps <= 3)
+                {
+                    MoveHelper.AnimateCarUp(carToMove, columnNum);
+                }
+                else if (car_steps <= 6)
+                {
+                    MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                }
+                else if (car_steps <= 8)
+                {
+                    MoveHelper.AnimateCarUp(carToMove, columnNum);
+                }
+                else if (car_steps <= 11)
+                {
+                    MoveHelper.AnimateCarRight(carToMove, columnNum);
+                }
+                else if (car_steps <= 14)
+                {
+                    MoveHelper.AnimateCarUp(carToMove, columnNum);
+                }
+                else if (car_steps <= 16)
+                {
+                    MoveHelper.AnimateCarRight(carToMove, columnNum);
+                }
+                else if (car_steps <= 19)
+                {
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                }
+                else if (car_steps <= 22)
+                {
+                    MoveHelper.AnimateCarRight(carToMove, columnNum);
+                }
+                else if (car_steps <= 24)
+                {
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                }
+                else if (car_steps <= 27)
+                {
+                    MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                }
+                else if (car_steps <= 30)
+                {
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                }
+                else if (car_steps <= 31)
+                {
+                    MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                }
+                else if (car_steps >= 32)
+                {
+                    MoveHelper.AnimateCarUp(carToMove, columnNum);
+                }
+            }
+        }
+
 
         private void DisableAllCarsForCurrentPlayer()
         {
