@@ -521,7 +521,7 @@ namespace Fia_med_krock
 
         private async Task AnimateCarAsync(Windows.UI.Xaml.Shapes.Rectangle carToMove, string[] CarsRoad, int dice, Cars car, Player player, Grid playBoard)
         {
-            int destination = Math.Min(car.steps + dice, 35);
+            //int destination = Math.Min(car.steps + dice, 35);
             goForward = true;
             int MovesToMake = 0;
 
@@ -550,6 +550,8 @@ namespace Fia_med_krock
                 }
 
                 Debug.WriteLine($"Car steps: {car.steps}");
+                Debug.WriteLine($"Player: {players[0].Cars[0].steps}");
+                Debug.WriteLine($"Player: {players[0].CheckIfWinner()}");
 
                 int columnNum = Convert.ToInt32(CarsRoad[car.steps].Substring(0, 2));
                 int rowNum = Convert.ToInt32(CarsRoad[car.steps].Substring(2, 2));
@@ -563,7 +565,7 @@ namespace Fia_med_krock
                     car.StepCarToGoal();
                     carToMove.Visibility = Visibility.Collapsed;
                     Debug.WriteLine("Car reached destination");
-                    //break;
+                 //   if (players[0].CheckIfWinner()) Debug.WriteLine("We have a winner");
                 }
             }
 
@@ -572,8 +574,6 @@ namespace Fia_med_krock
                 CheckCarPositionToCrash(car);
             }
             RollDice.IsEnabled = true;
-
-           
 
             if (dice != 6)
             {
