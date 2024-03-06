@@ -160,7 +160,6 @@ namespace Fia_med_krock
                     else if (playerKVP.Value.Color == "Blue") currentPlayer = GameState.PlayerBlue;
                     else if (playerKVP.Value.Color == "Green") currentPlayer = GameState.PlayerGreen;
                     else currentPlayer = GameState.PlayerYellow;
-
                     CenterOfGrid.Fill = GetColorForPlayer(player);
                     RollDice.Background = GetColorForPlayer(player);
                     
@@ -177,6 +176,8 @@ namespace Fia_med_krock
                         RollDice.Content = "Rulla Tärning";
                         await HandleHumanPlayerTurn(player);
                     }
+
+                    SwitchToNextPlayer();
                 }
             }
         }
