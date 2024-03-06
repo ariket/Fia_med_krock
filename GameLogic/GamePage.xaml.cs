@@ -279,7 +279,6 @@ namespace Fia_med_krock
             RollDice.Content = dice;
             RollDice.IsEnabled = false;
             setCurrentPlayerCarsState(dice);
-            
             bool anyCarsEnabled = CheckAnyCarsEnabled();
             
             if (!anyCarsEnabled)
@@ -503,7 +502,6 @@ namespace Fia_med_krock
                 }
             }
         }
-
         private void SetTapDisabeldForPlayer(Cars car)
         {
             Player currentPlayerObj = players[GetCarColor(currentPlayer)];
@@ -669,6 +667,7 @@ namespace Fia_med_krock
 
         private async Task AnimateCarAsync(Windows.UI.Xaml.Shapes.Rectangle carToMove, string[] CarsRoad, int dice, Cars car, Player player, Grid playBoard)
         {
+            DisableAllCarsForCurrentPlayer();
             //int destination = Math.Min(car.steps + dice, 35);
             goForward = true;
             int MovesToMake = 0;
@@ -737,6 +736,7 @@ namespace Fia_med_krock
                 RollDice.Content = "Rulla Tärning";
                 RollDice.IsEnabled = true;
                 SetTapDisabeldForPlayer(car);
+                
             }
         }
 
@@ -977,40 +977,40 @@ namespace Fia_med_krock
                     Red2.IsTapEnabled = false;
                     Red3.IsTapEnabled = false;
                     Red4.IsTapEnabled = false;
-                    Red1.Opacity = 0.3;
-                    Red2.Opacity = 0.3;
-                    Red3.Opacity = 0.3;
-                    Red4.Opacity = 0.3;
+                 //   Red1.Opacity = 0.3;
+                 //   Red2.Opacity = 0.3;
+                 //   Red3.Opacity = 0.3;
+                 //   Red4.Opacity = 0.3;
                     break;
                 case GameState.PlayerBlue:
                     Blue1.IsTapEnabled = false;
                     Blue2.IsTapEnabled = false;
                     Blue3.IsTapEnabled = false;
                     Blue4.IsTapEnabled = false;
-                    Blue1.Opacity = 0.3;
-                    Blue2.Opacity = 0.3;
-                    Blue3.Opacity = 0.3;
-                    Blue4.Opacity = 0.3;
+                 //   Blue1.Opacity = 0.3;
+                 //   Blue2.Opacity = 0.3;
+                 //   Blue3.Opacity = 0.3;
+                 //   Blue4.Opacity = 0.3;
                     break;
                 case GameState.PlayerGreen:
                     Green1.IsTapEnabled = false;
                     Green2.IsTapEnabled = false;
                     Green3.IsTapEnabled = false;
                     Green4.IsTapEnabled = false;
-                    Green1.Opacity = 0.3;
-                    Green2.Opacity = 0.3;
-                    Green3.Opacity = 0.3;
-                    Green4.Opacity = 0.3;
+                 //   Green1.Opacity = 0.3;
+                 //   Green2.Opacity = 0.3;
+                 //   Green3.Opacity = 0.3;
+                 //   Green4.Opacity = 0.3;
                     break;
                 case GameState.PlayerYellow:
                     Yellow1.IsTapEnabled = false;
                     Yellow2.IsTapEnabled = false;
                     Yellow3.IsTapEnabled = false;
                     Yellow4.IsTapEnabled = false;
-                    Yellow1.Opacity = 0.3;
-                    Yellow2.Opacity = 0.3;
-                    Yellow3.Opacity = 0.3;
-                    Yellow4.Opacity = 0.3;
+                 //   Yellow1.Opacity = 0.3;
+                 //   Yellow2.Opacity = 0.3;
+                 //   Yellow3.Opacity = 0.3;
+                 //   Yellow4.Opacity = 0.3;
                     break;
 
                 default:
@@ -1037,6 +1037,9 @@ namespace Fia_med_krock
             {
                 Debug.WriteLine($"CarRectangle_Tapped Error: {ex.Message}");
             }
+            
+            DisableAllCarsForCurrentPlayer();
+
         }
 
 
