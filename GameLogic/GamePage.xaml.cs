@@ -353,16 +353,27 @@ namespace Fia_med_krock
 
         private async Task SimulateAiPlayerTurn (Player aiPlayer)
         {
+            int aiDiceValue = 0;
             while (turnActive)
             {
                 Debug.WriteLine($"Starting simulation for {aiPlayer.Color}: SimulateAiPlayerTurn function");
                 RollDice.IsEnabled = false;
-                int aiDiceValue = roll_dice();
-                await Task.Delay(2000);
-                setCurrentPlayerCarsState(aiDiceValue);
-                await SimulateMoveCar(aiPlayer, aiDiceValue);
-               
+                aiDiceValue = roll_dice();
+                if (aiDiceValue != 6) turnActive = false;
+                else
+                {
+                    await Task.Delay(500);
+                    RollDice.Content = "AI";
+                    setCurrentPlayerCarsState(aiDiceValue);
+                    await SimulateMoveCar(aiPlayer, aiDiceValue);
+                    
+                }    
             }
+
+            await Task.Delay(1000);
+            setCurrentPlayerCarsState(aiDiceValue);
+            await SimulateMoveCar(aiPlayer, aiDiceValue);
+
             Debug.WriteLine($"exiting simulation {aiPlayer.Color}");
         }
 
@@ -375,6 +386,8 @@ namespace Fia_med_krock
                 if (car.CarUI.IsTapEnabled) 
                 {
                     await AnimateCarAsync(car.CarUI, carsRoad, aiDiceValue,  car, aiPlayer, PlayBoard);
+                    RollDice.Content = "AI";
+                    RollDice.IsEnabled = false;
                     await Task.Delay(1000);
                     break;
                 }
@@ -400,11 +413,11 @@ namespace Fia_med_krock
                     CenterOfGrid.Fill = new SolidColorBrush(Colors.Blue);
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
                     RollDice.Content = "Rulla Tärning";
-                    if (players[CarColor.Blue].IsAi)
-                    {
-                        Debug.WriteLine("Simulating  turn for Blue");
-                        await SimulateAiPlayerTurn(players[CarColor.Blue]);
-                    }
+                 //   if (players[CarColor.Blue].IsAi)
+                 //   {
+                 //       Debug.WriteLine("Simulating  turn for Blue");
+                 //       await SimulateAiPlayerTurn(players[CarColor.Blue]);
+                 //   }
                     break;
                 case GameState.PlayerBlue:
                     currentPlayer = GameState.PlayerGreen;
@@ -415,11 +428,11 @@ namespace Fia_med_krock
                     CenterOfGrid.Fill = new SolidColorBrush(Colors.Green);
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Green);
                     RollDice.Content = "Rulla Tärning";
-                    if (players[CarColor.Green].IsAi)
-                    {
-                        Debug.WriteLine("Simulating  turn for Green");
-                        await SimulateAiPlayerTurn(players[CarColor.Green]);
-                    }
+                 //   if (players[CarColor.Green].IsAi)
+                 //   {
+                 //       Debug.WriteLine("Simulating  turn for Green");
+                 //       await SimulateAiPlayerTurn(players[CarColor.Green]);
+                 //   }
                     break;
                 case GameState.PlayerGreen:
                     currentPlayer = GameState.PlayerYellow;
@@ -430,11 +443,11 @@ namespace Fia_med_krock
                     CenterOfGrid.Fill = new SolidColorBrush(Colors.Yellow);
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Yellow);
                     RollDice.Content = "Rulla Tärning";
-                    if (players[CarColor.Yellow].IsAi)
-                    {
-                        Debug.WriteLine("Simulating  turn for Yellow");
-                        await SimulateAiPlayerTurn(players[CarColor.Yellow]);
-                    }
+                 //   if (players[CarColor.Yellow].IsAi)
+                 //   {
+                 //       Debug.WriteLine("Simulating  turn for Yellow");
+                 //       await SimulateAiPlayerTurn(players[CarColor.Yellow]);
+                 //   }
 
                     break;
                 case GameState.PlayerYellow:
@@ -447,11 +460,11 @@ namespace Fia_med_krock
                     CenterOfGrid.Fill = new SolidColorBrush(Colors.Red);
                     RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
                     RollDice.Content = "Rulla Tärning";
-                    if (players[CarColor.Red].IsAi)
-                    {
-                        Debug.WriteLine("Simulating  turn for Red");
-                        await SimulateAiPlayerTurn(players[CarColor.Red]);
-                    }                   
+                 //   if (players[CarColor.Red].IsAi)
+                 //   {
+                 //       Debug.WriteLine("Simulating  turn for Red");
+                 //       await SimulateAiPlayerTurn(players[CarColor.Red]);
+                 //   }                   
                     break;
             }
         }
@@ -502,6 +515,7 @@ namespace Fia_med_krock
                     carUI.IsTapEnabled = false;
                     carUI.Opacity = 0.3;
                 }
+                
             }
             if(car.steps == 37)
             {
