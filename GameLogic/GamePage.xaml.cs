@@ -147,6 +147,32 @@ namespace Fia_med_krock
 
         }
 
+
+
+
+    private async Task MainGameLoop()
+        {
+            while (true) 
+            {
+                foreach (var playerKVP in players)
+                {
+                    Player player = playerKVP.Value;
+                    CenterOfGrid.Fill = GetColorForPlayer(player);
+                    RollDice.Background = GetColorForPlayer(player);
+                    RollDice.Content = "Rulla Tärning";
+
+                    if (player.IsAi)
+                    {
+                        Debug.WriteLine($"Simulating turn for {player.Color}");
+                        await SimulateAiPlayerTurn(player);
+                    }
+                    else
+                    {
+                        await HandleHumanPlayerTurn(player);
+                    }
+                }
+            }
+        }
     //Lagt till så att det slumpas ett värde.
     private int roll_dice()
         {
@@ -181,6 +207,23 @@ namespace Fia_med_krock
 
         }
 
+        private SolidColorBrush GetColorForPlayer(Player player)
+        {
+            switch (player.Color)
+            {
+                case "Red":
+                    return new SolidColorBrush(Colors.Red);
+                case "Blue":
+                    return new SolidColorBrush(Colors.Blue);
+                case "Green":
+                    return new SolidColorBrush(Colors.Green);
+                case "Yellow":
+                    return new SolidColorBrush(Colors.Yellow);
+                default:
+                    return new SolidColorBrush(Colors.Transparent);
+            }
+        }
+
 
         //tanken att kolla så att om ingen pjös kan flyttas skiftas turen till nästa spelare
         private bool CheckAnyCarsEnabled()
@@ -202,6 +245,11 @@ namespace Fia_med_krock
                 default:
                     return true;
             }
+        }
+
+        private async Task HandleHumanPlayerTurn(Player humanPlayer)
+        {
+            Debug.WriteLine("....");
         }
 
         private async Task SimulateAiPlayerTurn (Player aiPlayer)
