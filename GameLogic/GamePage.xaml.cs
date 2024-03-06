@@ -366,10 +366,9 @@ namespace Fia_med_krock
                     RollDice.Content = "AI";
                     setCurrentPlayerCarsState(aiDiceValue);
                     await SimulateMoveCar(aiPlayer, aiDiceValue);
-                    
                 }    
             }
-
+                    
             await Task.Delay(1000);
             setCurrentPlayerCarsState(aiDiceValue);
             await SimulateMoveCar(aiPlayer, aiDiceValue);
@@ -476,7 +475,7 @@ namespace Fia_med_krock
             SetTapEnabledForPlayer(currentPlayerObj.Cars[1], dice);
             SetTapEnabledForPlayer(currentPlayerObj.Cars[2], dice);
             SetTapEnabledForPlayer(currentPlayerObj.Cars[3], dice);
-        }
+        }   
 
         private CarColor GetCarColor(GameState playerState)
         {
@@ -515,14 +514,14 @@ namespace Fia_med_krock
                     carUI.IsTapEnabled = false;
                     carUI.Opacity = 0.3;
                 }
-                
+               
             }
             if(car.steps == 37)
             {
                 carUI.IsTapEnabled = false;
             }
         }
-        private void SetTapDisabeldForPlayer(Cars car)
+        private void SetTapDisabeldForPlayer()
         {
             Player currentPlayerObj = players[GetCarColor(currentPlayer)];
             Windows.UI.Xaml.Shapes.Rectangle carUI = currentPlayerObj.Cars[0].CarUI;
@@ -719,7 +718,7 @@ namespace Fia_med_krock
                 Debug.WriteLine($"Car steps: {car.steps}");
                 Debug.WriteLine($"Player: {players[0].Cars[0].steps}");
                 Debug.WriteLine($"Player: {player.CheckIfWinner()}");
-
+                SetTapDisabeldForPlayer();
                 int columnNum = Convert.ToInt32(CarsRoad[car.steps].Substring(0, 2));
                 int rowNum = Convert.ToInt32(CarsRoad[car.steps].Substring(2, 2));
                 MoveHelper.MoveCar(carToMove, playBoard, columnNum, rowNum);
@@ -747,7 +746,7 @@ namespace Fia_med_krock
 
             if (dice != 6)
             {
-                if (dice == 1) SetTapDisabeldForPlayer(car);  //dummy call to set if dice == 1
+                if (dice == 1) SetTapDisabeldForPlayer();  //dummy call to set if dice == 1
 
                 turnActive = false;
                 //await SwitchToNextPlayer();
@@ -756,7 +755,7 @@ namespace Fia_med_krock
             {
                 RollDice.Content = "Rulla Tärning";
                 RollDice.IsEnabled = true;
-                SetTapDisabeldForPlayer(car);
+                SetTapDisabeldForPlayer();
                 
             }
         }
