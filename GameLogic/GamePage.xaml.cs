@@ -288,7 +288,7 @@ namespace Fia_med_krock
                 await Task.Delay(1000);
                 turnActive = false;
                 //await SwitchToNextPlayer();
-                RollDice.IsEnabled = true;
+                //RollDice.IsEnabled = true;
             }
 
         }
@@ -684,7 +684,7 @@ namespace Fia_med_krock
                 if (!CheckMyOtherCarsPosition(car, goForward))
                 {
                     Debug.WriteLine("CheckCarPosition failed");
-                    RollDice.IsEnabled = true;
+                    //RollDice.IsEnabled = true;
                     break;
                 }
 
@@ -706,6 +706,7 @@ namespace Fia_med_krock
                 MoveHelper.MoveCar(carToMove, playBoard, columnNum, rowNum);
                 //Kör animationen
                 PickAnimation(carToMove, columnNum, car.steps, currentPlayer);
+                carToMove.IsTapEnabled = false;  
                 await Task.Delay(200);
                 MovesToMake++;
 
@@ -722,7 +723,7 @@ namespace Fia_med_krock
             {
                 CheckCarPositionToCrash(car);
             }
-            RollDice.IsEnabled = true;
+            //RollDice.IsEnabled = true;
 
             if (dice != 6)
             {
@@ -734,6 +735,7 @@ namespace Fia_med_krock
             else
             {
                 RollDice.Content = "Rulla Tärning";
+                RollDice.IsEnabled = true;
                 SetTapDisabeldForPlayer(car);
             }
         }
