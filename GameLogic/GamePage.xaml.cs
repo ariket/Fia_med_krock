@@ -115,8 +115,8 @@ namespace Fia_med_krock
                 Debug.WriteLine($"Player 3 AI: {playerAiStates.IsPlayer3Ai}");
                 Debug.WriteLine($"Player 4 AI: {playerAiStates.IsPlayer4Ai}");
                 InitializePlayers(playerAiStates);
-
             }
+            MainGameLoop();
         }
 
         //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra.
@@ -152,6 +152,7 @@ namespace Fia_med_krock
             {
                 foreach (var playerKVP in players)
                 {
+                    turnActive = true;
                     Player player = playerKVP.Value;
                     CenterOfGrid.Fill = GetColorForPlayer(player);
                     RollDice.Background = GetColorForPlayer(player);
@@ -161,6 +162,7 @@ namespace Fia_med_krock
                     {
                         Debug.WriteLine($"Simulating turn for {player.Color}");
                         await SimulateAiPlayerTurn(player);
+                        //await TestTurn(player);
                     }
                     else
                     {
@@ -197,7 +199,8 @@ namespace Fia_med_krock
             {
                 // Ingen bil kan röras och därav byts det tur
                 await Task.Delay(1000);
-                await SwitchToNextPlayer();
+                turnActive = false;
+                //await SwitchToNextPlayer();
                 RollDice.IsEnabled = true;
             }
 
@@ -245,17 +248,31 @@ namespace Fia_med_krock
 
         private async Task HandleHumanPlayerTurn(Player humanPlayer)
         {
-            Debug.WriteLine("....");
+            Debug.WriteLine("Test human player");
+            RollDice.IsEnabled = true;
+            await Task.Delay(9000);
+        }
+
+        private async Task TestTurn(Player humanPlayer)
+        {
+
+            RollDice.IsEnabled = true;
+            Debug.WriteLine("Test Ai player");
+            await Task.Delay(9000);
         }
 
         private async Task SimulateAiPlayerTurn (Player aiPlayer)
         {
-            Debug.WriteLine($"Starting simulation for {aiPlayer.Color}: SimulateAiPlayerTurn function");
-            RollDice.IsEnabled = false;
-            int aiDiceValue = roll_dice();
-            await Task.Delay(2000);
-            setCurrentPlayerCarsState(aiDiceValue);
-            await SimulateMoveCar(aiPlayer, aiDiceValue);
+            while (turnActive)
+            {
+                Debug.WriteLine($"Starting simulation for {aiPlayer.Color}: SimulateAiPlayerTurn function");
+                RollDice.IsEnabled = false;
+                int aiDiceValue = roll_dice();
+                await Task.Delay(2000);
+                setCurrentPlayerCarsState(aiDiceValue);
+                await SimulateMoveCar(aiPlayer, aiDiceValue);
+               
+            }
             Debug.WriteLine($"exiting simulation {aiPlayer.Color}");
         }
 
@@ -273,12 +290,11 @@ namespace Fia_med_krock
                 }
                 
             }
-            await Task.Delay(2000);
-            Debug.WriteLine($"Move simulation completed for {aiPlayer.Color}");
-              await SwitchToNextPlayer();     
+            await Task.Delay(1000);
         }
 
 
+        public bool turnActive = true; 
 
         private async Task SwitchToNextPlayer()
         {
@@ -623,8 +639,9 @@ namespace Fia_med_krock
             if (dice != 6)
             {
                 if (dice == 1) SetTapDisabeldForPlayer(car);  //dummy call to set if dice == 1
-                       
-                await SwitchToNextPlayer();
+
+                turnActive = false;
+                //await SwitchToNextPlayer();
             }
             else
             {
