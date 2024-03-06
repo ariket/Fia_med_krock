@@ -353,6 +353,7 @@ namespace Fia_med_krock
 
         private async Task SimulateAiPlayerTurn (Player aiPlayer)
         {
+            await Task.Delay(1500);
             int aiDiceValue = 0;
             while (turnActive)
             {
@@ -362,14 +363,14 @@ namespace Fia_med_krock
                 if (aiDiceValue != 6) turnActive = false;
                 else
                 {
-                    await Task.Delay(500);
+                    await Task.Delay(200);
                     RollDice.Content = "AI";
                     setCurrentPlayerCarsState(aiDiceValue);
                     await SimulateMoveCar(aiPlayer, aiDiceValue);
                 }    
             }
                     
-            await Task.Delay(1000);
+            await Task.Delay(200);
             setCurrentPlayerCarsState(aiDiceValue);
             await SimulateMoveCar(aiPlayer, aiDiceValue);
 
@@ -387,12 +388,12 @@ namespace Fia_med_krock
                     await AnimateCarAsync(car.CarUI, carsRoad, aiDiceValue,  car, aiPlayer, PlayBoard);
                     RollDice.Content = "AI";
                     RollDice.IsEnabled = false;
-                    await Task.Delay(1000);
+                    await Task.Delay(200);
                     break;
                 }
                 
             }
-            await Task.Delay(1000);
+            await Task.Delay(200);
         }
 
 
