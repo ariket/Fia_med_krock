@@ -82,13 +82,16 @@ namespace Fia_med_krock
             currentPlayer = GameState.PlayerRed;
             CenterOfGrid.Fill = new SolidColorBrush(Colors.Red);
             RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-
+           
             //InitializePlayers();
 
             //music.mp3 downloaded from https://pixabay.com/
             // Uri newuri = new Uri("ms-appx:///Assets/music.mp3");
             // myPlayer.Source = newuri;
             //  myPlayer.Volume = 0.1;
+
+          
+
 
         }
 
@@ -140,11 +143,11 @@ namespace Fia_med_krock
             //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra, bara dom första 7 positionerna finns än så länge.
             //Road för red cars, {column,row}
             // public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404" };
-           
+
         }
 
-        //Lagt till så att det slumpas ett värde.
-        private int roll_dice()
+    //Lagt till så att det slumpas ett värde.
+    private int roll_dice()
         {
             Random dice_roll = new Random();
             //Slumpar ett värde mellan 1 och 6. Maxvärdet 7 kan inte slumpas.
@@ -170,7 +173,7 @@ namespace Fia_med_krock
             if (!anyCarsEnabled)
             {
                 // Ingen bil kan röras och därav byts det tur
-                
+                await Task.Delay(1000);
                 await SwitchToNextPlayer();
                 RollDice.IsEnabled = true;
             }
@@ -227,7 +230,7 @@ namespace Fia_med_krock
             }
             await Task.Delay(2000);
             Debug.WriteLine($"Move simulation completed for {aiPlayer.Color}");
-            await SwitchToNextPlayer();
+              await SwitchToNextPlayer();     
         }
 
 
@@ -520,26 +523,21 @@ namespace Fia_med_krock
         {
             int destination = Math.Min(car.steps + dice, 35);
             goForward = true;
+            int MovesToMake = 0;
 
-            for (int i = car.steps; i < destination; i++)
+            //for (int i = car.steps; i < destination; i++)
+            while (MovesToMake < dice)
             {
+                if (car.steps == 35)
+                {
+                    goForward = false;
+                }
+
                 if (!CheckMyOtherCarsPosition(car, goForward))
                 {
                     Debug.WriteLine("CheckCarPosition failed");
                     RollDice.IsEnabled = true;
                     break;
-                }
-
-                if (car.steps == 35)
-                {
-                    if (i == destination - 1)
-                    {
-                        car.StepCarToGoal();
-                        carToMove.Visibility = Visibility.Collapsed;
-                        Debug.WriteLine("Car reached destination");
-                        break;
-                    }
-                    goForward = false;
                 }
 
                 if (goForward == true)
@@ -551,22 +549,28 @@ namespace Fia_med_krock
                     car.StepCarBack();
                 }
 
-                    Debug.WriteLine($"Car steps: {car.steps}");
+                Debug.WriteLine($"Car steps: {car.steps}");
 
                 int columnNum = Convert.ToInt32(CarsRoad[car.steps].Substring(0, 2));
                 int rowNum = Convert.ToInt32(CarsRoad[car.steps].Substring(2, 2));
 
                 MoveHelper.MoveCar(carToMove, playBoard, columnNum, rowNum);
                 await Task.Delay(200);
+                MovesToMake++;
 
-           //     if (i == destination - 1)
-           //     {
-           //         CheckCarPositionToCrash(car);
-           //         RollDice.IsEnabled = true;                 
-           //     }
+                if (car.steps == 35 && MovesToMake == dice)
+                {
+                    car.StepCarToGoal();
+                    carToMove.Visibility = Visibility.Collapsed;
+                    Debug.WriteLine("Car reached destination");
+                    //break;
+                }
             }
 
-            CheckCarPositionToCrash(car);
+            if (car.steps < 32)
+            {
+                CheckCarPositionToCrash(car);
+            }
             RollDice.IsEnabled = true;
 
            
