@@ -90,10 +90,6 @@ namespace Fia_med_krock
             // Uri newuri = new Uri("ms-appx:///Assets/music.mp3");
             // myPlayer.Source = newuri;
             //  myPlayer.Volume = 0.1;
-
-          
-
-
         }
 
         private void InitializePlayers(PlayerAiStates playerAiStates)
@@ -566,7 +562,7 @@ namespace Fia_med_krock
                     car.StepCarToGoal();
                     carToMove.Visibility = Visibility.Collapsed;
                     Debug.WriteLine("Car reached destination");
-                 //   if (players[0].CheckIfWinner()) Debug.WriteLine("We have a winner");
+                    if (player.CheckIfWinner()) Debug.WriteLine("We have a winner");
                 }
             }
 
