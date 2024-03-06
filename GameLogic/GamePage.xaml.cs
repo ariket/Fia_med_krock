@@ -25,6 +25,7 @@ using static Fia_med_krock.StartPage;
 using Fia_med_krock.GameLogic;
 using System.Runtime.ConstrainedExecution;
 using Windows.Media.PlayTo;
+using System.Collections;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -551,7 +552,7 @@ namespace Fia_med_krock
 
                 Debug.WriteLine($"Car steps: {car.steps}");
                 Debug.WriteLine($"Player: {players[0].Cars[0].steps}");
-                Debug.WriteLine($"Player: {players[0].CheckIfWinner()}");
+                Debug.WriteLine($"Player: {player.CheckIfWinner()}");
 
                 int columnNum = Convert.ToInt32(CarsRoad[car.steps].Substring(0, 2));
                 int rowNum = Convert.ToInt32(CarsRoad[car.steps].Substring(2, 2));
@@ -697,7 +698,22 @@ namespace Fia_med_krock
 
         private Player GetPlayerByCarColor(string carColor)
         {
-            return null;
+
+            Player currentPlayer = players[CarColor.Yellow];
+            for (int i = 0; i < 3; i++)
+            {
+                Debug.WriteLine($"Test:{i}  {players.ElementAt(i).Value.Color}");
+                string colour = players.ElementAt(i).Value.Color;
+                if (carColor == colour)
+                {
+                    if (i == 0)
+                    { currentPlayer = players[CarColor.Red]; }
+                    else if (i == 1)
+                    { currentPlayer = players[CarColor.Blue]; }
+                    else { currentPlayer = players[CarColor.Red]; }
+                }
+            }  
+            return currentPlayer;
         }
 
     }
