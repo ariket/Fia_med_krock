@@ -258,8 +258,12 @@ namespace Fia_med_krock
                 }
             }
         }
-    //Lagt till så att det slumpas ett värde.
-    private int roll_dice()
+        /// <summary>
+        /// Randomizes a new dice roll,
+        /// this is saved in Globals.dice_result
+        /// </summary>
+        /// <returns>A number between 1-6</returns>
+        private int roll_dice()
         {
             Random dice_roll = new Random();
             //Slumpar ett värde mellan 1 och 6. Maxvärdet 7 kan inte slumpas.
