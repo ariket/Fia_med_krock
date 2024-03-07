@@ -254,7 +254,7 @@ namespace Fia_med_krock
                         await HandleHumanPlayerTurn(player);
                     }
 
-                    SwitchToNextPlayer();
+                    
                 }
             }
         }
@@ -286,7 +286,7 @@ namespace Fia_med_krock
                 // Ingen bil kan röras och därav byts det tur
                 await Task.Delay(100);
                 turnActive = false;
-                //await SwitchToNextPlayer();
+                
                 //RollDice.IsEnabled = true;
             }
 
@@ -343,13 +343,6 @@ namespace Fia_med_krock
 
         }
 
-        private async Task TestTurn(Player humanPlayer)
-        {
-
-            RollDice.IsEnabled = true;
-            Debug.WriteLine("Test Ai player");
-            await Task.Delay(1000);
-        }
 
         private async Task SimulateAiPlayerTurn (Player aiPlayer)
         {
@@ -399,75 +392,7 @@ namespace Fia_med_krock
 
         
 
-        private async Task SwitchToNextPlayer()
-        {
-            //DisableAllCarsForCurrentPlayer();
-            switch (currentPlayer)
-            {
-                case GameState.PlayerRed:
-                    currentPlayer = GameState.PlayerBlue;
-                    Red1.IsTapEnabled = false;
-                    Red2.IsTapEnabled = false;
-                    Red3.IsTapEnabled = false;
-                    Red4.IsTapEnabled = false;
-                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Blue);
-                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
-                    RollDice.Content = "Rulla Tärning";
-                 //   if (players[CarColor.Blue].IsAi)
-                 //   {
-                 //       Debug.WriteLine("Simulating  turn for Blue");
-                 //       await SimulateAiPlayerTurn(players[CarColor.Blue]);
-                 //   }
-                    break;
-                case GameState.PlayerBlue:
-                    currentPlayer = GameState.PlayerGreen;
-                    Blue1.IsTapEnabled = false;
-                    Blue2.IsTapEnabled = false;
-                    Blue3.IsTapEnabled = false;
-                    Blue4.IsTapEnabled = false;
-                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Green);
-                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Green);
-                    RollDice.Content = "Rulla Tärning";
-                 //   if (players[CarColor.Green].IsAi)
-                 //   {
-                 //       Debug.WriteLine("Simulating  turn for Green");
-                 //       await SimulateAiPlayerTurn(players[CarColor.Green]);
-                 //   }
-                    break;
-                case GameState.PlayerGreen:
-                    currentPlayer = GameState.PlayerYellow;
-                    Green1.IsTapEnabled = false;
-                    Green2.IsTapEnabled = false;
-                    Green3.IsTapEnabled = false;
-                    Green4.IsTapEnabled = false;
-                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Yellow);
-                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Yellow);
-                    RollDice.Content = "Rulla Tärning";
-                 //   if (players[CarColor.Yellow].IsAi)
-                 //   {
-                 //       Debug.WriteLine("Simulating  turn for Yellow");
-                 //       await SimulateAiPlayerTurn(players[CarColor.Yellow]);
-                 //   }
-
-                    break;
-                case GameState.PlayerYellow:
-                    
-                    currentPlayer = GameState.PlayerRed;
-                    Yellow1.IsTapEnabled = false;
-                    Yellow2.IsTapEnabled = false;
-                    Yellow3.IsTapEnabled = false;
-                    Yellow4.IsTapEnabled = false;
-                    CenterOfGrid.Fill = new SolidColorBrush(Colors.Red);
-                    RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-                    RollDice.Content = "Rulla Tärning";
-                 //   if (players[CarColor.Red].IsAi)
-                 //   {
-                 //       Debug.WriteLine("Simulating  turn for Red");
-                 //       await SimulateAiPlayerTurn(players[CarColor.Red]);
-                 //   }                   
-                    break;
-            }
-        }
+       
 
         private void setCurrentPlayerCarsState(int dice)
         {
@@ -750,7 +675,7 @@ namespace Fia_med_krock
                 if (dice == 1) SetTapDisabeldForPlayer();  //dummy call to set if dice == 1
 
                 turnActive = false;
-                //await SwitchToNextPlayer();
+                
             }
             else
             {
