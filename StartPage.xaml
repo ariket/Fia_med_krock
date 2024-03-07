@@ -60,7 +60,6 @@
                 <Button x:Name="Player1Button" Content="Spelare 1" Width="100" Height="30" Click="player_click" Background="Crimson"></Button>
             </StackPanel>
 
-
             <StackPanel Margin="20">
                 <TextBlock x:Name="Player2Text" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Tapped="PlayerText_Tapped"/>
                 <Rectangle Stroke="Blue" StrokeThickness="2" Width="100" Height="100">
@@ -101,20 +100,6 @@
             <Button HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="20" Width="150" Height="80" Background="#004225" Foreground="#FFFFFF" FontSize="32" CornerRadius="15" Click="RulesButton_Click">Regler</Button>
         </Grid>
 
-        <ContentDialog x:Name="RulesDialog" >
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0">
-                <TextBlock Text="Regler för FIA med krock:" Foreground="#000000" FontSize="24" TextDecorations="Underline" />
-                <TextBlock Text="För att flytta ut en bil på spelplanen måste man rulla 1 eller 6." Foreground="#000000" />
-                <TextBlock Text="Om man slår en 6a kan man flytta 2 pjäser till start, eller 1 pjäs 6 steg framåt.." Foreground="#000000" />
-                <TextBlock Text="Rullar man en 6a för man slå tärningen igen." Foreground="#000000" />
-                <TextBlock Text="Pjäser av samma färg kan inte gå förbi varandra på spelplanen." Foreground="#000000" />
-                <TextBlock Text="Landar man på en motståndares pjäs knuffas de tillbaks till boet." Foreground="#000000" />
-                <TextBlock Text="För att gå i mål måste man slå det exakta antalet steg som behövs." Foreground="#000000" />
-                <TextBlock Text="Spelaren som först går i mål med alla sina bilar har vunnit!." Foreground="#000000" />
-
-            </StackPanel>
-        </ContentDialog>
-
         <Grid x:Name="Rules" Grid.Row="0" Width="550" Margin="5,5,5,5" Background="Lavender" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed" CornerRadius="15">
             <Grid.RenderTransform>
                 <CompositeTransform/>
@@ -137,7 +122,6 @@
 
             <Button  x:Name="CloseButton" Height="35" Width="75" CornerRadius="5" Background="CornflowerBlue" Click="CloseRulesButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,5,5,25">Stäng</Button>
         </Grid>
-
 
     </Grid>
 </Page>

@@ -22,12 +22,11 @@ using Windows.UI.Xaml.Shapes;
 namespace Fia_med_krock
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Startpage of game
+    /// Sets number of AI players
     /// </summary>
     public sealed partial class StartPage : Page
     {
-       
-
         private PlayerAiStates playerAiStates = new PlayerAiStates();
 
         public class MainPageParameters
@@ -48,6 +47,8 @@ namespace Fia_med_krock
                 PlayerAiStates = playerAiStates
             });
         }
+
+        /// TODO Set player names
         private List<string> GetPlayerNames()
         {
             List<string> playerNames = new List<string>();
@@ -66,29 +67,25 @@ namespace Fia_med_krock
         }
         private void RulesButton_Click(Object sender, RoutedEventArgs e)
         {
-            //RulesDialog.ShowAsync();
             Rules.Visibility = Visibility.Visible;
             RollDownMeny.Begin();
         }
         private void CloseRulesButton_Click(object sender, RoutedEventArgs e)
         {
             RollUpMeny.Begin();
-         //   Rules.Visibility = Visibility.Collapsed;
         }
         public class PlayerAiStates
         {
             public bool IsPlayer1Ai { get; set; }
             public bool IsPlayer2Ai { get; set; }
             public bool IsPlayer3Ai { get; set; }
-            public bool IsPlayer4Ai { get; set; }
-            
+            public bool IsPlayer4Ai { get; set; }  
         }
 
         private void PlayerText_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (sender is TextBlock textBlock)
-            {
-                
+            { 
                 TextBox textBox = new TextBox
                 {
                     Text = "",
@@ -119,12 +116,8 @@ namespace Fia_med_krock
                 parentStackPanel.Children.RemoveAt(index);
                 parentStackPanel.Children.Insert(index, textBox);
                 textBox.Focus(FocusState.Programmatic);
-
             }
-
         }
-
-        
 
         private void player_click(object sender, RoutedEventArgs e)
         {
@@ -134,14 +127,14 @@ namespace Fia_med_krock
                 switch (playerName)
                 {
                     case "Player1":
-                        //Byter från mänsklig spelare till AI
+                        //Changes from human player to AI player
                         if (playerAiStates.IsPlayer1Ai == false)
                         {
                             playerAiStates.IsPlayer1Ai = true;
                             Player1Button.Content = "AI";
                             break;
                         }
-                        //Byter från spelare till AI
+                        //Changes from AI player to human player
                         else if (playerAiStates.IsPlayer1Ai == true)
                         {
                             playerAiStates.IsPlayer1Ai = false;
@@ -153,14 +146,14 @@ namespace Fia_med_krock
                             break;
                         }
                     case "Player2":
-                        //Byter från mänsklig spelare till AI
+                        //Changes from human player to AI player
                         if (playerAiStates.IsPlayer2Ai == false)
                         {
                             playerAiStates.IsPlayer2Ai = true;
                             Player2Button.Content = "AI";
                             break;
                         }
-                        //Byter från spelare till AI
+                        //Changes from AI player to human player
                         else if (playerAiStates.IsPlayer2Ai == true)
                         {
                             playerAiStates.IsPlayer2Ai = false;
@@ -172,14 +165,14 @@ namespace Fia_med_krock
                             break;
                         }
                     case "Player3":
-                        //Byter från mänsklig spelare till AI
+                        //Changes from human player to AI player
                         if (playerAiStates.IsPlayer3Ai == false)
                         {
                             playerAiStates.IsPlayer3Ai = true;
                             Player3Button.Content = "AI";
                             break;
                         }
-                        //Byter från spelare till AI
+                        //Changes from AI player to human player
                         else if (playerAiStates.IsPlayer3Ai == true)
                         {
                             playerAiStates.IsPlayer3Ai = false;
@@ -191,14 +184,14 @@ namespace Fia_med_krock
                             break;
                         }
                     case "Player4":
-                        //Byter från mänsklig spelare till AI
+                        //Changes from human player to AI player
                         if (playerAiStates.IsPlayer4Ai == false)
                         {
                             playerAiStates.IsPlayer4Ai = true;
                             Player4Button.Content = "AI";
                             break;
                         }
-                        //Byter från spelare till AI
+                        //Changes from AI player to human player
                         else if (playerAiStates.IsPlayer4Ai == true)
                         {
                             playerAiStates.IsPlayer4Ai = false;
