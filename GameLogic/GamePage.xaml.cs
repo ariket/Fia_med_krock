@@ -160,7 +160,7 @@ namespace Fia_med_krock
             currentPlayer = GameState.PlayerRed;
             CenterOfGrid.Fill = new SolidColorBrush(Colors.Red);
             RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
-           
+ 
             //InitializePlayers();
 
             //music.mp3 downloaded from https://pixabay.com/
@@ -277,8 +277,8 @@ namespace Fia_med_krock
         public async void RollDice_Click(object sender, RoutedEventArgs e)
         {
             //diceroll.mp3 downloaded from https://pixabay.com/
-            //Uri newuri = new Uri("ms-appx:///Assets/diceroll.mp3");
-            //diceRoll.Source = newuri;
+            Uri newuri = new Uri("ms-appx:///Assets/diceroll.mp3");
+            diceRoll.Source = newuri;
             int dice = roll_dice();
             RollDice.Content = dice;
             RollDice.IsEnabled = false;
