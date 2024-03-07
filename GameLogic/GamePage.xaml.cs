@@ -724,7 +724,7 @@ namespace Fia_med_krock
                 int rowNum = Convert.ToInt32(CarsRoad[car.steps].Substring(2, 2));
                 MoveHelper.MoveCar(carToMove, playBoard, columnNum, rowNum);
                 //Kör animationen
-                PickAnimation(carToMove, columnNum, car.steps, currentPlayer);
+                PickAnimation(carToMove, columnNum, car.steps, currentPlayer, goForward);
                 carToMove.IsTapEnabled = false;  
                 await Task.Delay(200);
                 MovesToMake++;
@@ -761,14 +761,25 @@ namespace Fia_med_krock
             }
         }
 
-        //TODO: Gör så att animationen funkar 'baklänges' när man tar för många steg för att gå i mål.
         //FIXME: Gör så att funktionen inte är världens största if-else träd.
-        private void PickAnimation(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int car_steps, GameState active_player)
+        //bounce får sitt värde från goForward variabeln i Animatecarasync funktionen.
+        private void PickAnimation(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int car_steps, GameState active_player, bool moveForward)
         {
             //Väljer olika animationer beroende på vilken spelare som kör.
             if (active_player == GameState.PlayerRed)
             {
-                if (car_steps <= 3)
+                if (moveForward == false)
+                {
+                    if (car_steps > 31)
+                        MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                    //Om man står på rutan bredvid mål och slår 6 så måste man ändra riktning igen.
+                    //Animationen blir rätt skum, men den hamnar på rätt plats iallafall.
+                    else
+                    {
+                        MoveHelper.AnimateCarDown(carToMove, columnNum);
+                    }
+                }
+                else if (car_steps <= 3)
                 {
                     MoveHelper.AnimateCarRight(carToMove, columnNum);
                 }
@@ -823,7 +834,17 @@ namespace Fia_med_krock
             }
             if (active_player == GameState.PlayerBlue)
             {
-                if (car_steps <= 3)
+                if (moveForward == false)
+                {
+                    if (car_steps > 31)
+                        MoveHelper.AnimateCarUp(carToMove, columnNum);
+                    //Om man står på rutan bredvid mål och slår 6 så måste man ändra riktning igen.
+                    else
+                    {
+                        MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                    }
+                }
+                else if (car_steps <= 3)
                 {
                     MoveHelper.AnimateCarDown(carToMove, columnNum);
                 }
@@ -878,7 +899,17 @@ namespace Fia_med_krock
             }
             if (active_player == GameState.PlayerGreen)
             {
-                if (car_steps <= 3)
+                if (moveForward == false)
+                {
+                    if (car_steps > 31)
+                        MoveHelper.AnimateCarRight(carToMove, columnNum);
+                    //Om man står på rutan bredvid mål och slår 6 så måste man ändra riktning igen.
+                    else
+                    {
+                        MoveHelper.AnimateCarUp(carToMove, columnNum);
+                    }
+                }
+                else if (car_steps <= 3)
                 {
                     MoveHelper.AnimateCarLeft(carToMove, columnNum);
                 }
@@ -933,7 +964,17 @@ namespace Fia_med_krock
             }
             if (active_player == GameState.PlayerYellow)
             {
-                if (car_steps <= 3)
+                if (moveForward == false)
+                {
+                    if (car_steps > 31)
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                    //Om man står på rutan bredvid mål och slår 6 så måste man ändra riktning igen.
+                    else
+                    {
+                        MoveHelper.AnimateCarRight(carToMove, columnNum);
+                    }
+                }
+                else if (car_steps <= 3)
                 {
                     MoveHelper.AnimateCarUp(carToMove, columnNum);
                 }
@@ -987,7 +1028,6 @@ namespace Fia_med_krock
                 }
             }
         }
-
 
         private void DisableAllCarsForCurrentPlayer()
         {
