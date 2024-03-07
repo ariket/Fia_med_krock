@@ -152,7 +152,7 @@ namespace Fia_med_krock
         
         
         private GameState currentPlayer;
-        private PlayerAiStates playerAiStates;
+       // private PlayerAiStates playerAiStates;
 
         public MainPage()
         {
@@ -214,16 +214,12 @@ namespace Fia_med_krock
         public static class Globals
         {
             public static int dice_result = 0;
-            //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra, bara dom första 7 positionerna finns än så länge.
-            //Road för red cars, {column,row}
-            // public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404" };
-
         }
 
 
 
 
-    private async Task MainGameLoop()
+        private async Task MainGameLoop()
         {
             while (true) 
             {
@@ -291,7 +287,6 @@ namespace Fia_med_krock
                 await Task.Delay(100);
                 turnActive = false;
                 
-                //RollDice.IsEnabled = true;
             }
 
         }
@@ -314,7 +309,7 @@ namespace Fia_med_krock
         }
 
 
-        //tanken att kolla så att om ingen pjös kan flyttas skiftas turen till nästa spelare
+        //tanken att kolla så att om ingen pjäs kan flyttas skiftas turen till nästa spelare
         private bool CheckAnyCarsEnabled()
         {
             switch (currentPlayer)
@@ -344,7 +339,6 @@ namespace Fia_med_krock
             {
                 await Task.Delay(1000);
             }
-
         }
 
 
@@ -392,11 +386,7 @@ namespace Fia_med_krock
             }
             await Task.Delay(200);
         }
-
-
-        
-
-       
+ 
 
         private void setCurrentPlayerCarsState(int dice)
         {
