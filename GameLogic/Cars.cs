@@ -11,17 +11,20 @@ using Windows.UI.Xaml.Shapes;
 
 namespace Fia_med_krock.GameLogic
 {
+    /// <summary>
+    /// Cars class
+    /// color is used to separate the 4 players
+    /// steps holds the positions of the game piece
+    /// </summary>
     public class Cars
     {
-        //color används för att veta vilken spelare pjäsen tillhör.
-        //steps har samma funktion som gamla positionRedCarX variablerna.
         public string color;
         public int steps;
         public Windows.UI.Xaml.Shapes.Rectangle CarUI { get; set; }
         public Grid PlayBoard { get; set; }
         public int CarNumber { get; set; }
 
-        //Konstruktor för objekten
+        //Constructor
         public Cars(string car_color, int total_steps, Grid playBoard, int carNumber)
         {
             color = car_color;
@@ -31,26 +34,28 @@ namespace Fia_med_krock.GameLogic
             CarNumber = carNumber;
         }
 
+        //Move the car forward
         public void StepCar()
         {
             steps++;
         }
 
+        //Move the car back
         public void StepCarBack()
         {
             steps--;
         }
 
+        //Sets the steps to 37 when the game peice reaches the goal
         public void StepCarToGoal()
         {
             steps = 37;
         }
 
+        //Sets the steps to -1 when a pame piece is crached out
         public void CarCrasced()
         {
             steps = -1;
-
-            
             int targetColumn = 0;
             int targetRow = 0;
 
@@ -68,7 +73,6 @@ namespace Fia_med_krock.GameLogic
                     targetColumn = 1;
                     targetRow = 1;
                     break; 
-
                 default:
                     Debug.WriteLine($"Unsupported car number: {CarNumber}");
                     return;
@@ -81,8 +85,6 @@ namespace Fia_med_krock.GameLogic
                 CarUI.Opacity = 0.3;
             }
         }
-
-
         private Grid FindColorGrid(string color)
         {
             string gridName = $"{color}";
@@ -91,9 +93,5 @@ namespace Fia_med_krock.GameLogic
             Debug.WriteLine(PlayBoard.FindName(gridName));
             return PlayBoard.FindName(gridName) as Grid;
         }
-
-       
-
-
     }
 }

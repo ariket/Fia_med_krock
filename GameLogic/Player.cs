@@ -9,13 +9,19 @@ using Windows.UI.Xaml.Controls;
 
 namespace Fia_med_krock.GameLogic
 {
+    /// <summary>
+    /// Player class
+    /// Color is used to specify the Palyers color
+    /// Cars is a list of all car that belong to a specific player
+    /// IsAi are true if specific player are an AI player
+    /// </summary>
     public class Player
     {
         public string Color { get; set; }
         public List<Cars> Cars { get; set; }
         public bool IsAi { get; set; }
-
-
+        
+        //Constructor
         public Player(string color, List<Windows.UI.Xaml.Shapes.Rectangle> carUIs, Grid playBoard, bool isAi = false)
         {
             Color = color;
@@ -47,8 +53,7 @@ namespace Fia_med_krock.GameLogic
             if (Cars[0].steps == 37 && Cars[1].steps == 37 && Cars[2].steps == 37 && Cars[3].steps == 37)
             {
                 winner = true;
-            }
-            
+            }         
             return winner;
         }
 
