@@ -31,6 +31,11 @@ using Windows.UI.Xaml.Media.Animation;
 
 namespace Fia_med_krock
 {
+
+    /// <summary>
+    /// MoveHelper class
+    /// Takes care of moving the game pieces
+    /// </summary>
     public static class MoveHelper
     {
         //Tar samma argument som 'movecar' funktionen
@@ -121,8 +126,11 @@ namespace Fia_med_krock
             Grid.SetColumn(carToMove, columnNum);
         }
     }
+
+
     /// <summary>
-    /// GamePage.
+    /// GamePage
+    /// Mainpage for the game
     /// </summary>
     public partial class MainPage : Page
     {
@@ -143,6 +151,24 @@ namespace Fia_med_krock
         }
         private Dictionary<CarColor, Player> players;
         private GameState currentPlayer;
+        public bool goForward = true;
+        public bool turnActive = true;
+
+        /// <summary>
+        /// RedCarsRoad - YellowCarsRoad an array that holds gridnumber for ecah position of each color
+        /// {column,row}
+        /// </summary>
+        public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404", "0000", "0000" };
+        public static string[] BlueCarsRoad = { "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0401", "0402", "0403", "0404", "0000", "0000" };
+        public static string[] GreenCarsRoad = { "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0704", "0604", "0504", "0404", "0000", "0000" };
+        public static string[] YellowCarsRoad = { "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0407", "0406", "0405", "0404", "0000", "0000" };
+
+        //Gloabal variables
+        public static class Globals
+        {
+            public static int dice_result = 0;
+        }
+
 
         public MainPage()
         {
@@ -184,25 +210,7 @@ namespace Fia_med_krock
             MainGameLoop();
         }
 
-        /// <summary>
-        /// RedCarsRoad - YellowCarsRoad an array that holds gridnumber for ecah position of each color
-        /// {column,row}
-        /// </summary>
-        public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404", "0000", "0000" };
-        public static string[] BlueCarsRoad = { "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0401", "0402", "0403", "0404", "0000", "0000" };
-        public static string[] GreenCarsRoad = { "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0704", "0604", "0504", "0404", "0000", "0000" };
-        public static string[] YellowCarsRoad = { "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0407", "0406", "0405", "0404", "0000", "0000" };
-
-        public bool goForward = true;
-        public bool turnActive = true;
-
-        //Gloabal variables
-        public static class Globals
-        {
-            public static int dice_result = 0;
-        }
-
-        private async Task MainGameLoop()
+        private async void MainGameLoop()
         {
             while (true) 
             {
@@ -319,6 +327,7 @@ namespace Fia_med_krock
                 await Task.Delay(1000);
             }
         }
+
         private async Task SimulateAiPlayerTurn (Player aiPlayer)
         {
             await Task.Delay(1500);
@@ -414,6 +423,7 @@ namespace Fia_med_krock
                 carUI.IsTapEnabled = false;
             }
         }
+
         private void SetTapDisabeldForPlayer()
         {
             Player currentPlayerObj = players[GetCarColor(currentPlayer)];
@@ -510,6 +520,7 @@ namespace Fia_med_krock
                 default: return "";
             }
         }
+
         public async void roll_dice_animation(int dice)
         {
             DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice2.png"));
