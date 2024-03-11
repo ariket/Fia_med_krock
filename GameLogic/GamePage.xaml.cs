@@ -253,7 +253,7 @@ namespace Fia_med_krock
             //Slumpar ett värde mellan 1 och 6. Maxvärdet 7 kan inte slumpas.
             int roll_result = Convert.ToInt32(dice_roll.Next(1, 7));
             Globals.dice_result = roll_result;
-            roll_dice_animation(roll_result);         
+            roll_dice_animation(roll_result);
             return roll_result;
         }
 
@@ -656,7 +656,7 @@ namespace Fia_med_krock
             {
                 if (moveForward == false)
                 {
-                    if (car_steps > 31)
+                    if (car_steps > 30)
                         MoveHelper.AnimateCarLeft(carToMove, columnNum);
                     //Om man står på rutan bredvid mål och slår 6 så måste man ändra riktning igen.
                     //Animationen blir rätt skum, men den hamnar på rätt plats iallafall.
@@ -722,7 +722,7 @@ namespace Fia_med_krock
             {
                 if (moveForward == false)
                 {
-                    if (car_steps > 31)
+                    if (car_steps > 30)
                         MoveHelper.AnimateCarUp(carToMove, columnNum);
                     //Om man står på rutan bredvid mål och slår 6 så måste man ändra riktning igen.
                     else
@@ -787,7 +787,7 @@ namespace Fia_med_krock
             {
                 if (moveForward == false)
                 {
-                    if (car_steps > 31)
+                    if (car_steps > 30)
                         MoveHelper.AnimateCarRight(carToMove, columnNum);
                     //Om man står på rutan bredvid mål och slår 6 så måste man ändra riktning igen.
                     else
@@ -852,7 +852,7 @@ namespace Fia_med_krock
             {
                 if (moveForward == false)
                 {
-                    if (car_steps > 31)
+                    if (car_steps > 30)
                     MoveHelper.AnimateCarDown(carToMove, columnNum);
                     //Om man står på rutan bredvid mål och slår 6 så måste man ändra riktning igen.
                     else
