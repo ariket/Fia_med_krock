@@ -318,10 +318,16 @@
                 <TextBlock Text="Grattis!" Foreground="#000000" FontSize="28" d:IsLocked="True" TextAlignment="Center" />
                 <TextBlock x:Name="WinnerText" Foreground="#000000" FontSize="24" d:IsLocked="True" TextAlignment="Center" />
             </StackPanel>
+
+            <Image Width="250" Height="250" Name="WinnerCarImage" Source="/Assets/dice6.png" Stretch="Fill"  />
+
             <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button  x:Name="GoToMainMenuButton" Height="35" Width="75" CornerRadius="5" Background="CornflowerBlue"  VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,5,5,25" Click="GoToMainMenu_Click">Till Meny</Button>
                 <Button  x:Name="ExitButton" Height="35" Width="75" CornerRadius="5" Background="CornflowerBlue"  VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,5,5,25" Click="ExitButton_Click">Avsluta</Button>
             </StackPanel>
-         </Grid>
+
+            
+
+        </Grid>
     </Grid>
 </Page>

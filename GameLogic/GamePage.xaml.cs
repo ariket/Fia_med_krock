@@ -168,7 +168,7 @@ namespace Fia_med_krock
             //music.mp3 downloaded from https://pixabay.com/
             Uri backGroundMusic = new Uri("ms-appx:///Assets/music.mp3");
             myPlayer.Source = backGroundMusic;
-            myPlayer.Volume = 0.1;
+            myPlayer.Volume = 0.05;
         }
 
         private void InitializePlayers(PlayerAiStates playerAiStates)
@@ -233,8 +233,25 @@ namespace Fia_med_krock
 
         private void showWinnerScreen(Player winner)
         {
-            
-            WinnerText.Text = $"{winner.Color} spelaren har vunnit!";
+            string winnerName = "Gula";
+            WinnerScreen.Background = new SolidColorBrush(Windows.UI.Colors.Yellow);
+            if (winner.Color == "Red")
+            {
+                winnerName = "Röda";
+                WinnerScreen.Background = new SolidColorBrush(Windows.UI.Colors.Red);
+            }
+            else if (winner.Color == "Blue")
+            {
+                winnerName = "Blåa";
+                WinnerScreen.Background = new SolidColorBrush(Windows.UI.Colors.Blue);
+            }
+            else if (winner.Color == "Green")
+            {
+                winnerName = "Gröna";
+                WinnerScreen.Background = new SolidColorBrush(Windows.UI.Colors.Green);
+            }
+
+            WinnerText.Text = $"{winnerName} spelaren har vunnit!";
             WinnerScreen.Visibility = Visibility.Visible;
             WinnerAnimation.Begin();
         }
