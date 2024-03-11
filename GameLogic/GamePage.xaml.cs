@@ -233,7 +233,7 @@ namespace Fia_med_krock
 
         private void showWinnerScreen(Player winner)
         {
-            WinnerText.Text = $"{winner.Color} player is the Winner!";
+            WinnerText.Text = $"{winner.Color} spelaren har vunnit!";
             WinnerScreen.Visibility = Visibility.Visible;
         }
 
@@ -971,6 +971,11 @@ namespace Fia_med_krock
         }
 
 
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Exit();
+        }
+
         private Cars GetCarFromUI(Windows.UI.Xaml.Shapes.Rectangle carUI)
         {
             // Iterate through all players and their cars to find the matching UI element
@@ -1022,5 +1027,7 @@ namespace Fia_med_krock
             }  
             return currentPlayer;
         }
+
+      
     }
 }
