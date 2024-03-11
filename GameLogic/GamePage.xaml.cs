@@ -233,8 +233,10 @@ namespace Fia_med_krock
 
         private void showWinnerScreen(Player winner)
         {
+            
             WinnerText.Text = $"{winner.Color} spelaren har vunnit!";
             WinnerScreen.Visibility = Visibility.Visible;
+            WinnerAnimation.Begin();
         }
 
         /// <summary>

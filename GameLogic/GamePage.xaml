@@ -10,7 +10,7 @@
 
     <Page.Resources>
         <Storyboard x:Name="WinnerAnimation">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Rules" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="WinnerScreen" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-450">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BackEase EasingMode="EaseInOut"/>
