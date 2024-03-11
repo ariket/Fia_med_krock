@@ -8,6 +8,36 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <Storyboard x:Name="RollDownMeny">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Rules" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-450">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="RollUpMeny">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Rules" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="-450">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
     <Grid>
 
         <Image Source="/Assets/carCrash.jpg" Stretch="Fill"  />
@@ -276,6 +306,19 @@
 
             <Button x:Name="RollDice" Height="45" Width="100" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50" Click="RollDice_Click" >Rulla Tärning</Button>
 
+        </Grid>
+        <Grid x:Name="WinnerScreen" Grid.Row="0" Width="550" Height="550" Margin="5,5,5,5" Background="Lavender" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed" CornerRadius="15">
+            <Grid.RenderTransform>
+                <CompositeTransform/>
+            </Grid.RenderTransform>
+            
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
+                <TextBlock Text="  " Foreground="#000000" d:IsLocked="True" />
+                <TextBlock Text="Congratulations!" Foreground="#000000" FontSize="28" d:IsLocked="True" TextAlignment="Center" />
+                <TextBlock x:Name="WinnerText" Foreground="#000000" FontSize="24" d:IsLocked="True" TextAlignment="Center" />
+            </StackPanel>
+
+            <Button  x:Name="CloseButton" Height="35" Width="75" CornerRadius="5" Background="CornflowerBlue"  VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,5,5,25">Stäng</Button>
         </Grid>
     </Grid>
 </Page>

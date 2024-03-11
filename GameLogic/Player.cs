@@ -48,8 +48,9 @@ namespace Fia_med_krock.GameLogic
         public bool CheckIfWinner()
         {
             bool winner = false;
+            //bool winner = true;
 
-            //if (Cars[0].steps == 37)
+            if (Cars[0].steps == 37)
             if (Cars[0].steps == 37 && Cars[1].steps == 37 && Cars[2].steps == 37 && Cars[3].steps == 37)
             {
                 winner = true;

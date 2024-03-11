@@ -1,31 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Capture;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Maps;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using static Fia_med_krock.MainPage;
 using static Fia_med_krock.StartPage;
 using Fia_med_krock.GameLogic;
-using System.Runtime.ConstrainedExecution;
-using Windows.Media.PlayTo;
-using System.Collections;
 using Windows.UI.Xaml.Media.Animation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -207,7 +193,7 @@ namespace Fia_med_krock
 
         public bool goForward = true;
         public bool turnActive = true;
-
+        public bool gameOver = false;
 
 
         //Finns inte globala variabler i c#, så gjorde en ful lösning från https://stackoverflow.com/questions/14368129/how-to-use-global-variables-in-c
@@ -221,14 +207,16 @@ namespace Fia_med_krock
 
         private async Task MainGameLoop()
         {
-            while (true) 
+            gameOver = false;
+            while (!gameOver) 
             {
-  
+                
                 foreach (var playerKVP in players)
                 {
                     turnActive = true;
+                         
+                    
                     Player player = playerKVP.Value;
-
                     if (playerKVP.Value.Color == "Red") currentPlayer = GameState.PlayerRed;
                     else if (playerKVP.Value.Color == "Blue") currentPlayer = GameState.PlayerBlue;
                     else if (playerKVP.Value.Color == "Green") currentPlayer = GameState.PlayerGreen;
@@ -248,12 +236,18 @@ namespace Fia_med_krock
                     {
                         RollDice.Content = "Rulla Tärning";
                         await HandleHumanPlayerTurn(player);
-                    }
-
-                    
+                    }                 
                 }
             }
+            
         }
+
+        private void showWinnerScreen(Player winner)
+        {
+            WinnerText.Text = $"{winner.Color} player is the Winner!";
+            WinnerScreen.Visibility = Visibility.Visible;
+        }
+
         /// <summary>
         /// Randomizes a new dice roll,
         /// this is saved in Globals.dice_result
@@ -273,8 +267,8 @@ namespace Fia_med_krock
         public async void RollDice_Click(object sender, RoutedEventArgs e)
         {
             //diceroll.mp3 downloaded from https://pixabay.com/
-            Uri newuri = new Uri("ms-appx:///Assets/diceroll.mp3");
-            diceRoll.Source = newuri;
+            //Uri newuri = new Uri("ms-appx:///Assets/diceroll.mp3");
+            //diceRoll.Source = newuri;
             int dice = roll_dice();
             RollDice.Content = dice;
             RollDice.IsEnabled = false;
@@ -649,12 +643,17 @@ namespace Fia_med_krock
                 MovesToMake++;
 
                 if (car.steps == 35 && MovesToMake == dice)
+                //if (car.steps > 6 && MovesToMake == dice)
                 {
                     car.StepCarToGoal();
                     carToMove.Visibility = Visibility.Collapsed;
                     carToMove.IsTapEnabled = false;
                     Debug.WriteLine("Car reached destination");
-                    if (player.CheckIfWinner()) Debug.WriteLine("We have a winner");
+                    if (player.CheckIfWinner()) 
+                    { 
+                        gameOver = true; 
+                        showWinnerScreen(player); 
+                    } 
                 }
             }
 
