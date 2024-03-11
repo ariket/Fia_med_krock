@@ -978,6 +978,11 @@ namespace Fia_med_krock
             Application.Current.Exit();
         }
 
+        private void GoToMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(StartPage));
+        }
+
         private Cars GetCarFromUI(Windows.UI.Xaml.Shapes.Rectangle carUI)
         {
             // Iterate through all players and their cars to find the matching UI element

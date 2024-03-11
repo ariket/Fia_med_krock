@@ -308,7 +308,7 @@
             <Button x:Name="RollDice" CornerRadius="5" Height="45" Width="100" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50" Click="RollDice_Click" >Rulla Tärning</Button>
 
         </Grid>
-        <Grid x:Name="WinnerScreen" Grid.Row="0" Width="550" Height="550" Margin="5,5,5,5" Background="Lavender" RenderTransformOrigin="0.5,0.5" Visibility="Visible" CornerRadius="15">
+        <Grid x:Name="WinnerScreen" Grid.Row="0" Width="550" Height="550" Margin="5,5,5,5" Background="Lavender" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed" CornerRadius="15">
             <Grid.RenderTransform>
                 <CompositeTransform/>
             </Grid.RenderTransform>
