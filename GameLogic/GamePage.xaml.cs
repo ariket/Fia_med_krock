@@ -139,9 +139,10 @@ namespace Fia_med_krock
         private GameState currentPlayer;
         public bool goForward = true;
         public bool turnActive = true;
+        public bool gameOver = false; 
 
         /// <summary>
-        /// RedCarsRoad - YellowCarsRoad an array that holds gridnumber for ecah position of each color
+        /// RedCarsRoad - YellowCarsRoad an array that holds gridnumber for each position of each color
         /// {column,row}
         /// </summary>
         public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404", "0000", "0000" };
@@ -198,7 +199,7 @@ namespace Fia_med_krock
 
         private async void MainGameLoop()
         {
-            while (true) 
+            while (!gameOver) 
             {
                 foreach (var playerKVP in players)
                 {

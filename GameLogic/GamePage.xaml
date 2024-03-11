@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <Storyboard x:Name="RollDownMeny">
+        <Storyboard x:Name="WinnerAnimation">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Rules" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)">
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-450">
                     <EasingDoubleKeyFrame.EasingFunction>
