@@ -14,13 +14,14 @@ using static Fia_med_krock.StartPage;
 using Fia_med_krock.GameLogic;
 using Windows.UI.Xaml.Media.Animation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
-
-
 
 namespace Fia_med_krock
 {
+
+    /// <summary>
+    /// MoveHelper class
+    /// Takes care of moving the game pieces
+    /// </summary>
     public static class MoveHelper
     {
         //Tar samma argument som 'movecar' funktionen
@@ -98,7 +99,6 @@ namespace Fia_med_krock
             oStoryboard.Begin();
         }
 
-
         public static void MoveCar(Windows.UI.Xaml.Shapes.Rectangle carToMove, Grid playBoard, int columnNum, int rowNum)
         {
             var parent = (Panel)carToMove.Parent;
@@ -107,14 +107,16 @@ namespace Fia_med_krock
             {
                 parent.Children.Remove(carToMove);
             }
-
             playBoard.Children.Add(carToMove);
             Grid.SetRow(carToMove, rowNum);
             Grid.SetColumn(carToMove, columnNum);
         }
     }
+
+
     /// <summary>
-    /// GamePage.
+    /// GamePage
+    /// Mainpage for the game
     /// </summary>
     public partial class MainPage : Page
     {
@@ -134,25 +136,38 @@ namespace Fia_med_krock
             Yellow
         }
         private Dictionary<CarColor, Player> players;
-
-        
-        
         private GameState currentPlayer;
-       // private PlayerAiStates playerAiStates;
+        public bool goForward = true;
+        public bool turnActive = true;
+
+        /// <summary>
+        /// RedCarsRoad - YellowCarsRoad an array that holds gridnumber for ecah position of each color
+        /// {column,row}
+        /// </summary>
+        public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404", "0000", "0000" };
+        public static string[] BlueCarsRoad = { "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0401", "0402", "0403", "0404", "0000", "0000" };
+        public static string[] GreenCarsRoad = { "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0704", "0604", "0504", "0404", "0000", "0000" };
+        public static string[] YellowCarsRoad = { "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0407", "0406", "0405", "0404", "0000", "0000" };
+
+        //Gloabal variables
+        public static class Globals
+        {
+            public static int dice_result = 0;
+        }
+
 
         public MainPage()
         {
+            
             this.InitializeComponent();
             currentPlayer = GameState.PlayerRed;
             CenterOfGrid.Fill = new SolidColorBrush(Colors.Red);
             RollDice.Background = new SolidColorBrush(Windows.UI.Colors.Red);
- 
-            //InitializePlayers();
 
             //music.mp3 downloaded from https://pixabay.com/
-            // Uri newuri = new Uri("ms-appx:///Assets/music.mp3");
-            // myPlayer.Source = newuri;
-            //  myPlayer.Volume = 0.1;
+            Uri backGroundMusic = new Uri("ms-appx:///Assets/music.mp3");
+            myPlayer.Source = backGroundMusic;
+            myPlayer.Volume = 0.1;
         }
 
         private void InitializePlayers(PlayerAiStates playerAiStates)
@@ -162,8 +177,7 @@ namespace Fia_med_krock
                 { CarColor.Red, new Player("Red", new List<Windows.UI.Xaml.Shapes.Rectangle> { Red1, Red2, Red3, Red4 }, PlayBoard, playerAiStates.IsPlayer1Ai) },
                 { CarColor.Blue, new Player("Blue", new List<Windows.UI.Xaml.Shapes.Rectangle> { Blue1, Blue2, Blue3, Blue4 }, PlayBoard, playerAiStates.IsPlayer2Ai) },
                 { CarColor.Green, new Player("Green", new List<Windows.UI.Xaml.Shapes.Rectangle> { Green1, Green2, Green3, Green4 }, PlayBoard, playerAiStates.IsPlayer3Ai) },
-                { CarColor.Yellow, new Player("Yellow", new List<Windows.UI.Xaml.Shapes.Rectangle> { Yellow1, Yellow2, Yellow3, Yellow4 }, PlayBoard, playerAiStates.IsPlayer4Ai) },
-                
+                { CarColor.Yellow, new Player("Yellow", new List<Windows.UI.Xaml.Shapes.Rectangle> { Yellow1, Yellow2, Yellow3, Yellow4 }, PlayBoard, playerAiStates.IsPlayer4Ai) },    
             };
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -178,39 +192,14 @@ namespace Fia_med_krock
                 Debug.WriteLine($"Player 3 AI: {playerAiStates.IsPlayer3Ai}");
                 Debug.WriteLine($"Player 4 AI: {playerAiStates.IsPlayer4Ai}");
                 InitializePlayers(playerAiStates);
-            }
-            
+            }     
             MainGameLoop();
         }
 
-        //RedCarsRoad är en array som redovisar vilken väg dom röda bilarna ska köra.
-        //Sen har man en int (Cars.steps) för varje bil som anger bilen position m.h.a. RedCarsRoad[] 
-        //Road för red cars, {column,row}
-        public static string[] RedCarsRoad = { "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0104", "0204", "0304", "0404", "0000", "0000" };
-        public static string[] BlueCarsRoad = { "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0401", "0402", "0403", "0404", "0000", "0000" };
-        public static string[] GreenCarsRoad = { "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0704", "0604", "0504", "0404", "0000", "0000" };
-        public static string[] YellowCarsRoad = { "0308", "0307", "0306", "0305", "0205", "0105", "0005", "0004", "0003", "0103", "0203", "0303", "0302", "0301", "0300", "0400", "0500", "0501", "0502", "0503", "0603", "0703", "0803", "0804", "0805", "0705", "0605", "0505", "0506", "0507", "0508", "0408", "0407", "0406", "0405", "0404", "0000", "0000" };
-
-        public bool goForward = true;
-        public bool turnActive = true;
-        public bool gameOver = false;
-
-
-        //Finns inte globala variabler i c#, så gjorde en ful lösning från https://stackoverflow.com/questions/14368129/how-to-use-global-variables-in-c
-        public static class Globals
+        private async void MainGameLoop()
         {
-            public static int dice_result = 0;
-        }
-
-
-
-
-        private async Task MainGameLoop()
-        {
-            gameOver = false;
-            while (!gameOver) 
+            while (true) 
             {
-                
                 foreach (var playerKVP in players)
                 {
                     turnActive = true;
@@ -223,8 +212,7 @@ namespace Fia_med_krock
                     else currentPlayer = GameState.PlayerYellow;
                     CenterOfGrid.Fill = GetColorForPlayer(player);
                     RollDice.Background = GetColorForPlayer(player);
-                    
-
+                   
                     if (player.IsAi)
                     {
                         RollDice.Content = "AI";
@@ -260,15 +248,14 @@ namespace Fia_med_krock
             int roll_result = Convert.ToInt32(dice_roll.Next(1, 7));
             Globals.dice_result = roll_result;
             roll_dice_animation(roll_result);
-            
             return roll_result;
         }
 
         public async void RollDice_Click(object sender, RoutedEventArgs e)
         {
             //diceroll.mp3 downloaded from https://pixabay.com/
-            //Uri newuri = new Uri("ms-appx:///Assets/diceroll.mp3");
-            //diceRoll.Source = newuri;
+            Uri diceRoller = new Uri("ms-appx:///Assets/diceroll.mp3");
+            diceRoll.Source = diceRoller;
             int dice = roll_dice();
             RollDice.Content = dice;
             RollDice.IsEnabled = false;
@@ -335,7 +322,6 @@ namespace Fia_med_krock
             }
         }
 
-
         private async Task SimulateAiPlayerTurn (Player aiPlayer)
         {
             await Task.Delay(1500);
@@ -353,8 +339,7 @@ namespace Fia_med_krock
                     setCurrentPlayerCarsState(aiDiceValue);
                     await SimulateMoveCar(aiPlayer, aiDiceValue);
                 }    
-            }
-                    
+            }                  
             await Task.Delay(200);
             setCurrentPlayerCarsState(aiDiceValue);
             await SimulateMoveCar(aiPlayer, aiDiceValue);
@@ -375,13 +360,11 @@ namespace Fia_med_krock
                     RollDice.IsEnabled = false;
                     await Task.Delay(200);
                     break;
-                }
-                
+                }        
             }
             await Task.Delay(200);
         }
  
-
         private void setCurrentPlayerCarsState(int dice)
         {
             Player currentPlayerObj = players[GetCarColor(currentPlayer)];
@@ -427,14 +410,14 @@ namespace Fia_med_krock
                 {
                     carUI.IsTapEnabled = false;
                     carUI.Opacity = 0.3;
-                }
-               
+                }     
             }
             if(car.steps == 37)
             {
                 carUI.IsTapEnabled = false;
             }
         }
+
         private void SetTapDisabeldForPlayer()
         {
             Player currentPlayerObj = players[GetCarColor(currentPlayer)];
@@ -464,7 +447,7 @@ namespace Fia_med_krock
             }
         }
 
-            Dictionary<CarColor, List<Cars>> GetCarsByColorDictionary()
+        Dictionary<CarColor, List<Cars>> GetCarsByColorDictionary()
         {
             return players.ToDictionary(entry => entry.Key, entry => entry.Value.Cars);
         }
@@ -494,7 +477,6 @@ namespace Fia_med_krock
                     check = false;
                 }
             }
-
             return check;
         }
 
@@ -532,6 +514,7 @@ namespace Fia_med_krock
                 default: return "";
             }
         }
+
         public async void roll_dice_animation(int dice)
         {
             DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice2.png"));
@@ -548,51 +531,39 @@ namespace Fia_med_krock
             await System.Threading.Tasks.Task.Delay(150);
             DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice6.png"));
          
-
             if (dice == 6)
             {
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-               
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));        
                 await System.Threading.Tasks.Task.Delay(150);
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice6.png"));
-               
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice6.png"));   
             }
             else if (dice == 5)
             {
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-                
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));            
                 await System.Threading.Tasks.Task.Delay(150);
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice5.png"));
-                
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice5.png"));    
             }
             else if (dice == 4)
             {
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-                
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png")); 
                 await System.Threading.Tasks.Task.Delay(150);
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice4.png"));
-               
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice4.png")); 
             }
             else if (dice == 3)
             {
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-                
                 await System.Threading.Tasks.Task.Delay(150);
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice3.png"));
-                
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice3.png"));     
             }
             else if (dice == 2)
             {
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-               
                 await System.Threading.Tasks.Task.Delay(150);
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice2.png"));
-             
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice2.png"));  
             }
             else
             {
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice5.png"));
-                
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice5.png"));  
                 await System.Threading.Tasks.Task.Delay(150);
                 DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
             }
@@ -636,8 +607,8 @@ namespace Fia_med_krock
                 int columnNum = Convert.ToInt32(CarsRoad[car.steps].Substring(0, 2));
                 int rowNum = Convert.ToInt32(CarsRoad[car.steps].Substring(2, 2));
                 MoveHelper.MoveCar(carToMove, playBoard, columnNum, rowNum);
-                //Kör animationen
-                PickAnimation(carToMove, columnNum, car.steps, currentPlayer);
+                //Run animation
+                PickAnimation(carToMove, columnNum, car.steps, currentPlayer, goForward);
                 carToMove.IsTapEnabled = false;  
                 await Task.Delay(200);
                 MovesToMake++;
@@ -661,32 +632,39 @@ namespace Fia_med_krock
             {
                 CheckCarPositionToCrash(car);
             }
-            //RollDice.IsEnabled = true;
 
             if (dice != 6)
             {
                 if (dice == 1) SetTapDisabeldForPlayer();  //dummy call to set if dice == 1
-
-                turnActive = false;
-                
+                turnActive = false;        
             }
             else
             {
                 RollDice.Content = "Rulla Tärning";
                 RollDice.IsEnabled = true;
-                SetTapDisabeldForPlayer();
-                
+                SetTapDisabeldForPlayer();             
             }
         }
 
-        //TODO: Gör så att animationen funkar 'baklänges' när man tar för många steg för att gå i mål.
         //FIXME: Gör så att funktionen inte är världens största if-else träd.
-        private void PickAnimation(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int car_steps, GameState active_player)
+        //bounce får sitt värde från goForward variabeln i Animatecarasync funktionen.
+        private void PickAnimation(Windows.UI.Xaml.Shapes.Rectangle carToMove, int columnNum, int car_steps, GameState active_player, bool moveForward)
         {
             //Väljer olika animationer beroende på vilken spelare som kör.
             if (active_player == GameState.PlayerRed)
             {
-                if (car_steps <= 3)
+                if (moveForward == false)
+                {
+                    if (car_steps > 30)
+                        MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                    //Om man står på rutan bredvid mål och slår 6 så måste man ändra riktning igen.
+                    //Animationen blir rätt skum, men den hamnar på rätt plats iallafall.
+                    else
+                    {
+                        MoveHelper.AnimateCarDown(carToMove, columnNum);
+                    }
+                }
+                else if (car_steps <= 3)
                 {
                     MoveHelper.AnimateCarRight(carToMove, columnNum);
                 }
@@ -741,7 +719,17 @@ namespace Fia_med_krock
             }
             if (active_player == GameState.PlayerBlue)
             {
-                if (car_steps <= 3)
+                if (moveForward == false)
+                {
+                    if (car_steps > 30)
+                        MoveHelper.AnimateCarUp(carToMove, columnNum);
+                    //Om man står på rutan bredvid mål och slår 6 så måste man ändra riktning igen.
+                    else
+                    {
+                        MoveHelper.AnimateCarLeft(carToMove, columnNum);
+                    }
+                }
+                else if (car_steps <= 3)
                 {
                     MoveHelper.AnimateCarDown(carToMove, columnNum);
                 }
@@ -796,7 +784,17 @@ namespace Fia_med_krock
             }
             if (active_player == GameState.PlayerGreen)
             {
-                if (car_steps <= 3)
+                if (moveForward == false)
+                {
+                    if (car_steps > 30)
+                        MoveHelper.AnimateCarRight(carToMove, columnNum);
+                    //Om man står på rutan bredvid mål och slår 6 så måste man ändra riktning igen.
+                    else
+                    {
+                        MoveHelper.AnimateCarUp(carToMove, columnNum);
+                    }
+                }
+                else if (car_steps <= 3)
                 {
                     MoveHelper.AnimateCarLeft(carToMove, columnNum);
                 }
@@ -851,7 +849,17 @@ namespace Fia_med_krock
             }
             if (active_player == GameState.PlayerYellow)
             {
-                if (car_steps <= 3)
+                if (moveForward == false)
+                {
+                    if (car_steps > 30)
+                    MoveHelper.AnimateCarDown(carToMove, columnNum);
+                    //Om man står på rutan bredvid mål och slår 6 så måste man ändra riktning igen.
+                    else
+                    {
+                        MoveHelper.AnimateCarRight(carToMove, columnNum);
+                    }
+                }
+                else if (car_steps <= 3)
                 {
                     MoveHelper.AnimateCarUp(carToMove, columnNum);
                 }
@@ -906,7 +914,6 @@ namespace Fia_med_krock
             }
         }
 
-
         private void DisableAllCarsForCurrentPlayer()
         {
             switch (currentPlayer)
@@ -916,42 +923,25 @@ namespace Fia_med_krock
                     Red2.IsTapEnabled = false;
                     Red3.IsTapEnabled = false;
                     Red4.IsTapEnabled = false;
-                 //   Red1.Opacity = 0.3;
-                 //   Red2.Opacity = 0.3;
-                 //   Red3.Opacity = 0.3;
-                 //   Red4.Opacity = 0.3;
                     break;
                 case GameState.PlayerBlue:
                     Blue1.IsTapEnabled = false;
                     Blue2.IsTapEnabled = false;
                     Blue3.IsTapEnabled = false;
                     Blue4.IsTapEnabled = false;
-                 //   Blue1.Opacity = 0.3;
-                 //   Blue2.Opacity = 0.3;
-                 //   Blue3.Opacity = 0.3;
-                 //   Blue4.Opacity = 0.3;
                     break;
                 case GameState.PlayerGreen:
                     Green1.IsTapEnabled = false;
                     Green2.IsTapEnabled = false;
                     Green3.IsTapEnabled = false;
                     Green4.IsTapEnabled = false;
-                 //   Green1.Opacity = 0.3;
-                 //   Green2.Opacity = 0.3;
-                 //   Green3.Opacity = 0.3;
-                 //   Green4.Opacity = 0.3;
                     break;
                 case GameState.PlayerYellow:
                     Yellow1.IsTapEnabled = false;
                     Yellow2.IsTapEnabled = false;
                     Yellow3.IsTapEnabled = false;
                     Yellow4.IsTapEnabled = false;
-                 //   Yellow1.Opacity = 0.3;
-                 //   Yellow2.Opacity = 0.3;
-                 //   Yellow3.Opacity = 0.3;
-                 //   Yellow4.Opacity = 0.3;
                     break;
-
                 default:
                     break;
             }
@@ -976,9 +966,7 @@ namespace Fia_med_krock
             {
                 Debug.WriteLine($"CarRectangle_Tapped Error: {ex.Message}");
             }
-            
             DisableAllCarsForCurrentPlayer();
-
         }
 
 
@@ -995,7 +983,6 @@ namespace Fia_med_krock
                     }
                 }
             }
-
             return null;
         }
 
@@ -1018,7 +1005,6 @@ namespace Fia_med_krock
 
         private Player GetPlayerByCarColor(string carColor)
         {
-
             Player currentPlayer = players[CarColor.Yellow];
             for (int i = 0; i < 3; i++)
             {
@@ -1035,6 +1021,5 @@ namespace Fia_med_krock
             }  
             return currentPlayer;
         }
-
     }
 }
