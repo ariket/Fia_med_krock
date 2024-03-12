@@ -478,6 +478,9 @@ namespace Fia_med_krock
             return (CarColor)Enum.Parse(typeof(CarColor), color, true);
         }
 
+        /// <summary>
+        /// CheckMyOtherCarsPosition contols the position of players other cars on gameplan.
+        /// </summary>
         bool CheckMyOtherCarsPosition(Cars car, bool goForward) //You are not allowed to pass your own cars
         {
             bool check = true;
@@ -500,6 +503,9 @@ namespace Fia_med_krock
             return check;
         }
 
+        /// <summary>
+        /// CheckCarPositionToCrash contols the position of all opponent cars and if match removes the opponent car from gameplan.
+        /// </summary>
         void CheckCarPositionToCrash(Cars car)
         {
             string movingCarPosition = GetCarRoadPosition(car);
@@ -535,6 +541,9 @@ namespace Fia_med_krock
             }
         }
 
+        /// <summary>
+        /// roll_dice_animation that shows dice number
+        /// </summary>
         public async void roll_dice_animation(int dice)
         {
             DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice2.png"));
@@ -589,14 +598,15 @@ namespace Fia_med_krock
             }
         }
 
+        /// <summary>
+        /// AnimateCarAsync - method that handles moving the cars on gameplan.
+        /// </summary>
         private async Task AnimateCarAsync(Windows.UI.Xaml.Shapes.Rectangle carToMove, string[] CarsRoad, int dice, Cars car, Player player, Grid playBoard)
         {
             DisableAllCarsForCurrentPlayer();
-            //int destination = Math.Min(car.steps + dice, 35);
             goForward = true;
             int MovesToMake = 0;
 
-            //for (int i = car.steps; i < destination; i++)
             while (MovesToMake < dice)
             {
                 if (car.steps == 35)
@@ -607,7 +617,6 @@ namespace Fia_med_krock
                 if (!CheckMyOtherCarsPosition(car, goForward))
                 {
                     Debug.WriteLine("CheckCarPosition failed");
-                    //RollDice.IsEnabled = true;
                     break;
                 }
 
@@ -634,7 +643,6 @@ namespace Fia_med_krock
                 MovesToMake++;
 
                 if (car.steps == 35 && MovesToMake == dice)
-                //if (car.steps > 6 && MovesToMake == dice)
                 {
                     car.StepCarToGoal();
                     carToMove.Visibility = Visibility.Collapsed;
