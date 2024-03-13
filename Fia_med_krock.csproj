@@ -124,6 +124,8 @@
     <Compile Include="GameLogic\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameLogic\MainAnimations.cs" />
+    <Compile Include="GameLogic\MoveHelper.cs" />
     <Compile Include="GameLogic\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartPage.xaml.cs">
