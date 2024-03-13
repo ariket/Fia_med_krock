@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 using static Fia_med_krock.MainPage;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
+
 
 namespace Fia_med_krock.GameLogic
 {
@@ -274,6 +275,63 @@ namespace Fia_med_krock.GameLogic
                 {
                     MoveHelper.AnimateCarUp(carToMove, columnNum);
                 }
+            }
+        }
+
+        /// <summary>
+        /// roll_dice_animation that shows dice number
+        /// </summary>
+        public static  async void roll_dice_animation(int dice, Image DiceAnimation)
+        {
+            DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice2.png"));
+
+            await System.Threading.Tasks.Task.Delay(150);
+            DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice6.png"));
+
+            await System.Threading.Tasks.Task.Delay(150);
+            DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice3.png"));
+
+            await System.Threading.Tasks.Task.Delay(150);
+            DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice4.png"));
+
+            await System.Threading.Tasks.Task.Delay(150);
+            DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice6.png"));
+
+            if (dice == 6)
+            {
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
+                await System.Threading.Tasks.Task.Delay(150);
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice6.png"));
+            }
+            else if (dice == 5)
+            {
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
+                await System.Threading.Tasks.Task.Delay(150);
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice5.png"));
+            }
+            else if (dice == 4)
+            {
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
+                await System.Threading.Tasks.Task.Delay(150);
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice4.png"));
+            }
+            else if (dice == 3)
+            {
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
+                await System.Threading.Tasks.Task.Delay(150);
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice3.png"));
+            }
+            else if (dice == 2)
+            {
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
+                await System.Threading.Tasks.Task.Delay(150);
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice2.png"));
+            }
+            else
+            {
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice5.png"));
+                await System.Threading.Tasks.Task.Delay(150);
+                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
             }
         }
     }

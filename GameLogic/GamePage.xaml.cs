@@ -8,11 +8,10 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using static Fia_med_krock.StartPage;
 using Fia_med_krock.GameLogic;
-using Windows.UI.Xaml.Media.Animation;
+
 
 
 namespace Fia_med_krock
@@ -170,7 +169,7 @@ namespace Fia_med_krock
             //Slumpar ett värde mellan 1 och 6. Maxvärdet 7 kan inte slumpas.
             int roll_result = Convert.ToInt32(dice_roll.Next(1, 7));
             Globals.dice_result = roll_result;
-            roll_dice_animation(roll_result);
+            MainAnimations.roll_dice_animation(roll_result, DiceAnimation);
             return roll_result;
         }
 
@@ -443,64 +442,6 @@ namespace Fia_med_krock
                 default: return "";
             }
         }
-
-        /// <summary>
-        /// roll_dice_animation that shows dice number
-        /// </summary>
-        public async void roll_dice_animation(int dice)
-        {
-            DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice2.png"));
-         
-            await System.Threading.Tasks.Task.Delay(150);
-            DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice6.png"));
-        
-            await System.Threading.Tasks.Task.Delay(150);
-            DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice3.png"));
-         
-            await System.Threading.Tasks.Task.Delay(150);
-            DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice4.png"));
-         
-            await System.Threading.Tasks.Task.Delay(150);
-            DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice6.png"));
-         
-            if (dice == 6)
-            {
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));        
-                await System.Threading.Tasks.Task.Delay(150);
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice6.png"));   
-            }
-            else if (dice == 5)
-            {
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));            
-                await System.Threading.Tasks.Task.Delay(150);
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice5.png"));    
-            }
-            else if (dice == 4)
-            {
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png")); 
-                await System.Threading.Tasks.Task.Delay(150);
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice4.png")); 
-            }
-            else if (dice == 3)
-            {
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-                await System.Threading.Tasks.Task.Delay(150);
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice3.png"));     
-            }
-            else if (dice == 2)
-            {
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-                await System.Threading.Tasks.Task.Delay(150);
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice2.png"));  
-            }
-            else
-            {
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice5.png"));  
-                await System.Threading.Tasks.Task.Delay(150);
-                DiceAnimation.Source = new BitmapImage(new Uri("ms-appx:///Assets/dice1.png"));
-            }
-        }
-
         /// <summary>
         /// AnimateCarAsync - method that handles moving the cars on gameplan.
         /// </summary>
