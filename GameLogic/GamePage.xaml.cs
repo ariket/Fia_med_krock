@@ -107,8 +107,7 @@ namespace Fia_med_krock
                 foreach (var playerKVP in players)
                 {
                     turnActive = true;
-                         
-                    
+   
                     Player player = playerKVP.Value;
                     if (playerKVP.Value.Color == "Red") currentPlayer = GameState.PlayerRed;
                     else if (playerKVP.Value.Color == "Blue") currentPlayer = GameState.PlayerBlue;
@@ -246,6 +245,12 @@ namespace Fia_med_krock
             }
         }
 
+
+        /// <summary>
+        /// Simulates a turn for the AI player. Makes a dice roll and moves the first available car in the list for the player according to dice roll.
+        /// Ends turn according to rules e.g when 6 not rolleed. 
+        /// </summary>
+        /// <param name="aiPlayer">The Player object used to access and move the correct cars for example</param>
         private async Task SimulateAiPlayerTurn (Player aiPlayer)
         {
             await Task.Delay(1500);
