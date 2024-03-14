@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using static Fia_med_krock.StartPage;
 using Fia_med_krock.GameLogic;
+using Windows.UI.Xaml.Controls.Maps;
 
 
 
@@ -70,7 +71,7 @@ namespace Fia_med_krock
             //music.mp3 downloaded from https://pixabay.com/
             Uri backGroundMusic = new Uri("ms-appx:///Assets/music.mp3");
             myPlayer.Source = backGroundMusic;
-            myPlayer.Volume = 0.05;
+            myPlayer.Volume = 0.07;
         }
 
         private void InitializePlayers(PlayerAiStates playerAiStates)
@@ -178,6 +179,7 @@ namespace Fia_med_krock
             //diceroll.mp3 downloaded from https://pixabay.com/
             Uri diceRoller = new Uri("ms-appx:///Assets/diceroll.mp3");
             diceRoll.Source = diceRoller;
+            diceRoll.Volume = 0.5;
             int dice = roll_dice();
             RollDice.Content = dice;
             RollDice.IsEnabled = false;
