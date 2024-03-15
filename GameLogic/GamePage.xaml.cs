@@ -167,6 +167,13 @@ namespace Fia_med_krock
             return roll_result;
         }
 
+
+        /// <summary>
+        /// When clicking the roll dice button plays the sound for the dice effect and 
+        /// and uses roll_dice function. Uses CheckAnyCarsEnabled to see if turn should be ended.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public async void RollDice_Click(object sender, RoutedEventArgs e)
         {
             //diceroll.mp3 downloaded from https://pixabay.com/
@@ -207,7 +214,10 @@ namespace Fia_med_krock
         }
 
 
-        //tanken att kolla så att om ingen pjäs kan flyttas skiftas turen till nästa spelare
+        /// <summary>
+        /// Used to see if player can move any piece, if not the idea is to be able to use this to change turns
+        /// </summary>
+        /// <returns>Boolean</returns>
         private bool CheckAnyCarsEnabled()
         {
             switch (currentPlayer)
@@ -371,14 +381,19 @@ namespace Fia_med_krock
             return players.ToDictionary(entry => entry.Key, entry => entry.Value.Cars);
         }
 
-        // Helper method to convert string color to enum
+        /// <summary>
+        /// Helper method to convert string color to enum
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
         CarColor GetCarColorEnum(string color)
         {
             return (CarColor)Enum.Parse(typeof(CarColor), color, true);
         }
 
         /// <summary>
-        /// CheckMyOtherCarsPosition contols the position of players other cars on gameplan.
+        /// CheckMyOtherCarsPosition contols the position of players other cars on gameplan. To make sure you 
+        /// cant move past your own piece.
         /// </summary>
         bool CheckMyOtherCarsPosition(Cars car, bool goForward) //You are not allowed to pass your own cars
         {
@@ -579,9 +594,14 @@ namespace Fia_med_krock
             Frame.Navigate(typeof(StartPage));
         }
 
+        /// <summary>
+        /// Iterate through all players and their cars to find the matching UI element
+        /// </summary>
+        /// <param name="carUI"></param>
+        /// <returns>car</returns>
+
         private Cars GetCarFromUI(Windows.UI.Xaml.Shapes.Rectangle carUI)
         {
-            // Iterate through all players and their cars to find the matching UI element
             foreach (var player in players.Values)
             {
                 foreach (var car in player.Cars)
