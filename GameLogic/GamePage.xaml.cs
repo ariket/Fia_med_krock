@@ -90,11 +90,6 @@ namespace Fia_med_krock
             {
                 List<string> playerNames = parameters.PlayerNames;
                 PlayerAiStates playerAiStates = parameters.PlayerAiStates;
-                Debug.WriteLine("Player AI States:");
-                Debug.WriteLine($"Player 1 AI: {playerAiStates.IsPlayer1Ai}");
-                Debug.WriteLine($"Player 2 AI: {playerAiStates.IsPlayer2Ai}");
-                Debug.WriteLine($"Player 3 AI: {playerAiStates.IsPlayer3Ai}");
-                Debug.WriteLine($"Player 4 AI: {playerAiStates.IsPlayer4Ai}");
                 InitializePlayers(playerAiStates);
             }     
             MainGameLoop();
@@ -119,7 +114,6 @@ namespace Fia_med_krock
                     if (player.IsAi)
                     {
                         RollDice.Content = "AI";
-                        Debug.WriteLine($"Simulating turn for {player.Color}");
                         await SimulateAiPlayerTurn(player);
                         //await TestTurn(player);
                     }
@@ -237,7 +231,6 @@ namespace Fia_med_krock
 
         private async Task HandleHumanPlayerTurn(Player humanPlayer)
         {
-            Debug.WriteLine($"Test human player: {humanPlayer.Cars}");
             RollDice.IsEnabled = true;
             while (turnActive)
             {
@@ -257,7 +250,6 @@ namespace Fia_med_krock
             int aiDiceValue = 0;
             while (turnActive)
             {
-                Debug.WriteLine($"Starting simulation for {aiPlayer.Color}: SimulateAiPlayerTurn function");
                 RollDice.IsEnabled = false;
                 aiDiceValue = roll_dice();
                 if (aiDiceValue != 6) turnActive = false;
@@ -273,12 +265,10 @@ namespace Fia_med_krock
             setCurrentPlayerCarsState(aiDiceValue);
             await SimulateMoveCar(aiPlayer, aiDiceValue);
 
-            Debug.WriteLine($"exiting simulation {aiPlayer.Color}");
         }
 
         private async Task SimulateMoveCar(Player aiPlayer, int aiDiceValue)
         {
-            Debug.WriteLine($"Simulating move for {aiPlayer.Color}");
             string[] carsRoad = GetCarsRoad(aiPlayer.Color);
             foreach (Cars car in aiPlayer.Cars) 
             { 
@@ -480,9 +470,6 @@ namespace Fia_med_krock
                     car.StepCarBack();
                 }
 
-                Debug.WriteLine($"Car steps: {car.steps}");
-                Debug.WriteLine($"Player: {players[0].Cars[0].steps}");
-                Debug.WriteLine($"Player: {player.CheckIfWinner()}");
                 SetTapDisabeldForPlayer();
                 int columnNum = Convert.ToInt32(CarsRoad[car.steps].Substring(0, 2));
                 int rowNum = Convert.ToInt32(CarsRoad[car.steps].Substring(2, 2));
@@ -498,7 +485,6 @@ namespace Fia_med_krock
                     car.StepCarToGoal();
                     carToMove.Visibility = Visibility.Collapsed;
                     carToMove.IsTapEnabled = false;
-                    Debug.WriteLine("Car reached destination");
                     if (player.CheckIfWinner()) 
                     { 
                         gameOver = true; 
@@ -631,7 +617,6 @@ namespace Fia_med_krock
             Player currentPlayer = players[CarColor.Yellow];
             for (int i = 0; i < 3; i++)
             {
-                Debug.WriteLine($"Test:{i}  {players.ElementAt(i).Value.Color}");
                 string colour = players.ElementAt(i).Value.Color;
                 if (carColor == colour)
                 {
